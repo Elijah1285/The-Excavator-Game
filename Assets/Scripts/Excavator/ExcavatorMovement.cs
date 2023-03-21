@@ -8,6 +8,7 @@ public class ExcavatorMovement : MonoBehaviour
     public float sensitivityX = 1.0f;
     public float animationSpeed = 1.5f;
     public float elapsedTime = 0;
+    private bool noForwardMov = true;
     private bool noBackMov = true;
     private float desiredDuration = 0.5f;
 
@@ -22,7 +23,7 @@ public class ExcavatorMovement : MonoBehaviour
         ourBody = this.GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         float drive = Input.GetAxis("Drive");
         float steer = Input.GetAxis("Steer");
@@ -35,10 +36,17 @@ public class ExcavatorMovement : MonoBehaviour
     {
         if (drive > 0)
         {
+            if (noForwardMov == true)
+            {
+                elapsedTime = 0;
+                noForwardMov = false;
+            }
+
             // start animations
-            anim.SetFloat(hash.leftTrackSpeedFloat, 1.5f, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 1.5f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.leftTrackSpeedFloat, 1f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.rightTrackSpeedFloat, 1f, speedDampTime, Time.deltaTime);
             anim.SetBool(hash.movingBool, true);
+            noBackMov = true;
 
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
@@ -50,10 +58,17 @@ public class ExcavatorMovement : MonoBehaviour
 
         if (drive < 0)
         {
+            if (noBackMov == true)
+            {
+                elapsedTime = 0;
+                noBackMov = false;
+            }
+
             // start animations
-            anim.SetFloat(hash.leftTrackSpeedFloat, -1.5f, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -1.5f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.leftTrackSpeedFloat, -1f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.rightTrackSpeedFloat, -1f, speedDampTime, Time.deltaTime);
             anim.SetBool(hash.movingBool, true);
+            noForwardMov = true;
 
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
