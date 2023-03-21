@@ -1,0 +1,601 @@
+fileFormatVersion: 2
+guid: fbe890c5532043847968b95974e12c7f
+ModelImporter:
+  serializedVersion: 22103
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: left_track
+  - first:
+      74: -7705320244680176797
+    second: right_track
+  - first:
+      74: -5464186069489789468
+    second: bucket_wheel
+  - first:
+      74: -2527987263671704582
+    second: arm_movement
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 4f968fd4b6ade26458ae4e750db81aa0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_arm_steering_wheel
+    second: {fileID: 2100000, guid: c6b78f7b1c293a84ba5fe0409fa96bde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_backlight
+    second: {fileID: 2100000, guid: c1e746ee029de424184b8c9c2427c885, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_bucket_wheel
+    second: {fileID: 2100000, guid: 404b91e25293fac4d80303c4bf67f7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_bulb
+    second: {fileID: 2100000, guid: 90501057506ab6c43b78bb885cb8450f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_component
+    second: {fileID: 2100000, guid: 76ae0ab47d2da574593c13964b58d2af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_conveyor_belt
+    second: {fileID: 2100000, guid: 5fd6a962848d196408a655730b4cd15a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_excavator_yellow
+    second: {fileID: 2100000, guid: 45d7003b10d2ba94cb03d3dfbc4e3eda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_floor
+    second: {fileID: 2100000, guid: ae5c65b91a362d441ad13f7bc54ed273, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_glass
+    second: {fileID: 2100000, guid: c3072624c8e74374c812964a0b3da0f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_grill
+    second: {fileID: 2100000, guid: c4918ba20665ef341a6c966f8b5b3e80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_headlight
+    second: {fileID: 2100000, guid: 44dfc246e10bb2747b62a2697ef8a915, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_inside
+    second: {fileID: 2100000, guid: 6ea3747cab3b60d40a1d0eeebd53812b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_inside_2
+    second: {fileID: 2100000, guid: e909eb0aeb62dda448116c6fdc016ed5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_left_handle
+    second: {fileID: 2100000, guid: a078e03d87ff7a44aa26bb7a4e1b9975, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_pipe
+    second: {fileID: 2100000, guid: a9f75d17563a69d4ea154f735a90d70a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_right_handle
+    second: {fileID: 2100000, guid: f38fce0c14283504f971be02e0f2d5ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_tracks
+    second: {fileID: 2100000, guid: d8b5b2b408099ef48a77164c0f9e88c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_underside
+    second: {fileID: 2100000, guid: f0030a79bfd5aeb4383ec038da41a39e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_wheel_toggle_button
+    second: {fileID: 2100000, guid: bc247c0e56016fa4aa814d51c674fb24, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_AnodizedAluminium_Worn_512_albedo
+    second: {fileID: 2800000, guid: bcd8f57f862aee443ac1a38d479b434f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_AnodizedAluminium_Worn_512_metallic
+    second: {fileID: 2800000, guid: 0c7c6dc1fff457c4e8269a6e5d3a8ba0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_AnodizedAluminium_Worn_512_normal
+    second: {fileID: 2800000, guid: 1679ea323a1da7440b57453d70bfecdf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_AnodizedAluminium_Worn_512_roughness
+    second: {fileID: 2800000, guid: 7010fe47af47ea547951a75b0f714822, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_BrokenGlass0020_2_S
+    second: {fileID: 2800000, guid: 41794a8dfe58a0644a03ad6333a08804, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_BrokenGlass0064_4_S
+    second: {fileID: 2800000, guid: 74bebc893b3a8504581ab94ebaa32f8b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Buttons0149_S
+    second: {fileID: 2800000, guid: 62c0f3521beb42746be70432e0b469c6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_FloorMetalGrate_1K_albedo
+    second: {fileID: 2800000, guid: f5d2c141d0ba6b24d9a5233c982b138d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_FloorMetalGrate_1K_metallic
+    second: {fileID: 2800000, guid: da61758478762344a819148c8e8c5292, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_FloorMetalGrate_1K_normal
+    second: {fileID: 2800000, guid: 2e6011378bd91554ca1327f30d0c0fd5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_FloorMetalGrate_1K_roughness
+    second: {fileID: 2800000, guid: f435c5eab63a9cc4dbfe34d9e69a42df, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_MetalThreadplate5_512_albedo
+    second: {fileID: 2800000, guid: c5479b56444ed8c469247f1553b7397c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_MetalThreadplate5_512_metallic
+    second: {fileID: 2800000, guid: d193c97c4ed7df2418791677eeec6270, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_MetalThreadplate5_512_normal
+    second: {fileID: 2800000, guid: 5e60d8f7382627e41ba8d18cf7936fa2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_MetalThreadplate5_512_roughness
+    second: {fileID: 2800000, guid: 61967e2bd3c550540b141d96ad635224, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_PipeRusted7_0.54x0.27_512_albedo
+    second: {fileID: 2800000, guid: 22818806085dd344cbe99d76d37d843b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_PipeRusted7_0.54x0.27_512_normal
+    second: {fileID: 2800000, guid: e7726855cb12b3841b5d66c138ff4f0b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_PipeRusted7_0.54x0.27_512_roughness
+    second: {fileID: 2800000, guid: 0d75a2839b3fca94ba3d6cd0eb7b3ec8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_SteelRough2_1K_albedo
+    second: {fileID: 2800000, guid: 5313a7c6d9ff18f42858bf93e488ff47, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_SteelRough2_1K_metallic
+    second: {fileID: 2800000, guid: ac486c3b15f4fd946919097b04cc29b6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_SteelRough2_1K_roughness
+    second: {fileID: 2800000, guid: c4f9831253585c64c9dd16b6483382c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Metal_SteelRough_1K_normal
+    second: {fileID: 2800000, guid: 5aa8cfb8ce27ceb42aef593a147f3c77, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_OnlyRust_1K_albedo
+    second: {fileID: 2800000, guid: 29e1850e3d4fb8e42b8e5784d83bd064, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_OnlyRust_1K_metallic
+    second: {fileID: 2800000, guid: 1e23163e9d893e64b859f9c56e008eca, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_OnlyRust_1K_normal
+    second: {fileID: 2800000, guid: fd9e8c97eef767f4b9e3310e321a5aa0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_OnlyRust_1K_roughness
+    second: {fileID: 2800000, guid: c351134e34def9542ab34b52eab13252, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_Yellow_1K_albedo
+    second: {fileID: 2800000, guid: 0289eed60996e7242b98a97bebbb9186, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_Yellow_1K_metallic
+    second: {fileID: 2800000, guid: 69bc298bd52ea6b4f82725e84f9fec64, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_Yellow_1K_normal
+    second: {fileID: 2800000, guid: 66e379ea392d9224fb67476493e5567d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_PaintRusted3_Yellow_1K_roughness
+    second: {fileID: 2800000, guid: 5ca70642fa6edf0418b3282bd1f6bee9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_Rusted_1K_albedo
+    second: {fileID: 2800000, guid: 6fb372e2283fc20409bb57478d92c3cd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_Rusted_1K_normal
+    second: {fileID: 2800000, guid: 1308a091a1cae0a438ca9165cf91421c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_Rusted_1K_roughness
+    second: {fileID: 2800000, guid: d8ff92a0a11ed4946b2c5f3a850abf2d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_WroughtIron_512_albedo
+    second: {fileID: 2800000, guid: 817a0159726d1854c995aa3a69799ecf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_WroughtIron_512_metallic
+    second: {fileID: 2800000, guid: b7070d663e4d3214ca07b1fd2dab9866, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_WroughtIron_512_normal
+    second: {fileID: 2800000, guid: 055247862c5f39b4c8d7e01821d18eb9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Paint_WroughtIron_512_roughness
+    second: {fileID: 2800000, guid: 893a088088ad6dc4d938e2072fb8482d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rubber_Damaged_0.5x0.5_1K_albedo
+    second: {fileID: 2800000, guid: c156b0588c4f37d4183507575ba0afe9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rubber_Damaged_0.5x0.5_1K_normal
+    second: {fileID: 2800000, guid: 7409cb054ee6f4848ba64160e6042a5a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rubber_Damaged_0.5x0.5_1K_roughness
+    second: {fileID: 2800000, guid: 8c7657398c014ea4ab95a396df37b011, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Heavy_MediumRust_1K_albedo
+    second: {fileID: 2800000, guid: 335564c97fed0f54fa8389a2e6182e79, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Heavy_MediumRust_1K_normal
+    second: {fileID: 2800000, guid: 6a779d95c97212346981b5122bbc82f5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Heavy_MediumRust_1K_roughness
+    second: {fileID: 2800000, guid: 98de30146879bf546baf296f453ac38e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Heavy_Medium_1K_metallic
+    second: {fileID: 2800000, guid: 1469fb63c8cd3a74a908d2c657468a61, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Pitted_1K_albedo
+    second: {fileID: 2800000, guid: 49b0191e2ca64d046b899d2dde0bca58, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Pitted_1K_metallic
+    second: {fileID: 2800000, guid: c141c249326976447a99cb47f83c5e9a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Pitted_1K_normal
+    second: {fileID: 2800000, guid: ef04ec05089f15042b17a0539e48df06, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Pitted_1K_roughness
+    second: {fileID: 2800000, guid: 0ac8a79976ec33142b43b2f553b7e035, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Plain_1K_albedo
+    second: {fileID: 2800000, guid: c55e813025b91e74286d902795d52d01, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Plain_1K_normal
+    second: {fileID: 2800000, guid: 4639b47a160371248abfe1543e864a4a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rust_Plain_1K_roughness
+    second: {fileID: 2800000, guid: d66cec5e6de20354996c54dd06421f2a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_WindowsBacklit0024_1_S
+    second: {fileID: 2800000, guid: f252e76637b48ce4e87c589cf5973239, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tex_headlight
+    second: {fileID: 2800000, guid: b4d41850059a57041a597890e8224fca, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: left_track
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 400
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: right_track
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 401
+      lastFrame: 800
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: bucket_wheel
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 801
+      lastFrame: 1200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: arm_movement
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1201
+      lastFrame: 1920
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
