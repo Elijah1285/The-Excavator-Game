@@ -4,28 +4,83 @@ using UnityEngine;
 
 public class ExcavatorMovement : MonoBehaviour
 {
+    public float speedDampTime = 0.01f;
+    public float sensitivityX = 1.0f;
+    public float animationSpeed = 1.5f;
+    public float elapsedTime = 0;
+    private bool noBackMov = true;
+    private float desiredDuration = 0.5f;
+
     private Animator anim;
     private HashIDs hash;
+    private Rigidbody ourBody;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
+        ourBody = this.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        float v = Input.GetAxis("Vertical");
-        MovementManagement(v);
+        float drive = Input.GetAxis("Drive");
+        float steer = Input.GetAxis("Steer");
+        MovementManagement(drive);
+        Rotating(steer);
+        elapsedTime += Time.deltaTime;
     }
 
-    void MovementManager(float vertical)
+    void MovementManagement(float drive)
     {
-        if (vertical > 0)
+        if (drive > 0)
         {
+            // start animations
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.5f, speedDampTime, Time.deltaTime);
-            anim.SetBool("Backwards", false);
-            noBackMov = true;
+            anim.SetFloat(hash.rightTrackSpeedFloat, 1.5f, speedDampTime, Time.deltaTime);
+            anim.SetBool(hash.reverseBool, false);
+
+            // do movement
+            float percentageComplete = elapsedTime / desiredDuration;
+            float movement = Mathf.Lerp(0f, -0.025f, percentageComplete);
+            Vector3 moveForward = new Vector3(movement, 0f, 0f);
+            moveForward = ourBody.transform.TransformDirection(moveForward);
+            ourBody.transform.position += moveForward;
+        }
+
+        if (drive < 0)
+        {
+            // start animations
+            anim.SetFloat(hash.leftTrackSpeedFloat, -1.5f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.rightTrackSpeedFloat, -1.5f, speedDampTime, Time.deltaTime);
+            anim.SetBool(hash.reverseBool, true);
+
+            // do movement
+            float percentageComplete = elapsedTime / desiredDuration;
+            float movement = Mathf.Lerp(0f, 0.025f, percentageComplete);
+            Vector3 moveBack = new Vector3(movement, 0f, 0f);
+            moveBack = ourBody.transform.TransformDirection(moveBack);
+            ourBody.transform.position += moveBack;
+        }
+        if (drive == 0)
+        {
+            anim.SetFloat(hash.leftTrackSpeedFloat, 0);
+            anim.SetFloat(hash.rightTrackSpeedFloat, 0);
+        }
+    }
+    void Rotating(float steer)
+    {
+        // access the avatar's rigidbody
+        Rigidbody ourBody = this.GetComponent<Rigidbody>();
+
+        // check whether we have rotation data to apply
+        if (steer != 0)
+        {
+            // use mouse input to create a Euler ange which provides rotation in the Y axis
+            // this value is then turned into a Quarternion
+            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX, 0f);
+            // this value is applied to turn the body via the rididbody
+            ourBody.MoveRotation(ourBody.rotation * deltaRotation);
         }
     }
 }
