@@ -38,7 +38,7 @@ public class ExcavatorMovement : MonoBehaviour
             // start animations
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.5f, speedDampTime, Time.deltaTime);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.5f, speedDampTime, Time.deltaTime);
-            anim.SetBool(hash.reverseBool, false);
+            anim.SetBool(hash.movingBool, true);
 
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
@@ -53,7 +53,7 @@ public class ExcavatorMovement : MonoBehaviour
             // start animations
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.5f, speedDampTime, Time.deltaTime);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.5f, speedDampTime, Time.deltaTime);
-            anim.SetBool(hash.reverseBool, true);
+            anim.SetBool(hash.movingBool, true);
 
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
@@ -66,6 +66,7 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0);
+            anim.SetBool(hash.movingBool, false);
         }
     }
     void Rotating(float steer)
