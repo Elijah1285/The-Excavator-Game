@@ -34,6 +34,8 @@ public class ExcavatorMovement : MonoBehaviour
 
     void MovementManagement(float drive)
     {
+        //Debug.Log(drive);
+
         if (drive > 0)
         {
             if (noForwardMov == true)
@@ -82,6 +84,8 @@ public class ExcavatorMovement : MonoBehaviour
             anim.SetFloat(hash.leftTrackSpeedFloat, 0);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0);
             anim.SetBool(hash.movingBool, false);
+            noForwardMov = true;
+            noBackMov = true;
         }
     }
     void Rotating(float steer)
