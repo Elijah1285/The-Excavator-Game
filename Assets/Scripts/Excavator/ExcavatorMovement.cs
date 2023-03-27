@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ExcavatorMovement : MonoBehaviour
 {
-    public float speedDampTime = 0.01f;
+    public float speedDampTime = 399f;
     public float sensitivityX = 1.0f;
     public float animationSpeed = 1.5f;
     public float elapsedTime = 0;
     private bool noForwardMov = true;
     private bool noBackMov = true;
     private float desiredDuration = 0.5f;
+    private bool bucketWheelMov = false;
 
     private Animator anim;
     private HashIDs hash;
@@ -21,6 +22,7 @@ public class ExcavatorMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
         ourBody = this.GetComponent<Rigidbody>();
+        anim.speed = 0;
     }
 
     private void Update()
@@ -29,6 +31,7 @@ public class ExcavatorMovement : MonoBehaviour
         float steer = Input.GetAxis("Steer");
         MovementManagement(drive);
         Rotating(steer);
+        BucketWheelManagement();
         elapsedTime += Time.deltaTime;
     }
 
@@ -101,6 +104,20 @@ public class ExcavatorMovement : MonoBehaviour
             Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX, 0f);
             // this value is applied to turn the body via the rididbody
             ourBody.MoveRotation(ourBody.rotation * deltaRotation);
+        }
+    }
+
+    void BucketWheelManagement()
+    {
+        if (Input.GetKeyUp("f") && bucketWheelMov)
+        {
+            anim.speed = 0;
+            bucketWheelMov = false;
+        }
+        else if(Input.GetKeyUp("f") && !bucketWheelMov)
+        {
+            anim.speed = 1;
+            bucketWheelMov = true;
         }
     }
 }
