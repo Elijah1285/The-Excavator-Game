@@ -9,7 +9,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-/[Uu]ser[Ss}Settings/
+/[Uu]ser[Ss]Settings/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
