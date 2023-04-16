@@ -8,6 +8,7 @@ public class SetUpCameras : MonoBehaviour
     public Camera StaticCamera;
     public Camera StaticCamera2;
     public Camera StaticCamera3;
+    public Camera FollowCamera2;
 
     // Start is called before the first frame update
     void Start()
@@ -18,10 +19,12 @@ public class SetUpCameras : MonoBehaviour
         StaticCamera.enabled = false;
         StaticCamera2.enabled = false;
         StaticCamera3.enabled = false;
+        FollowCamera2.enabled = false;
 
         PlayerCharacter.GetComponent<AudioListener>().enabled = true;
         StaticCamera.GetComponent<AudioListener>().enabled = false;
         StaticCamera2.GetComponent<AudioListener>().enabled = false;
         StaticCamera3.GetComponent<AudioListener>().enabled = false;
+        FollowCamera2.GetComponent<AudioListener>().enabled = false;
     }
 }

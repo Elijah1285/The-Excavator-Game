@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float elapsedTime = 0;
     private bool noBackMov = true;
     private float desiredDuration = 0.5f;
+    public bool is_playing = true;
 
     private Animator anim;
     private HashIDs hash;
@@ -25,19 +26,25 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float v = Input.GetAxis("Vertical");
-        bool sneak = Input.GetButton("Sneak");
-        float turn = Input.GetAxis("Turn");
-        Rotating(turn);
-        MovementManagement(v, sneak);
-        elapsedTime += Time.deltaTime;
+        if (is_playing)
+        {
+            float v = Input.GetAxis("Vertical");
+            bool sneak = Input.GetButton("Sneak");
+            float turn = Input.GetAxis("Turn");
+            Rotating(turn);
+            MovementManagement(v, sneak);
+            elapsedTime += Time.deltaTime;
+        }
     }
 
     private void Update()
     {
-        bool shout = Input.GetButtonDown("Attract");
-        anim.SetBool(hash.shoutingBool, shout);
-        AudioManagement(shout);
+        if (is_playing && !noBackMov)
+        {
+            bool shout = Input.GetButtonDown("Attract");
+            anim.SetBool(hash.shoutingBool, shout);
+            AudioManagement(shout);
+        }
     }
 
     void Rotating(float mouseXInput)
