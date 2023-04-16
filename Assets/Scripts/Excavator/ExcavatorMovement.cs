@@ -111,13 +111,17 @@ public class ExcavatorMovement : MonoBehaviour
     {
         if (Input.GetKeyUp("f") && bucketWheelMov)
         {
-            anim.speed = 0;
+            anim.speed = 1;
             bucketWheelMov = false;
+            anim.SetFloat(hash.bucketWheelSpeedFloat, 0);
+            anim.SetBool(hash.bucketWheelMovBool, true);
         }
         else if(Input.GetKeyUp("f") && !bucketWheelMov)
         {
             anim.speed = 1;
             bucketWheelMov = true;
+            anim.SetFloat(hash.bucketWheelSpeedFloat, 1);
+            anim.SetBool(hash.bucketWheelMovBool, true);
         }
     }
 }
