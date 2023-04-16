@@ -10,7 +10,7 @@ public class BoxExplosion : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp("e"))
+        if (Input.GetKeyUp("z"))
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, explosion_radius);
 

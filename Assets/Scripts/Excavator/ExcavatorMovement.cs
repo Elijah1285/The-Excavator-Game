@@ -12,6 +12,9 @@ public class ExcavatorMovement : MonoBehaviour
     private bool noBackMov = true;
     private float desiredDuration = 0.5f;
     private bool bucketWheelMov = false;
+    private bool armMovLeft = false;
+    private bool armMovRight = false;
+    private int armFrame = 0;
 
     private Animator anim;
     private HashIDs hash;
@@ -31,6 +34,7 @@ public class ExcavatorMovement : MonoBehaviour
         MovementManagement(drive);
         Rotating(steer);
         BucketWheelManagement();
+        ArmManagement();
         elapsedTime += Time.deltaTime;
     }
 
@@ -117,6 +121,88 @@ public class ExcavatorMovement : MonoBehaviour
         {
             bucketWheelMov = true;
             anim.SetFloat(hash.bucketWheelSpeedFloat, 1);
+        }
+    }
+
+    void ArmManagement()
+    {
+        //if (Input.GetKeyDown("q") && armMovLeft)
+        //{
+        //    armMovLeft = false;
+        //    anim.SetFloat(hash.armSpeedFloat, 0);
+        //}
+        //else if (Input.GetKeyDown("q") && !armMovLeft)
+        //{
+        //    armMovLeft = true;
+        //    armMovRight = false;
+        //    anim.SetFloat(hash.armSpeedFloat, 1);
+        //}
+
+        //if (Input.GetKeyDown("e") && armMovRight)
+        //{
+        //    armMovRight = false;
+        //    anim.SetFloat(hash.armSpeedFloat, 0);
+        //}
+        //else if (Input.GetKeyDown("e") && !armMovRight)
+        //{
+        //    armMovRight = true;
+        //    armMovLeft = false;
+        //    anim.SetFloat(hash.armSpeedFloat, -1);
+        //}
+
+        //if (Input.GetKeyUp("q") && armMovLeft)
+        //{
+        //    armMovLeft = false;
+        //    anim.SetFloat(hash.armSpeedFloat, 0);
+        //}
+        //else if (Input.GetKeyUp("q") && !armMovLeft)
+        //{
+        //    armMovLeft = true;
+        //    armMovRight = false;
+        //    anim.SetFloat(hash.armSpeedFloat, 1);
+        //}
+
+        //if (Input.GetKeyUp("e") && armMovRight)
+        //{
+        //    armMovRight = false;
+        //    anim.SetFloat(hash.armSpeedFloat, 0);
+        //}
+        //else if (Input.GetKeyUp("e") && !armMovRight)
+        //{
+        //    armMovRight = true;
+        //    armMovLeft = false;
+        //    anim.SetFloat(hash.armSpeedFloat, -1);
+        //}
+
+        if (Input.GetKeyDown("q") && !armMovLeft &&!armMovRight)
+        {
+            armMovLeft = true;
+            anim.SetFloat(hash.armSpeedFloat, 1);
+        }
+        else if (Input.GetKeyUp("q") && armMovLeft)
+        {
+            armMovLeft = false;
+            anim.SetFloat(hash.armSpeedFloat, 0);
+        }
+
+        if (Input.GetKeyDown("e") && !armMovLeft && !armMovRight)
+        {
+            armMovRight = true;
+            anim.SetFloat(hash.armSpeedFloat, -1);
+        }
+        else if (Input.GetKeyUp("e") && armMovRight)
+        {
+            armMovRight = false;
+            anim.SetFloat(hash.armSpeedFloat, 0);
+        }
+
+        if (armMovLeft)
+        {
+            armFrame += 1;
+        }
+        else if (armMovRight)
+        {
+            armFrame -= 1;
         }
     }
 }
