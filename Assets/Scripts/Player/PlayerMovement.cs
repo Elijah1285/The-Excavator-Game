@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float sensitivityX = 1.0f;
     public float animationSpeed = 1.5f;
     private float elapsedTime = 0;
-    private bool noBackMov = true;
+    public bool noBackMov = true;
     private float desiredDuration = 0.5f;
     public bool is_playing = true;
 

@@ -10,6 +10,12 @@ public class EnterTheExcavator : MonoBehaviour
     public Camera excavator_cam;
     public GameObject player;
     public GameObject excavator;
+    private HashIDs hash;
+
+    void Awake()
+    {
+        hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -45,6 +51,9 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<PlayerMovement>().is_playing = false;
                 player.transform.position = new Vector3(excavator.transform.position.x, excavator.transform.position.y + 8, excavator.transform.position.z);
                 player.transform.parent = excavator.transform;
+                player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
+                player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
+                player.GetComponent<PlayerMovement>().noBackMov = true;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
                 excavator.GetComponent<AudioSource>().Play();
                 Input.ResetInputAxes();
@@ -57,6 +66,9 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<PlayerMovement>().is_playing = true;
                 player.transform.position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y, excavator.transform.position.z - 6);
                 player.transform.parent = null;
+                player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
+                player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
+                player.GetComponent<PlayerMovement>().noBackMov = true;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = false;
                 excavator.GetComponent<AudioSource>().Stop();
                 Input.ResetInputAxes();
