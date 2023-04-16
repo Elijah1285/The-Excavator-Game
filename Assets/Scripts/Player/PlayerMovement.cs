@@ -58,8 +58,6 @@ public class PlayerMovement : MonoBehaviour
 
     void MovementManagement(float vertical, bool sneaking)
     {
-        Debug.Log(vertical);
-
         anim.SetBool(hash.sneakingBool, sneaking);
 
         if (vertical > 0)

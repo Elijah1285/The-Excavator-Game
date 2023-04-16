@@ -14,7 +14,7 @@ public class ExcavatorMovement : MonoBehaviour
     private bool bucketWheelMov = false;
     private bool armMovLeft = false;
     private bool armMovRight = false;
-    private int armFrame = 0;
+    private float armFrame = 0.0f;
 
     private Animator anim;
     private HashIDs hash;
@@ -198,11 +198,23 @@ public class ExcavatorMovement : MonoBehaviour
 
         if (armMovLeft)
         {
-            armFrame += 1;
+            armFrame += 1 * Time.deltaTime;
+
+            if (armFrame > 3)
+            {
+                armMovLeft = false;
+                anim.SetFloat(hash.armSpeedFloat, 0);
+            }
         }
         else if (armMovRight)
         {
-            armFrame -= 1;
+            armFrame -= 1 * Time.deltaTime;
+
+            if (armFrame < -3)
+            {
+                armMovRight = false;
+                anim.SetFloat(hash.armSpeedFloat, 0);
+            }
         }
     }
 }
