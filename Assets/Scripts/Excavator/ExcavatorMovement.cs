@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExcavatorMovement : MonoBehaviour
 {
+
+
     public float speedDampTime = 399f;
     public float sensitivityX = 1.0f;
     public float animationSpeed = 1.5f;
@@ -45,6 +47,7 @@ public class ExcavatorMovement : MonoBehaviour
             BucketWheelManagement();
             ArmManagement();
             AudioManagement();
+            AnimationManagement(drive, steer);
             elapsedTime += Time.deltaTime;
         }
     }
@@ -72,9 +75,9 @@ public class ExcavatorMovement : MonoBehaviour
 
 
             // start animations
-            anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed, speedDampTime, Time.deltaTime);
-            anim.SetBool(hash.movingBool, true);
+            //anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed, speedDampTime, Time.deltaTime);
+            //anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed, speedDampTime, Time.deltaTime);
+            //anim.SetBool(hash.movingBool, true);
             noBackMov = true;
 
             // do movement
@@ -111,9 +114,9 @@ public class ExcavatorMovement : MonoBehaviour
             }
 
             // start animations
-            anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed, speedDampTime, Time.deltaTime);
-            anim.SetBool(hash.movingBool, true);
+            //anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed, speedDampTime, Time.deltaTime);
+            //anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed, speedDampTime, Time.deltaTime);
+            //anim.SetBool(hash.movingBool, true);
             noForwardMov = true;
 
             // do movement
@@ -131,9 +134,9 @@ public class ExcavatorMovement : MonoBehaviour
         }
         if (drive == 0)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, 0);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 0);
-            anim.SetBool(hash.movingBool, false);
+            //anim.SetFloat(hash.leftTrackSpeedFloat, 0);
+            //anim.SetFloat(hash.rightTrackSpeedFloat, 0);
+            //anim.SetBool(hash.movingBool, false);
             noForwardMov = true;
             noBackMov = true;
             revved = false;
@@ -264,6 +267,67 @@ public class ExcavatorMovement : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(engine_start_clip, transform.position);
             engine_start = false;
+        }
+    }
+
+    void AnimationManagement(float drive, float steer)
+    {
+        if (true)
+        {
+            if (drive > 0 && steer == 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f, speedDampTime, Time.deltaTime);
+                anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f, speedDampTime, Time.deltaTime);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive < 0 && steer == 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f, speedDampTime, Time.deltaTime);
+                anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f, speedDampTime, Time.deltaTime);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive == 0 && steer > 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive == 0 && steer < 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive > 0 && steer > 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, 0.5f);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive > 0 && steer < 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, 0.5f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive < 0 && steer > 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, -0.5f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive < 0 && steer < 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, -0.5f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+                anim.SetBool(hash.movingBool, true);
+            }
+            else if (drive == 0 && steer == 0)
+            {
+                anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
+                anim.SetBool(hash.movingBool, false);
+            }
         }
     }
 }

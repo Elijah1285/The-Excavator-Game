@@ -54,6 +54,7 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
                 player.GetComponent<PlayerMovement>().noBackMov = true;
+                player.GetComponent<AudioSource>().Stop();
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_start = true;
                 excavator.GetComponent<AudioSource>().Play();
