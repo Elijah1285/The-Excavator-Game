@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (is_playing)
         {
             float v = Input.GetAxis("Vertical");
+          //  Debug.Log(v);
             bool sneak = Input.GetButton("Sneak");
             float turn = Input.GetAxis("Turn");
             Rotating(turn);
@@ -103,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
 
     void AudioManagement (bool shout)
     {
-        Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"));
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
         {
             if (!GetComponent<AudioSource>().isPlaying)

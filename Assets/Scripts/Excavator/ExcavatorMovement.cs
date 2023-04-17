@@ -20,8 +20,6 @@ public class ExcavatorMovement : MonoBehaviour
     public bool is_playing = false;
     public bool engine_start = false;
     public bool revved = false;
-    public float left_track_speed = 0.0f;
-    public float right_track_speed = 0.0f;
     Movement movement;
     public AudioClip engine_start_clip;
     public AudioClip rev_clip;
@@ -40,9 +38,12 @@ public class ExcavatorMovement : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (is_playing)
         {
             float drive = Input.GetAxis("Drive");
+            //Debug.Log(drive);
             float steer = Input.GetAxis("Steer");
             MovementManagement(drive);
             Rotating(steer);
@@ -63,18 +64,6 @@ public class ExcavatorMovement : MonoBehaviour
                 elapsedTime = 0;
                 noForwardMov = false;
             }
-
-            // track speeds
-            if (left_track_speed < 1)
-            {
-                left_track_speed += 1.0f;
-            }
-
-            if (right_track_speed < 1)
-            {
-                right_track_speed += 1.0f;
-            }
-
 
             noBackMov = true;
 
@@ -98,17 +87,6 @@ public class ExcavatorMovement : MonoBehaviour
             {
                 elapsedTime = 0;
                 noBackMov = false;
-            }
-
-            // track speeds
-            if (left_track_speed > -1)
-            {
-                left_track_speed -= 1.0f;
-            }
-
-            if (right_track_speed > -1)
-            {
-                right_track_speed -= 1.0f;
             }
 
             noForwardMov = true;
@@ -143,49 +121,9 @@ public class ExcavatorMovement : MonoBehaviour
         {
             // use mouse input to create a Euler ange which provides rotation in the Y axis
             // this value is then turned into a Quarternion
-            anim.SetBool(hash.movingBool, true);
             Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX, 0f);
             // this value is applied to turn the body via the rididbody
             ourBody.MoveRotation(ourBody.rotation * deltaRotation);
-            
-            if (steer > 0)
-            {
-                // track speeds
-                if (left_track_speed < 1)
-                {
-                    left_track_speed += 1.0f;
-                }
-
-                if (right_track_speed > -1)
-                {
-                    right_track_speed -= 1.0f;
-                }
-
-                // animation
-                //anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed);
-                //anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed);
-            }
-            else
-            {
-                // track speeds
-                //if (left_track_speed > -1)
-                //{
-                //    left_track_speed -= 1.0f;
-                //}
-
-                //if (right_track_speed < 1)
-                //{
-                //    right_track_speed += 1.0f;
-                //}
-
-                // animation
-                //anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed);
-                //anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed);
-            }
-        }
-        else
-        {
-
         }
     }
 
@@ -262,17 +200,15 @@ public class ExcavatorMovement : MonoBehaviour
     {
         if (drive > 0 && steer == 0 && movement != Movement.FORWARD)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f, speedDampTime, Time.deltaTime);
-            anim.SetBool(hash.movingBool, true);
+            anim.SetFloat(hash.leftTrackSpeedFloat,1.0f);
+            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
             movement = Movement.FORWARD;
             Debug.Log("moving forward");
         }
         else if (drive < 0 && steer == 0 && movement != Movement.BACKWARD)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f, speedDampTime, Time.deltaTime);
-            anim.SetBool(hash.movingBool, true);
+            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
+            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
             movement = Movement.BACKWARD;
             Debug.Log("moving backward");
         }
@@ -280,7 +216,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
-            anim.SetBool(hash.movingBool, true);
             movement = Movement.RIGHT;
             Debug.Log("turning right");
         }
@@ -288,7 +223,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
-            anim.SetBool(hash.movingBool, true);
             movement = Movement.LEFT;
             Debug.Log("turning left");
         }
@@ -296,7 +230,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f);
-            anim.SetBool(hash.movingBool, true);
             movement = Movement.FORWARDRIGHT;
             Debug.Log("moving forwardright");
         }
@@ -304,7 +237,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
-            anim.SetBool(hash.movingBool, true);
             movement = Movement.FORWARDLEFT;
             Debug.Log("moving forwardleft");
         }
@@ -312,7 +244,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
-            anim.SetBool(hash.movingBool, true);
             movement = Movement.BACKWARDLEFT;
             Debug.Log("moving backwardleft");
         }
@@ -320,7 +251,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f);
-            anim.SetBool(hash.movingBool, true);
             movement = Movement.BACKWARDRIGHT;
             Debug.Log("moving backwardright");
         }
@@ -328,7 +258,6 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
-            anim.SetBool(hash.movingBool, false);
             movement = Movement.STOP;
             Debug.Log("stopped movement");
         }
