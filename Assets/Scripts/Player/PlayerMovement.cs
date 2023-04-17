@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (is_playing && !noBackMov)
+        if (is_playing && noBackMov)
         {
             bool shout = Input.GetButtonDown("Attract");
             anim.SetBool(hash.shoutingBool, shout);
@@ -97,12 +97,13 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetFloat(hash.speedFloat, 0);
             anim.SetBool(hash.backwardsBool, false);
-            noBackMov= true;
+            noBackMov = true;
         }
     }
 
     void AudioManagement (bool shout)
     {
+        Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"));
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
         {
             if (!GetComponent<AudioSource>().isPlaying)
