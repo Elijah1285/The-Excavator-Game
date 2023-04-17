@@ -16,6 +16,12 @@ public class ExcavatorMovement : MonoBehaviour
     private bool armMovRight = false;
     private float armFrame = 0.0f;
     public bool is_playing = false;
+    public bool engine_start = false;
+    public bool revved = false;
+    public float left_track_speed = 0.0f;
+    public float right_track_speed = 0.0f;
+    public AudioClip engine_start_clip;
+    public AudioClip rev_clip;
 
     private Animator anim;
     private HashIDs hash;
@@ -38,6 +44,7 @@ public class ExcavatorMovement : MonoBehaviour
             Rotating(steer);
             BucketWheelManagement();
             ArmManagement();
+            AudioManagement();
             elapsedTime += Time.deltaTime;
         }
     }
@@ -52,9 +59,21 @@ public class ExcavatorMovement : MonoBehaviour
                 noForwardMov = false;
             }
 
+            // track speeds
+            if (left_track_speed < 1)
+            {
+                left_track_speed += 1.0f;
+            }
+
+            if (right_track_speed < 1)
+            {
+                right_track_speed += 1.0f;
+            }
+
+
             // start animations
-            anim.SetFloat(hash.leftTrackSpeedFloat, 1f, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 1f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed, speedDampTime, Time.deltaTime);
             anim.SetBool(hash.movingBool, true);
             noBackMov = true;
 
@@ -64,6 +83,12 @@ public class ExcavatorMovement : MonoBehaviour
             Vector3 moveForward = new Vector3(movement, 0f, 0f);
             moveForward = ourBody.transform.TransformDirection(moveForward);
             ourBody.transform.position += moveForward;
+
+            if (!revved)
+            {
+                AudioSource.PlayClipAtPoint(rev_clip, transform.position);
+                revved = true;
+            }
         }
 
         if (drive < 0)
@@ -74,9 +99,20 @@ public class ExcavatorMovement : MonoBehaviour
                 noBackMov = false;
             }
 
+            // track speeds
+            if (left_track_speed > -1)
+            {
+                left_track_speed -= 1.0f;
+            }
+
+            if (right_track_speed > -1)
+            {
+                right_track_speed -= 1.0f;
+            }
+
             // start animations
-            anim.SetFloat(hash.leftTrackSpeedFloat, -1f, speedDampTime, Time.deltaTime);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -1f, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed, speedDampTime, Time.deltaTime);
+            anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed, speedDampTime, Time.deltaTime);
             anim.SetBool(hash.movingBool, true);
             noForwardMov = true;
 
@@ -86,6 +122,12 @@ public class ExcavatorMovement : MonoBehaviour
             Vector3 moveBack = new Vector3(movement, 0f, 0f);
             moveBack = ourBody.transform.TransformDirection(moveBack);
             ourBody.transform.position += moveBack;
+
+            if (!revved)
+            {
+                AudioSource.PlayClipAtPoint(rev_clip, transform.position);
+                revved = true;
+            }
         }
         if (drive == 0)
         {
@@ -94,6 +136,7 @@ public class ExcavatorMovement : MonoBehaviour
             anim.SetBool(hash.movingBool, false);
             noForwardMov = true;
             noBackMov = true;
+            revved = false;
         }
     }
     void Rotating(float steer)
@@ -106,10 +149,53 @@ public class ExcavatorMovement : MonoBehaviour
         {
             // use mouse input to create a Euler ange which provides rotation in the Y axis
             // this value is then turned into a Quarternion
+            anim.SetBool(hash.movingBool, true);
             Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX, 0f);
             // this value is applied to turn the body via the rididbody
             ourBody.MoveRotation(ourBody.rotation * deltaRotation);
+            
+            if (steer > 0)
+            {
+                // track speeds
+                if (left_track_speed < 1)
+                {
+                    left_track_speed += 1.0f;
+                }
+
+                if (right_track_speed > -1)
+                {
+                    right_track_speed -= 1.0f;
+                }
+
+                // animation
+                anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed);
+                anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed);
+            }
+            else
+            {
+                // track speeds
+                if (left_track_speed > -1)
+                {
+                    left_track_speed -= 1.0f;
+                }
+
+                if (right_track_speed < 1)
+                {
+                    right_track_speed += 1.0f;
+                }
+
+                // animation
+                anim.SetFloat(hash.leftTrackSpeedFloat, left_track_speed);
+                anim.SetFloat(hash.rightTrackSpeedFloat, right_track_speed);
+            }
         }
+        else
+        {
+
+        }
+
+        Debug.Log(left_track_speed);
+        Debug.Log(right_track_speed);
     }
 
     void BucketWheelManagement()
@@ -169,6 +255,15 @@ public class ExcavatorMovement : MonoBehaviour
                 armMovRight = false;
                 anim.SetFloat(hash.armSpeedFloat, 0);
             }
+        }
+    }
+
+    void AudioManagement()
+    {
+        if (engine_start)
+        {
+            AudioSource.PlayClipAtPoint(engine_start_clip, transform.position);
+            engine_start = false;
         }
     }
 }
