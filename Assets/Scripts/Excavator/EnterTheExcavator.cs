@@ -49,12 +49,16 @@ public class EnterTheExcavator : MonoBehaviour
                 player_cam.enabled = false;
                 excavator_cam.enabled = true;
                 player.GetComponent<PlayerMovement>().is_playing = false;
-                player.transform.position = new Vector3(excavator.transform.position.x, excavator.transform.position.y + 8, excavator.transform.position.z);
+                player.transform.position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 5, excavator.transform.position.z);
                 player.transform.parent = excavator.transform;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
                 player.GetComponent<PlayerMovement>().noBackMov = true;
                 player.GetComponent<AudioSource>().Stop();
+                player.GetComponent<CapsuleCollider>().enabled = false;
+                player.GetComponent<Rigidbody>().useGravity = false;
+                Quaternion player_rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
+                player.transform.rotation = player_rotation;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_start = true;
                 excavator.GetComponent<AudioSource>().Play();
@@ -71,6 +75,8 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
                 player.GetComponent<PlayerMovement>().noBackMov = true;
+                player.GetComponent<CapsuleCollider>().enabled = true;
+                player.GetComponent<Rigidbody>().useGravity = true;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = false;
                 excavator.GetComponent<Animator>().SetFloat(hash.leftTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.rightTrackSpeedFloat, 0);
