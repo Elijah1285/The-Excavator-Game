@@ -41,7 +41,7 @@ public class EnterTheExcavator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp("1"))
+        if (Input.GetKeyUp("e"))
         {
             if (!player_in_excavator && player_in_bound)
             {

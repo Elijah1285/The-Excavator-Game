@@ -129,12 +129,12 @@ public class ExcavatorMovement : MonoBehaviour
 
     void BucketWheelManagement()
     {
-        if (Input.GetKeyUp("f") && bucketWheelMov)
+        if (Input.GetKeyUp("2") && bucketWheelMov)
         {
             bucketWheelMov = false;
             anim.SetFloat(hash.bucketWheelSpeedFloat, 0);
         }
-        else if(Input.GetKeyUp("f") && !bucketWheelMov)
+        else if(Input.GetKeyUp("1") && !bucketWheelMov)
         {
             bucketWheelMov = true;
             anim.SetFloat(hash.bucketWheelSpeedFloat, 1);
@@ -143,23 +143,23 @@ public class ExcavatorMovement : MonoBehaviour
 
     void ArmManagement()
     {
-        if (Input.GetKeyDown("q") && !armMovLeft &&!armMovRight)
+        if (Input.GetKeyDown("3") && !armMovLeft &&!armMovRight)
         {
             armMovLeft = true;
             anim.SetFloat(hash.armSpeedFloat, 1);
         }
-        else if (Input.GetKeyUp("q") && armMovLeft)
+        else if (Input.GetKeyUp("3") && armMovLeft)
         {
             armMovLeft = false;
             anim.SetFloat(hash.armSpeedFloat, 0);
         }
 
-        if (Input.GetKeyDown("e") && !armMovLeft && !armMovRight)
+        if (Input.GetKeyDown("4") && !armMovLeft && !armMovRight)
         {
             armMovRight = true;
             anim.SetFloat(hash.armSpeedFloat, -1);
         }
-        else if (Input.GetKeyUp("e") && armMovRight)
+        else if (Input.GetKeyUp("4") && armMovRight)
         {
             armMovRight = false;
             anim.SetFloat(hash.armSpeedFloat, 0);
