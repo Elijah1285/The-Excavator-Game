@@ -14,13 +14,12 @@ public class ExcavatorMovement : MonoBehaviour
     private bool noBackMov = true;
     private float desiredDuration = 0.5f;
     private bool bucketWheelMov = false;
-    private bool armMovLeft = false;
-    private bool armMovRight = false;
     private float armFrame = 0.0f;
     public bool is_playing = false;
     public bool engine_start = false;
     public bool revved = false;
     public float bucket_wheel_speed = 0.0f;
+    public float arm_speed = 0.0f;
     Movement movement;
     public AudioClip engine_start_clip;
     public AudioClip rev_clip;
@@ -49,7 +48,6 @@ public class ExcavatorMovement : MonoBehaviour
             float steer = Input.GetAxis("Steer");
             float arm = Input.GetAxis("Arm");
             float wheel = Input.GetAxis("Wheel");
-            Debug.Log(wheel);
             MovementManagement(drive);
             Rotating(steer);
             BucketWheelManagement(wheel);
@@ -159,48 +157,36 @@ public class ExcavatorMovement : MonoBehaviour
 
     void ArmManagement(float arm)
     {
-        if (Input.GetKeyDown("3") && !armMovLeft &&!armMovRight)
+        if (arm < 0)
         {
-            armMovLeft = true;
-            anim.SetFloat(hash.armSpeedFloat, 1);
-        }
-        else if (Input.GetKeyUp("3") && armMovLeft)
-        {
-            armMovLeft = false;
-            anim.SetFloat(hash.armSpeedFloat, 0);
-        }
-
-        if (Input.GetKeyDown("4") && !armMovLeft && !armMovRight)
-        {
-            armMovRight = true;
-            anim.SetFloat(hash.armSpeedFloat, -1);
-        }
-        else if (Input.GetKeyUp("4") && armMovRight)
-        {
-            armMovRight = false;
-            anim.SetFloat(hash.armSpeedFloat, 0);
-        }
-
-        if (armMovLeft)
-        {
-            armFrame += 1 * Time.deltaTime;
-
-            if (armFrame > 3)
+            if (armFrame < -3.75)
             {
-                armMovLeft = false;
-                anim.SetFloat(hash.armSpeedFloat, 0);
+                arm_speed = 0;
+            }
+            else
+            {
+                arm_speed = arm * 1.5f;
+                armFrame += arm_speed * Time.deltaTime;
             }
         }
-        else if (armMovRight)
+        else if (arm > 0)
         {
-            armFrame -= 1 * Time.deltaTime;
-
-            if (armFrame < -3)
+            if (armFrame > 3.75)
             {
-                armMovRight = false;
-                anim.SetFloat(hash.armSpeedFloat, 0);
+                arm_speed = 0;
+            }
+            else
+            {
+                arm_speed = arm * 1.5f;
+                armFrame += arm_speed * Time.deltaTime;
             }
         }
+        else
+        {
+            arm_speed = arm;
+        }
+
+        anim.SetFloat(hash.armSpeedFloat, arm_speed);
     }
 
     void AudioManagement()
@@ -219,63 +205,54 @@ public class ExcavatorMovement : MonoBehaviour
             anim.SetFloat(hash.leftTrackSpeedFloat,1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
             movement = Movement.FORWARD;
-            Debug.Log("moving forward");
         }
         else if (drive < 0 && steer == 0 && movement != Movement.BACKWARD)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
             movement = Movement.BACKWARD;
-            Debug.Log("moving backward");
         }
         else if (drive == 0 && steer > 0 && movement != Movement.RIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
             movement = Movement.RIGHT;
-            Debug.Log("turning right");
         }
         else if (drive == 0 && steer < 0 && movement != Movement.LEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
             movement = Movement.LEFT;
-            Debug.Log("turning left");
         }
         else if (drive > 0 && steer > 0 && movement != Movement.FORWARDRIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f);
             movement = Movement.FORWARDRIGHT;
-            Debug.Log("moving forwardright");
         }
         else if (drive > 0 && steer < 0 && movement != Movement.FORWARDLEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
             movement = Movement.FORWARDLEFT;
-            Debug.Log("moving forwardleft");
         }
         else if (drive < 0 && steer > 0 && movement != Movement.BACKWARDLEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
             movement = Movement.BACKWARDLEFT;
-            Debug.Log("moving backwardleft");
         }
         else if (drive < 0 && steer < 0 && movement != Movement.BACKWARDRIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f);
             movement = Movement.BACKWARDRIGHT;
-            Debug.Log("moving backwardright");
         }
         else if (drive == 0 && steer == 0 && movement != Movement.STOP)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
             movement = Movement.STOP;
-            Debug.Log("stopped movement");
         }
     }
 }
