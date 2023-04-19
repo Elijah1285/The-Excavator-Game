@@ -83,6 +83,7 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<Animator>().SetFloat(hash.armSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.bucketWheelSpeedFloat, 0);
                 excavator.GetComponent<AudioSource>().Stop();
+                excavator.GetComponent<ExcavatorMovement>().bucket_wheel_speed = 0;
                 Input.ResetInputAxes();
             }
         }
