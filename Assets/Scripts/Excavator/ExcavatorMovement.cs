@@ -20,6 +20,7 @@ public class ExcavatorMovement : MonoBehaviour
     public bool is_playing = false;
     public bool engine_start = false;
     public bool revved = false;
+    public float bucket_wheel_speed = 0.0f;
     Movement movement;
     public AudioClip engine_start_clip;
     public AudioClip rev_clip;
@@ -46,10 +47,13 @@ public class ExcavatorMovement : MonoBehaviour
             float drive = Input.GetAxis("Drive");
             //Debug.Log(drive);
             float steer = Input.GetAxis("Steer");
+            float arm = Input.GetAxis("Arm");
+            float wheel = Input.GetAxis("Wheel");
+            Debug.Log(wheel);
             MovementManagement(drive);
             Rotating(steer);
-            BucketWheelManagement();
-            ArmManagement();
+            BucketWheelManagement(wheel);
+            ArmManagement(arm);
             AudioManagement();
             AnimationManagement(drive, steer);
             elapsedTime += Time.deltaTime;
@@ -128,21 +132,32 @@ public class ExcavatorMovement : MonoBehaviour
         }
     }
 
-    void BucketWheelManagement()
+    void BucketWheelManagement(float wheel)
     {
-        if (Input.GetKeyUp("2") && bucketWheelMov)
+        if (wheel <= 0)
         {
             bucketWheelMov = false;
-            anim.SetFloat(hash.bucketWheelSpeedFloat, 0);
+
+            if (bucket_wheel_speed > 0)
+            {
+                bucket_wheel_speed += wheel;
+            }
+            else if (bucket_wheel_speed < 0)
+            {
+                bucket_wheel_speed = 0;
+            }
+
+            anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
         }
-        else if(Input.GetKeyUp("1") && !bucketWheelMov)
+        else if (wheel > 0)
         {
             bucketWheelMov = true;
-            anim.SetFloat(hash.bucketWheelSpeedFloat, 1);
+            bucket_wheel_speed = wheel * 5.0f;
+            anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
         }
     }
 
-    void ArmManagement()
+    void ArmManagement(float arm)
     {
         if (Input.GetKeyDown("3") && !armMovLeft &&!armMovRight)
         {
