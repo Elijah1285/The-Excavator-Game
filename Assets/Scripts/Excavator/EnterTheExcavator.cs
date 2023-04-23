@@ -61,7 +61,7 @@ public class EnterTheExcavator : MonoBehaviour
                 player.transform.rotation = player_rotation;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_start = true;
-                excavator.GetComponent<AudioSource>().Play();
+                excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Play();
                 Input.ResetInputAxes();
             }
             else if (player_in_excavator)
@@ -82,7 +82,7 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<Animator>().SetFloat(hash.rightTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.armSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.bucketWheelSpeedFloat, 0);
-                excavator.GetComponent<AudioSource>().Stop();
+                excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Stop();
                 excavator.GetComponent<ExcavatorMovement>().bucket_wheel_speed = 0;
                 Input.ResetInputAxes();
             }

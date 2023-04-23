@@ -24,6 +24,9 @@ public class ExcavatorMovement : MonoBehaviour
     public AudioClip engine_start_clip;
     public AudioClip rev_clip;
 
+    public AudioSource engine_audio_source;
+    public AudioSource bucket_wheel_audio_source;
+
     private Animator anim;
     private HashIDs hash;
     private Rigidbody ourBody;
@@ -34,7 +37,8 @@ public class ExcavatorMovement : MonoBehaviour
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
         ourBody = this.GetComponent<Rigidbody>();
         movement = Movement.STOP;
-        GetComponent<AudioSource>().volume = 0.3f;
+        engine_audio_source.volume = 0.3f;
+        bucket_wheel_audio_source.volume = 0.3f;
     }
 
     private void Update()
@@ -143,6 +147,7 @@ public class ExcavatorMovement : MonoBehaviour
             else if (bucket_wheel_speed < 0)
             {
                 bucket_wheel_speed = 0;
+                bucket_wheel_audio_source.Stop();
             }
 
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
@@ -152,6 +157,11 @@ public class ExcavatorMovement : MonoBehaviour
             bucketWheelMov = true;
             bucket_wheel_speed = wheel * 5.0f;
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
+
+            if (!bucket_wheel_audio_source.isPlaying)
+            {
+                bucket_wheel_audio_source.Play();
+            }
         }
     }
 
