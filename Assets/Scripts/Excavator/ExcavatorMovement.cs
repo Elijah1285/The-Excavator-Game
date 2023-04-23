@@ -26,6 +26,7 @@ public class ExcavatorMovement : MonoBehaviour
 
     public AudioSource engine_audio_source;
     public AudioSource bucket_wheel_audio_source;
+    public AudioSource arm_audio_source;
 
     private Animator anim;
     private HashIDs hash;
@@ -39,6 +40,7 @@ public class ExcavatorMovement : MonoBehaviour
         movement = Movement.STOP;
         engine_audio_source.volume = 0.3f;
         bucket_wheel_audio_source.volume = 0.3f;
+        arm_audio_source.volume = 0.3f;
     }
 
     private void Update()
@@ -178,6 +180,11 @@ public class ExcavatorMovement : MonoBehaviour
                 arm_speed = arm * 1.5f;
                 armFrame += arm_speed * Time.deltaTime;
             }
+
+            if (!arm_audio_source.isPlaying)
+            {
+                arm_audio_source.Play();
+            }
         }
         else if (arm > 0)
         {
@@ -190,10 +197,20 @@ public class ExcavatorMovement : MonoBehaviour
                 arm_speed = arm * 1.5f;
                 armFrame += arm_speed * Time.deltaTime;
             }
+
+            if (!arm_audio_source.isPlaying)
+            {
+                arm_audio_source.Play();
+            }
         }
         else
         {
             arm_speed = arm;
+
+            if (arm_audio_source.isPlaying)
+            {
+                arm_audio_source.Stop();
+            }
         }
 
         anim.SetFloat(hash.armSpeedFloat, arm_speed);
