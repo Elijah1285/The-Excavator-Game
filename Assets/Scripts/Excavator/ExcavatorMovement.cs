@@ -27,6 +27,7 @@ public class ExcavatorMovement : MonoBehaviour
     public AudioSource engine_audio_source;
     public AudioSource bucket_wheel_audio_source;
     public AudioSource arm_audio_source;
+    public AudioSource turn_audio_source;
 
     private Animator anim;
     private HashIDs hash;
@@ -41,6 +42,7 @@ public class ExcavatorMovement : MonoBehaviour
         engine_audio_source.volume = 0.3f;
         bucket_wheel_audio_source.volume = 0.3f;
         arm_audio_source.volume = 0.3f;
+        turn_audio_source.volume = 0.1f;
     }
 
     private void Update()
@@ -133,6 +135,18 @@ public class ExcavatorMovement : MonoBehaviour
             Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX, 0f);
             // this value is applied to turn the body via the rididbody
             ourBody.MoveRotation(ourBody.rotation * deltaRotation);
+
+            if (!turn_audio_source.isPlaying)
+            {
+                turn_audio_source.Play();
+            }
+        }
+        else
+        {
+            if (turn_audio_source.isPlaying)
+            {
+                turn_audio_source.Stop();
+            }
         }
     }
 
