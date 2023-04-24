@@ -7,7 +7,7 @@ public class ExcavatorMovement : MonoBehaviour
     enum Movement {FORWARD, BACKWARD, LEFT, RIGHT, FORWARDLEFT, FORWARDRIGHT, BACKWARDLEFT, BACKWARDRIGHT, STOP};
 
     public float speedDampTime = 399f;
-    public float sensitivityX = 1.0f;
+    public float sensitivityX = 0.5f;
     public float animationSpeed = 1.5f;
     public float elapsedTime = 0;
     private bool noForwardMov = true;
