@@ -13,7 +13,6 @@ public class ExcavatorMovement : MonoBehaviour
     private bool noForwardMov = true;
     private bool noBackMov = true;
     private float desiredDuration = 0.5f;
-    private bool bucketWheelMov = false;
     private float armFrame = 0.0f;
     public bool is_playing = false;
     public bool engine_start = false;
@@ -28,6 +27,7 @@ public class ExcavatorMovement : MonoBehaviour
     public AudioSource bucket_wheel_audio_source;
     public AudioSource arm_audio_source;
     public AudioSource turn_audio_source;
+    public AudioSource drive_audio_source;
 
     private Animator anim;
     private HashIDs hash;
@@ -43,6 +43,7 @@ public class ExcavatorMovement : MonoBehaviour
         bucket_wheel_audio_source.volume = 0.3f;
         arm_audio_source.volume = 0.3f;
         turn_audio_source.volume = 0.1f;
+        drive_audio_source.volume = 0.3f;
     }
 
     private void Update()
@@ -52,7 +53,6 @@ public class ExcavatorMovement : MonoBehaviour
         if (is_playing)
         {
             float drive = Input.GetAxis("Drive");
-            //Debug.Log(drive);
             float steer = Input.GetAxis("Steer");
             float arm = Input.GetAxis("Arm");
             float wheel = Input.GetAxis("Wheel");
@@ -90,6 +90,11 @@ public class ExcavatorMovement : MonoBehaviour
                 AudioSource.PlayClipAtPoint(rev_clip, transform.position);
                 revved = true;
             }
+
+            if (!drive_audio_source.isPlaying)
+            {
+                drive_audio_source.Play();
+            }
         }
 
         if (drive < 0)
@@ -114,12 +119,22 @@ public class ExcavatorMovement : MonoBehaviour
                 AudioSource.PlayClipAtPoint(rev_clip, transform.position);
                 revved = true;
             }
+
+            if (!drive_audio_source.isPlaying)
+            {
+                drive_audio_source.Play();
+            }
         }
         if (drive == 0)
         {
             noForwardMov = true;
             noBackMov = true;
             revved = false;
+
+            if (drive_audio_source.isPlaying)
+            {
+                drive_audio_source.Stop();
+            }
         }
     }
     void Rotating(float steer)
@@ -154,8 +169,6 @@ public class ExcavatorMovement : MonoBehaviour
     {
         if (wheel <= 0)
         {
-            bucketWheelMov = false;
-
             if (bucket_wheel_speed > 0)
             {
                 bucket_wheel_speed += wheel;
@@ -170,7 +183,6 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (wheel > 0)
         {
-            bucketWheelMov = true;
             bucket_wheel_speed = wheel * 5.0f;
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
 
