@@ -9,8 +9,6 @@ public class MainMenu : MonoBehaviour
     {
         float enter = Input.GetAxis("Enter");
         float exit = Input.GetAxis("Exit");
-        Debug.Log(enter);
-        Debug.Log(exit);
 
         if (enter > 0)
         {
