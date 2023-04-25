@@ -6,10 +6,10 @@ public class DirtScooper : MonoBehaviour
 {
     void Update()
     {
-        
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         Debug.Log("collision");
     }

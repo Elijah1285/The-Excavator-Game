@@ -56,7 +56,7 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<PlayerMovement>().noBackMov = true;
                 player.GetComponent<AudioSource>().Stop();
                 player.GetComponent<CapsuleCollider>().enabled = false;
-                player.GetComponent<Rigidbody>().useGravity = false;
+                Destroy(player.GetComponent<Rigidbody>());
                 Quaternion player_rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
                 player.transform.rotation = player_rotation;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
@@ -76,7 +76,8 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
                 player.GetComponent<PlayerMovement>().noBackMov = true;
                 player.GetComponent<CapsuleCollider>().enabled = true;
-                player.GetComponent<Rigidbody>().useGravity = true;
+                player.AddComponent(typeof(Rigidbody));
+                player.GetComponent<Rigidbody>().freezeRotation = true;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = false;
                 excavator.GetComponent<Animator>().SetFloat(hash.leftTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.rightTrackSpeedFloat, 0);
