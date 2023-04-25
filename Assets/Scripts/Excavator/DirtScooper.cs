@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DirtScooper : MonoBehaviour
 {
-    void Update()
-    {
+    public bool bucket_wheel_turning;
 
-    }
-
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("collision");
+        if (bucket_wheel_turning)
+        {
+
+        }
     }
 }

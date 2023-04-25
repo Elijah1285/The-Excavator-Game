@@ -29,6 +29,8 @@ public class ExcavatorMovement : MonoBehaviour
     public AudioSource turn_audio_source;
     public AudioSource drive_audio_source;
 
+    public GameObject scooper;
+
     private Animator anim;
     private HashIDs hash;
     private Rigidbody ourBody;
@@ -177,6 +179,7 @@ public class ExcavatorMovement : MonoBehaviour
             {
                 bucket_wheel_speed = 0;
                 bucket_wheel_audio_source.Stop();
+                scooper.GetComponent<DirtScooper>().bucket_wheel_turning = false;
             }
 
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
@@ -185,6 +188,11 @@ public class ExcavatorMovement : MonoBehaviour
         {
             bucket_wheel_speed = wheel * 5.0f;
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
+
+            if (!scooper.GetComponent<DirtScooper>().bucket_wheel_turning)
+            {
+                scooper.GetComponent<DirtScooper>().bucket_wheel_turning = true;
+            }
 
             if (!bucket_wheel_audio_source.isPlaying)
             {
