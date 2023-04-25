@@ -5,8 +5,8 @@ using UnityEngine;
 public class DirtScooper : MonoBehaviour
 {
     public bool bucket_wheel_turning;
-    public Vector3 shrink = new Vector3(0.05f, 0.05f, 0.05f);
-    public Vector3 minimum_size = new Vector3(0.1f, 0.1f, 0.1f);
+    public Vector3 shrink = new Vector3(0.03f, 0.03f, 0.03f);
+    public Vector3 minimum_size = new Vector3(0.3f, 0.3f, 0.3f);
 
     private void OnTriggerStay(Collider other)
     {
