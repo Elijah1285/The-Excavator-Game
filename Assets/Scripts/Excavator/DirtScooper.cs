@@ -9,43 +9,26 @@ public class DirtScooper : MonoBehaviour
     public Vector3 shrink = new Vector3(0.03f, 0.03f, 0.03f);
     public Vector3 minimum_size = new Vector3(0.5f, 0.5f, 0.5f);
     public int dirt_counter = 0;
-    public int digging_counter = 0;
+    public int dirt_intersected = 0;
     public TMP_Text dirt_counter_text;
 
     private void Update()
     {
-        Debug.Log(digging_counter);
+        Debug.Log(dirt_intersected);
 
-        if (!bucket_wheel_turning)
+        if (dirt_intersected > 0 && bucket_wheel_turning)
         {
-            if (digging_counter > 0)
-            { 
-                digging_counter = 0;
+            if (GetComponent<AudioSource>().volume < 1.0f)
+            {
+                GetComponent<AudioSource>().volume = 1.0f;
             }
-        }
-
-        if (digging_counter > 0)
-        {
-            //if (!GetComponent<AudioSource>().isPlaying)
-            //{
-                //GetComponent<AudioSource>().Play();
-
-                if (GetComponent<AudioSource>().volume < 1.0f)
-                {
-                    GetComponent<AudioSource>().volume = 1.0f;
-                }
-            //}
         }
         else
         {
-            //if (GetComponent<AudioSource>().isPlaying)
-            //{
-                //GetComponent<AudioSource>().Stop();
-                if (GetComponent<AudioSource>().volume > -0.0f)
-                {
-                    GetComponent<AudioSource>().volume = 0.0f;
-                }
-            //}
+            if (GetComponent<AudioSource>().volume > 0.0f)
+            {
+                GetComponent<AudioSource>().volume = 0.0f;
+            }
         }
     }
 
@@ -64,7 +47,7 @@ public class DirtScooper : MonoBehaviour
                     other.gameObject.transform.localScale.z < minimum_size.z)
                 {
                     Destroy(other.gameObject);
-                    digging_counter -= 1;
+                    dirt_intersected--;
                 }
             }
         }
@@ -72,25 +55,16 @@ public class DirtScooper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (bucket_wheel_turning)
+        if (other.gameObject.tag == "DirtBall")
         {
-            if (other.gameObject.tag == "DirtBall")
-            {
-                digging_counter += 1;
-            }
+            dirt_intersected++;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (bucket_wheel_turning)
+        if (other.gameObject.tag == "DirtBall")
         {
-            if (other.gameObject.tag == "DirtBall")
-            {
-                if (digging_counter > 0)
-                {
-                    digging_counter -= 1;
-                }
-            }
+            dirt_intersected--;
         }
     }
 }
