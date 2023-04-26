@@ -6,7 +6,7 @@ public class DirtScooper : MonoBehaviour
 {
     public bool bucket_wheel_turning;
     public Vector3 shrink = new Vector3(0.03f, 0.03f, 0.03f);
-    public Vector3 minimum_size = new Vector3(0.3f, 0.3f, 0.3f);
+    public Vector3 minimum_size = new Vector3(0.5f, 0.5f, 0.5f);
 
     private void OnTriggerStay(Collider other)
     {
