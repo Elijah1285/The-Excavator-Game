@@ -12,7 +12,7 @@ public class DirtScooper : MonoBehaviour
     {
         if (bucket_wheel_turning)
         {
-            if (other.gameObject.name == "dirt_ball")
+            if (other.gameObject.tag == "DirtBall")
             {
                 other.gameObject.transform.localScale -= shrink;
 
