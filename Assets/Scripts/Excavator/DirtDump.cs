@@ -44,6 +44,8 @@ public class DirtDump : MonoBehaviour
                         current_dump.GetComponent<DirtContainer>().dirt_counter = current_dump.GetComponent<DirtContainer>().dirt_capacity;
                     }
 
+                    current_dump.GetComponent<DirtContainer>().updateDirt();
+
                     if (!current_dump.GetComponent<DirtContainer>().dumping)
                     {
                         current_dump.GetComponent<DirtContainer>().dumping = true;

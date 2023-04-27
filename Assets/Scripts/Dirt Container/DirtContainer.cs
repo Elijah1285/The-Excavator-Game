@@ -7,6 +7,8 @@ public class DirtContainer : MonoBehaviour
     public float dirt_counter = 0;
     public int dirt_capacity = 1000;
     public bool dumping = false;
+    public bool update_dirt = false;
+    public GameObject dirt;
 
     void FixedUpdate()
     {
@@ -18,6 +20,23 @@ public class DirtContainer : MonoBehaviour
             {
                 dirt_counter = 0;
             }
+
+            updateDirt();
         }
+    }
+
+    public void updateDirt()
+    {
+        if (dirt_counter > 0)
+        {
+            dirt.GetComponent<MeshRenderer>().enabled = true;
+        }
+        else
+        {
+            dirt.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        Vector3 new_scale = new Vector3(dirt_counter * 0.012f, dirt.transform.localScale.y, dirt.transform.localScale.z);
+        dirt.transform.localScale = new_scale;
     }
 }
