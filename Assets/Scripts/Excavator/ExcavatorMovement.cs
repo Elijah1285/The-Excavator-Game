@@ -82,7 +82,7 @@ public class ExcavatorMovement : MonoBehaviour
 
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
-            float movement = Mathf.Lerp(0f, -0.025f, percentageComplete);
+            float movement = Mathf.Lerp(0f, -0.030f, percentageComplete);
             Vector3 moveForward = new Vector3(movement, 0f, 0f);
             moveForward = ourBody.transform.TransformDirection(moveForward);
             ourBody.transform.position += moveForward;
@@ -111,7 +111,7 @@ public class ExcavatorMovement : MonoBehaviour
 
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
-            float movement = Mathf.Lerp(0f, 0.025f, percentageComplete);
+            float movement = Mathf.Lerp(0f, 0.030f, percentageComplete);
             Vector3 moveBack = new Vector3(movement, 0f, 0f);
             moveBack = ourBody.transform.TransformDirection(moveBack);
             ourBody.transform.position += moveBack;

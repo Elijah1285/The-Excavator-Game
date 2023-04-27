@@ -8,6 +8,7 @@ public class DirtScooper : MonoBehaviour
     public bool bucket_wheel_turning;
     public Vector3 shrink = new Vector3(0.03f, 0.03f, 0.03f);
     public Vector3 minimum_size = new Vector3(0.5f, 0.5f, 0.5f);
+    public Vector3 size_for_rigidbody = new Vector3(5.0f, 5.0f, 5.0f);
     public int dirt_counter = 0;
     public int dirt_intersected = 0;
     public TMP_Text dirt_counter_text;
@@ -42,12 +43,37 @@ public class DirtScooper : MonoBehaviour
                 dirt_counter++;
                 dirt_counter_text.text = dirt_counter.ToString();
 
+                if (other.gameObject.GetComponent<Rigidbody>() != null)
+                {
+                    other.gameObject.GetComponent<Rigidbody>().mass = other.gameObject.transform.localScale.x * 100;
+                }
+
+                if (other.gameObject.transform.localScale.x < size_for_rigidbody.x &&
+                    other.gameObject.transform.localScale.y < size_for_rigidbody.y &&
+                    other.gameObject.transform.localScale.z < size_for_rigidbody.z)
+                {
+                    if (other.gameObject.GetComponent<Rigidbody>() == null)
+                    {
+                        other.gameObject.AddComponent(typeof(Rigidbody));
+                        other.gameObject.GetComponent<Rigidbody>().drag = 1.0f;
+
+                        if (dirt_intersected > 0)
+                        {
+                            dirt_intersected--;
+                        }
+                    }
+                }
+
                 if (other.gameObject.transform.localScale.x < minimum_size.x &&
                     other.gameObject.transform.localScale.y < minimum_size.y &&
                     other.gameObject.transform.localScale.z < minimum_size.z)
                 {
                     Destroy(other.gameObject);
-                    dirt_intersected--;
+
+                    if (dirt_intersected > 0)
+                    {
+                        dirt_intersected--;
+                    }
                 }
             }
         }
