@@ -25,7 +25,6 @@ public class ViewSwitch : MonoBehaviour
             {
                 if (current_cam != cab_cam)
                 {
-                    Debug.Log("switched to cab view");
                     cam_index = 1;
                     cab_cam.enabled = true;
                     cab_cam.GetComponent<AudioListener>().enabled = true;
@@ -38,7 +37,6 @@ public class ViewSwitch : MonoBehaviour
             {
                 if (current_cam != wheel_cam)
                 {
-                    Debug.Log("switched to wheel view");
                     cam_index = 2;
                     wheel_cam.enabled = true;
                     wheel_cam.GetComponent<AudioListener>().enabled = true;
@@ -51,7 +49,6 @@ public class ViewSwitch : MonoBehaviour
             {
                 if (current_cam != external_cam)
                 {
-                    Debug.Log("switched to external view");
                     cam_index = 3;
                     external_cam.enabled = true;
                     external_cam.GetComponent<AudioListener>().enabled = true;
