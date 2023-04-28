@@ -6,6 +6,7 @@ public class FollowCamera : MonoBehaviour
 {
     public GameObject target;
     public Vector3 offset;
+    public Camera this_camera;
     private float mouseX;
     private float mouseY;
     private float mouseZ;
@@ -19,44 +20,48 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
-        mouseZ = Input.GetAxis("Mouse ScrollWheel");
-
-        if (Input.GetMouseButton(1))
+        if (this_camera.enabled)
         {
-            offset = Quaternion.Euler(0, mouseX, 0) * offset;
-        }
+            mouseX = Input.GetAxis("Mouse X");
+            mouseY = Input.GetAxis("Mouse Y");
+            mouseZ = Input.GetAxis("Mouse ScrollWheel");
 
-        float angleBetween = Vector3.Angle(Vector3.up, transform.forward);
 
-        float desiredAngle = target.transform.eulerAngles.y;
-
-        if (((angleBetween > 100) && (mouseY < 0)) || ((angleBetween < 145) && (mouseY > 0)))
-        {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(1))
             {
-                Vector3 LocalRight = target.transform.worldToLocalMatrix.MultiplyVector(transform.right);
-                offset = Quaternion.AngleAxis(mouseY, LocalRight) * offset;
+                offset = Quaternion.Euler(0, mouseX, 0) * offset;
             }
+
+            float angleBetween = Vector3.Angle(Vector3.up, transform.forward);
+
+            float desiredAngle = target.transform.eulerAngles.y;
+
+            if (((angleBetween > 100) && (mouseY < 0)) || ((angleBetween < 145) && (mouseY > 0)))
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 LocalRight = target.transform.worldToLocalMatrix.MultiplyVector(transform.right);
+                    offset = Quaternion.AngleAxis(mouseY, LocalRight) * offset;
+                }
+            }
+
+            float dist = Vector3.Distance(target.transform.position, transform.position);
+
+            if (mouseZ < 0 && dist < 50)
+            {
+                offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
+            }
+
+
+            if (mouseZ > 0 && dist > 0.5)
+            {
+                offset = Vector3.Scale(offset, new Vector3(0.95f, 0.95f, 0.95f));
+            }
+
+            Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
+            transform.position = target.transform.position + (rotation * offset);
+            transform.LookAt(target.transform);
         }
-
-        float dist = Vector3.Distance(target.transform.position, transform.position);
-
-        if (mouseZ < 0 && dist < 50)
-        {
-            offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
-        }
-
-
-        if (mouseZ > 0 && dist > 0.5)
-        {
-            offset = Vector3.Scale(offset, new Vector3(0.95f, 0.95f, 0.95f));
-        }
-
-        Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
-        transform.position = target.transform.position + (rotation * offset);
-        transform.LookAt(target.transform);
-     }
+    }
 }
 
