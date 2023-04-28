@@ -10,6 +10,7 @@ public class EnterTheExcavator : MonoBehaviour
     public Camera excavator_cam;
     public GameObject player;
     public GameObject excavator;
+    public ViewSwitch view_switch;
     private HashIDs hash;
 
     void Awake()
@@ -47,7 +48,8 @@ public class EnterTheExcavator : MonoBehaviour
             {
                 player_in_excavator = true;
                 player_cam.enabled = false;
-                excavator_cam.enabled = true;
+                //excavator_cam.enabled = true;
+                view_switch.current_cam.enabled = true;
                 player.GetComponent<PlayerMovement>().is_playing = false;
                 player.transform.position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 5, excavator.transform.position.z);
                 player.transform.parent = excavator.transform;
@@ -68,7 +70,8 @@ public class EnterTheExcavator : MonoBehaviour
             {
                 player_in_excavator = false;
                 player_cam.enabled = true;
-                excavator_cam.enabled = false;
+                //excavator_cam.enabled = false;
+                view_switch.current_cam.enabled = false;
                 player.GetComponent<PlayerMovement>().is_playing = true;
                 player.transform.position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y, excavator.transform.position.z - 6);
                 player.transform.parent = null;
