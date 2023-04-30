@@ -31,6 +31,10 @@ public class ExcavatorMovement : MonoBehaviour
 
     public GameObject scooper;
 
+    public ParticleSystem pipe_1_particles;
+    public ParticleSystem pipe_2_particles;
+    public ParticleSystem pipe_3_particles;
+
     private Animator anim;
     private HashIDs hash;
     private Rigidbody ourBody;
@@ -261,58 +265,98 @@ public class ExcavatorMovement : MonoBehaviour
 
     void AnimationManagement(float drive, float steer)
     {
+        var pipe_1_particles_main = pipe_1_particles.main;
+        var pipe_2_particles_main = pipe_2_particles.main;
+        var pipe_3_particles_main = pipe_3_particles.main;
+
         if (drive > 0 && steer == 0 && movement != Movement.FORWARD)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat,1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.FORWARD;
         }
         else if (drive < 0 && steer == 0 && movement != Movement.BACKWARD)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.BACKWARD;
         }
         else if (drive == 0 && steer > 0 && movement != Movement.RIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.RIGHT;
         }
         else if (drive == 0 && steer < 0 && movement != Movement.LEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.LEFT;
         }
         else if (drive > 0 && steer > 0 && movement != Movement.FORWARDRIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 150;
             movement = Movement.FORWARDRIGHT;
         }
         else if (drive > 0 && steer < 0 && movement != Movement.FORWARDLEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 150;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.FORWARDLEFT;
         }
         else if (drive < 0 && steer > 0 && movement != Movement.BACKWARDLEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 150;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.BACKWARDLEFT;
         }
         else if (drive < 0 && steer < 0 && movement != Movement.BACKWARDRIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f);
+            pipe_1_particles.Play();
+            pipe_3_particles.Play();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 150;
             movement = Movement.BACKWARDRIGHT;
         }
         else if (drive == 0 && steer == 0 && movement != Movement.STOP)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
+            pipe_1_particles.Stop();
+            pipe_3_particles.Stop();
+            pipe_1_particles_main.startSize = 300;
+            pipe_3_particles_main.startSize = 300;
             movement = Movement.STOP;
         }
     }
