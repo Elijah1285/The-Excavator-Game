@@ -54,20 +54,19 @@ public class ExcavatorMovement : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (is_playing)
         {
             float drive = Input.GetAxis("Drive");
             float steer = Input.GetAxis("Steer");
             float arm = Input.GetAxis("Arm");
             float wheel = Input.GetAxis("Wheel");
+
             MovementManagement(drive);
             Rotating(steer);
             BucketWheelManagement(wheel);
             ArmManagement(arm);
             AudioManagement();
-            AnimationManagement(drive, steer);
+            AnimationAndParticleManagement(drive, steer);
             elapsedTime += Time.deltaTime;
         }
     }
@@ -179,16 +178,16 @@ public class ExcavatorMovement : MonoBehaviour
             {
                 bucket_wheel_speed += wheel;
             }
-            else if (bucket_wheel_speed < 0)
+            else if (bucket_wheel_speed <= 0 && scooper.GetComponent<DirtScooper>().bucket_wheel_turning)
             {
                 bucket_wheel_speed = 0;
                 bucket_wheel_audio_source.Stop();
                 scooper.GetComponent<DirtScooper>().bucket_wheel_turning = false;
+
+                pipe_2_particles.Stop();
             }
 
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
-
-
         }
         else if (wheel > 0)
         {
@@ -203,6 +202,11 @@ public class ExcavatorMovement : MonoBehaviour
             if (!bucket_wheel_audio_source.isPlaying)
             {
                 bucket_wheel_audio_source.Play();
+            }
+
+            if (!pipe_2_particles.isEmitting)
+            {
+                pipe_2_particles.Play();
             }
         }
     }
@@ -265,7 +269,7 @@ public class ExcavatorMovement : MonoBehaviour
         }
     }
 
-    void AnimationManagement(float drive, float steer)
+    void AnimationAndParticleManagement(float drive, float steer)
     {
         var pipe_1_particles_main = pipe_1_particles.main;
         var pipe_2_particles_main = pipe_2_particles.main;
@@ -275,8 +279,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat,1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.FORWARD;
@@ -285,8 +295,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.BACKWARD;
@@ -295,8 +311,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.RIGHT;
@@ -305,8 +327,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.LEFT;
@@ -315,8 +343,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 100;
             movement = Movement.FORWARDRIGHT;
@@ -325,8 +359,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 100;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.FORWARDLEFT;
@@ -335,8 +375,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 100;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.BACKWARDLEFT;
@@ -345,8 +391,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f);
-            pipe_1_particles.Play();
-            pipe_3_particles.Play();
+            if (!pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Play();
+            }
+            if (!pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Play();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 100;
             movement = Movement.BACKWARDRIGHT;
@@ -355,8 +407,14 @@ public class ExcavatorMovement : MonoBehaviour
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
-            pipe_1_particles.Stop();
-            pipe_3_particles.Stop();
+            if (pipe_1_particles.isEmitting)
+            {
+                pipe_1_particles.Stop();
+            }
+            if (pipe_3_particles.isEmitting)
+            {
+                pipe_3_particles.Stop();
+            }
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.STOP;
