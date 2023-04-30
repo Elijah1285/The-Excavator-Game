@@ -50,6 +50,17 @@ public class DirtDump : MonoBehaviour
                     {
                         current_dump.GetComponent<DirtContainer>().dumping = true;
                     }
+
+                    if (!GetComponent<AudioSource>().isPlaying)
+                    {
+                        GetComponent<AudioSource>().Play();
+                    }
+
+                    if ((current_dump.GetComponent<DirtContainer>().dirt_counter >= current_dump.GetComponent<DirtContainer>().dirt_capacity ||
+                        dirt_scooper.dirt_counter <= 0) && GetComponent<AudioSource>().isPlaying)
+                    {
+                        GetComponent<AudioSource>().Stop();
+                    }
                 }
             }
         }
@@ -60,6 +71,11 @@ public class DirtDump : MonoBehaviour
                 if (current_dump.GetComponent<DirtContainer>().dumping)
                 {
                     current_dump.GetComponent<DirtContainer>().dumping = false;
+                }
+
+                if (GetComponent<AudioSource>().isPlaying)
+                {
+                    GetComponent<AudioSource>().Stop();
                 }
             }
         }
