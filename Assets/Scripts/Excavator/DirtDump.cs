@@ -5,9 +5,12 @@ using TMPro;
 
 public class DirtDump : MonoBehaviour
 {
+    public int money = 0;
+
     public GameObject current_dump;
     public DirtScooper dirt_scooper;
     public TMP_Text full_text;
+    public TMP_Text money_counter;
 
     void OnTriggerEnter(Collider other)
     {
@@ -39,6 +42,8 @@ public class DirtDump : MonoBehaviour
                     dirt_scooper.dirt_counter--;
                     dirt_scooper.dirt_counter_text.text = dirt_scooper.dirt_counter.ToString();
                     current_dump.GetComponent<DirtContainer>().dirt_counter++;
+                    money++;
+                    money_counter.text = money.ToString();
 
                     if (current_dump.GetComponent<DirtContainer>().dirt_counter > current_dump.GetComponent<DirtContainer>().dirt_capacity)
                     {
