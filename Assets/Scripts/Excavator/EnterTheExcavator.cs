@@ -14,6 +14,10 @@ public class EnterTheExcavator : MonoBehaviour
     public AudioListener player_audio_listener;
     private HashIDs hash;
 
+    public ParticleSystem pipe_1_particles;
+    public ParticleSystem pipe_2_particles;
+    public ParticleSystem pipe_3_particles;
+
     void Awake()
     {
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
@@ -91,6 +95,40 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<Animator>().SetFloat(hash.bucketWheelSpeedFloat, 0);
                 excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Stop();
                 excavator.GetComponent<ExcavatorMovement>().bucket_wheel_speed = 0;
+
+                if (excavator.GetComponent<ExcavatorMovement>().bucket_wheel_audio_source.isPlaying)
+                {
+                    excavator.GetComponent<ExcavatorMovement>().bucket_wheel_audio_source.Stop();
+                }
+
+                if (excavator.GetComponent<ExcavatorMovement>().arm_audio_source.isPlaying)
+                {
+                    excavator.GetComponent<ExcavatorMovement>().arm_audio_source.Stop();
+                }
+
+                if (excavator.GetComponent<ExcavatorMovement>().turn_audio_source.isPlaying)
+                {
+                    excavator.GetComponent<ExcavatorMovement>().turn_audio_source.Stop();
+                }
+
+                if (excavator.GetComponent<ExcavatorMovement>().drive_audio_source.isPlaying)
+                {
+                    excavator.GetComponent<ExcavatorMovement>().drive_audio_source.Stop();
+                }
+
+                if (pipe_1_particles.isEmitting)
+                {
+                    pipe_1_particles.Stop();
+                }
+                if (pipe_2_particles.isEmitting)
+                {
+                    pipe_2_particles.Stop();
+                }
+                if (pipe_3_particles.isEmitting)
+                {
+                    pipe_3_particles.Stop();
+                }
+
                 Input.ResetInputAxes();
             }
         }
