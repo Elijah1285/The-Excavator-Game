@@ -13,6 +13,7 @@ public class DirtScooper : MonoBehaviour
     public int dirt_intersected = 0;
     public int dirt_capacity = 1000;
     public TMP_Text dirt_counter_text;
+    public ParticleSystem dirt_particles;
 
     private void Update()
     {
@@ -22,12 +23,22 @@ public class DirtScooper : MonoBehaviour
             {
                 GetComponent<AudioSource>().volume = 1.0f;
             }
+
+            if (!dirt_particles.isEmitting)
+            {
+                dirt_particles.Play();
+            }
         }
         else
         {
             if (GetComponent<AudioSource>().volume > 0.0f)
             {
                 GetComponent<AudioSource>().volume = 0.0f;
+            }
+
+            if (dirt_particles.isEmitting)
+            {
+                dirt_particles.Stop();
             }
         }
     }
