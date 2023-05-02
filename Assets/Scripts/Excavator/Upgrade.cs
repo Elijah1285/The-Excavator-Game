@@ -19,6 +19,8 @@ public class Upgrade : MonoBehaviour
 
     public Canvas upgrade_UI;
 
+    public DirtDump dirt_dump;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "UpgradeStation")
@@ -47,9 +49,17 @@ public class Upgrade : MonoBehaviour
             {
                 if (!speed_upgrade_flag)
                 {
-                    speed_upgrade_flag = true;
-                    speed_level++;
-                    speed_level_text.text = speed_level.ToString();
+                    if (dirt_dump.money > 100)
+                    {
+                        speed_upgrade_flag = true;
+                        speed_level++;
+                        speed_level_text.text = speed_level.ToString();
+
+                        dirt_dump.money -= 100;
+                        dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+                        GetComponent<AudioSource>().Play();
+                    }
                 }
             }
             else
@@ -64,9 +74,17 @@ public class Upgrade : MonoBehaviour
             {
                 if (!capacity_upgrade_flag)
                 {
-                    capacity_upgrade_flag = true;
-                    capacity_level++;
-                    capacity_level_text.text = capacity_level.ToString();
+                    if (dirt_dump.money > 100)
+                    {
+                        capacity_upgrade_flag = true;
+                        capacity_level++;
+                        capacity_level_text.text = capacity_level.ToString();
+                        
+                        dirt_dump.money -= 100;
+                        dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+                        GetComponent<AudioSource>().Play();
+                    }
                 }             
             }
             else
@@ -81,9 +99,17 @@ public class Upgrade : MonoBehaviour
             {
                 if (!dirt_collection_upgrade_flag)
                 {
-                    dirt_collection_upgrade_flag = true;
-                    dirt_collection_level++;
-                    dirt_collection_level_text.text = dirt_collection_level.ToString();
+                    if (dirt_dump.money > 100)
+                    {
+                        dirt_collection_upgrade_flag = true;
+                        dirt_collection_level++;
+                        dirt_collection_level_text.text = dirt_collection_level.ToString();
+
+                        dirt_dump.money -= 100;
+                        dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+                        GetComponent<AudioSource>().Play();
+                    }
                 }
             }
             else
