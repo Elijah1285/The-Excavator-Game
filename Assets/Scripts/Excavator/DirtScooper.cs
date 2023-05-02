@@ -13,6 +13,7 @@ public class DirtScooper : MonoBehaviour
     public int dirt_intersected = 0;
     public int dirt_capacity = 1000;
     public TMP_Text dirt_counter_text;
+    public TMP_Text full_text;
     public ParticleSystem dirt_particles;
 
     private void Update()
@@ -87,6 +88,11 @@ public class DirtScooper : MonoBehaviour
                         {
                             dirt_intersected--;
                         }
+                    }
+
+                    if (dirt_counter >= dirt_capacity)
+                    {
+                        full_text.enabled = true;
                     }
                 }
             }

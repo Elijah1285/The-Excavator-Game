@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DirtDump : MonoBehaviour
 {
     public GameObject current_dump;
     public DirtScooper dirt_scooper;
-
+    public TMP_Text full_text;
 
     void OnTriggerEnter(Collider other)
     {
@@ -60,6 +61,11 @@ public class DirtDump : MonoBehaviour
                         dirt_scooper.dirt_counter <= 0) && GetComponent<AudioSource>().isPlaying)
                     {
                         GetComponent<AudioSource>().Stop();
+                    }
+
+                    if (full_text.enabled)
+                    {
+                        full_text.enabled = false;
                     }
                 }
             }
