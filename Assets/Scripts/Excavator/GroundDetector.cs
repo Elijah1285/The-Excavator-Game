@@ -10,6 +10,8 @@ public class GroundDetector : MonoBehaviour
     public bool excavator_reset_timer_running = false;
     public float excavator_reset_timer = 0.2f;
 
+    public int ground_intersected = 0;
+
     public GameObject excavator;
 
     public Flash flash;
@@ -19,10 +21,18 @@ public class GroundDetector : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
-            off_ground_timer_running = false;
-            off_ground_timer = 3.0f;
+            ground_intersected++;
 
-            enter_the_excavator.excavator_open = true;
+            if (off_ground_timer_running)
+            {
+                off_ground_timer_running = false;
+                off_ground_timer = 3.0f;
+            }
+
+            if (!enter_the_excavator.excavator_open)
+            {
+                enter_the_excavator.excavator_open = true;
+            }
         }
     }
 
@@ -30,14 +40,20 @@ public class GroundDetector : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
-            off_ground_timer_running = true;
+            ground_intersected--;
 
-            enter_the_excavator.excavator_open = false;
+            if (ground_intersected <= 0)
+            {
+                off_ground_timer_running = true;
+                enter_the_excavator.excavator_open = false;
+            }
         }
     }
 
     void Update()
     {
+        Debug.Log(ground_intersected);
+
         if (off_ground_timer_running)
         {
             off_ground_timer -= Time.deltaTime;

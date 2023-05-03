@@ -10,7 +10,7 @@ public class DirtSquisher : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "DirtBall")
+        if (other.gameObject.tag == "DirtBall" || other.gameObject.tag == "DirtBall2" || other.gameObject.tag == "DirtBall3")
         {
             other.gameObject.transform.localScale -= squish;
 
