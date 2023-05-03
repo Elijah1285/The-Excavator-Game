@@ -103,19 +103,73 @@ public class DirtScooper : MonoBehaviour
                     }
                 }
             }
+            else if (other.gameObject.tag == "DirtBall")
+            {
+                if (dirt_counter < dirt_capacity)
+                {
+                    other.gameObject.transform.localScale -= shrink * digging_speed;
+                    dirt_counter += (int)digging_speed;
+
+                    if (dirt_counter > dirt_capacity)
+                    {
+                        dirt_counter = dirt_capacity;
+                    }
+
+                    dirt_counter_text.text = dirt_counter.ToString();
+
+                    if (other.gameObject.GetComponent<Rigidbody>() != null)
+                    {
+                        other.gameObject.GetComponent<Rigidbody>().mass = other.gameObject.transform.localScale.x * 100;
+                    }
+
+                    if (other.gameObject.transform.localScale.x < size_for_rigidbody.x &&
+                        other.gameObject.transform.localScale.y < size_for_rigidbody.y &&
+                        other.gameObject.transform.localScale.z < size_for_rigidbody.z)
+                    {
+                        if (other.gameObject.GetComponent<Rigidbody>() == null)
+                        {
+                            other.gameObject.AddComponent(typeof(Rigidbody));
+                            other.gameObject.GetComponent<Rigidbody>().drag = 1.0f;
+                            other.gameObject.GetComponent<Rigidbody>().angularDrag = 1.0f;
+
+                            if (dirt_intersected > 0)
+                            {
+                                dirt_intersected--;
+                            }
+                        }
+                    }
+
+                    if (other.gameObject.transform.localScale.x < minimum_size.x &&
+                        other.gameObject.transform.localScale.y < minimum_size.y &&
+                        other.gameObject.transform.localScale.z < minimum_size.z)
+                    {
+                        Destroy(other.gameObject);
+
+                        if (dirt_intersected > 0)
+                        {
+                            dirt_intersected--;
+                        }
+                    }
+
+                    if (dirt_counter >= dirt_capacity)
+                    {
+                        full_text.enabled = true;
+                    }
+                }
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "DirtBall")
+        if (other.gameObject.tag == "DirtBall" || other.gameObject.tag == "DirtBall2" || other.gameObject.tag == "DirtBall3")
         {
             dirt_intersected++;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "DirtBall")
+        if (other.gameObject.tag == "DirtBall" || other.gameObject.tag == "DirtBall2" || other.gameObject.tag == "DirtBall3")
         {
             dirt_intersected--;
         }
