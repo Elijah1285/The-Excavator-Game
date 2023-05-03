@@ -13,6 +13,7 @@ public class GroundDetector : MonoBehaviour
     public GameObject excavator;
 
     public Flash flash;
+    public EnterTheExcavator enter_the_excavator;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,6 +21,8 @@ public class GroundDetector : MonoBehaviour
         {
             off_ground_timer_running = false;
             off_ground_timer = 3.0f;
+
+            enter_the_excavator.excavator_open = true;
         }
     }
 
@@ -28,6 +31,8 @@ public class GroundDetector : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             off_ground_timer_running = true;
+
+            enter_the_excavator.excavator_open = false;
         }
     }
 

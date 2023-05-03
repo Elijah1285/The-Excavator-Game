@@ -6,6 +6,7 @@ public class EnterTheExcavator : MonoBehaviour
 {
     public bool player_in_bound = false;
     public bool player_in_excavator = false;
+    public bool excavator_open = true;
     public Camera player_cam;
     public Camera excavator_cam;
     public GameObject player;
@@ -49,7 +50,7 @@ public class EnterTheExcavator : MonoBehaviour
     {
         if (Input.GetKeyUp("e"))
         {
-            if (!player_in_excavator && player_in_bound)
+            if (!player_in_excavator && player_in_bound && excavator_open)
             {
                 player_in_excavator = true;
                 player_cam.enabled = false;
@@ -58,7 +59,6 @@ public class EnterTheExcavator : MonoBehaviour
                 view_switch.current_cam.GetComponent<AudioListener>().enabled = true;
                 player.GetComponent<PlayerMovement>().is_playing = false;
                 Vector3 new_player_position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 5, excavator.transform.position.z);
-                new_player_position = excavator.transform.TransformDirection(new_player_position);
                 player.transform.position = new_player_position;
                 player.transform.parent = excavator.transform;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
