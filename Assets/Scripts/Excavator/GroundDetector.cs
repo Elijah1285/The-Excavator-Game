@@ -45,7 +45,5 @@ public class GroundDetector : MonoBehaviour
         Quaternion upright = Quaternion.Euler(0, 0, 0);
 
         excavator.transform.rotation = upright;
-
-        Debug.Log("reset excavator rotation");
     }
 }
