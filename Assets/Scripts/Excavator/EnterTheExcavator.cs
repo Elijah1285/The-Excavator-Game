@@ -88,6 +88,8 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<CapsuleCollider>().enabled = true;
                 player.AddComponent(typeof(Rigidbody));
                 player.GetComponent<Rigidbody>().freezeRotation = true;
+                Quaternion upright = Quaternion.Euler(0, 0, 0);
+                player.transform.rotation = upright;
                 excavator.GetComponent<ExcavatorMovement>().is_playing = false;
                 excavator.GetComponent<Animator>().SetFloat(hash.leftTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.rightTrackSpeedFloat, 0);
