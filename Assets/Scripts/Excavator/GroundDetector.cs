@@ -41,7 +41,6 @@ public class GroundDetector : MonoBehaviour
             {
                 flash.startFlash(0.4f, 1.0f, Color.black);
                 off_ground_timer = 3.0f;
-                off_ground_timer_running = false;
                 excavator_reset_timer_running = true;
             }
         }
