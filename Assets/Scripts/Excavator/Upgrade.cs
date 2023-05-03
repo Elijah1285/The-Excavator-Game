@@ -16,6 +16,8 @@ public class Upgrade : MonoBehaviour
     public int capacity_upgrade_cost = 100;
     public int digging_upgrade_cost = 100;
 
+    public int max_level = 10;
+
     public TMP_Text speed_level_text;
     public TMP_Text capacity_level_text;
     public TMP_Text digging_level_text;
@@ -57,7 +59,7 @@ public class Upgrade : MonoBehaviour
             {
                 if (!speed_upgrade_flag)
                 {
-                    if (dirt_dump.money >= speed_upgrade_cost)
+                    if (dirt_dump.money >= speed_upgrade_cost && speed_level < max_level)
                     {
                         speed_upgrade_flag = true;
                         speed_level++;
@@ -69,7 +71,15 @@ public class Upgrade : MonoBehaviour
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
 
                         speed_upgrade_cost += 100;
-                        speed_upgrade_cost_text.text = speed_upgrade_cost.ToString();
+
+                        if (speed_level < max_level)
+                        {
+                            speed_upgrade_cost_text.text = speed_upgrade_cost.ToString();
+                        }
+                        else
+                        {
+                            speed_upgrade_cost_text.text = "MAX";
+                        }
 
                         GetComponent<AudioSource>().Play();
                     }
@@ -87,7 +97,7 @@ public class Upgrade : MonoBehaviour
             {
                 if (!capacity_upgrade_flag)
                 {
-                    if (dirt_dump.money >= capacity_upgrade_cost)
+                    if (dirt_dump.money >= capacity_upgrade_cost && capacity_level < max_level)
                     {
                         capacity_upgrade_flag = true;
                         capacity_level++;
@@ -99,7 +109,15 @@ public class Upgrade : MonoBehaviour
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
 
                         capacity_upgrade_cost += 100;
-                        capacity_upgrade_cost_text.text = capacity_upgrade_cost.ToString();
+
+                        if (capacity_level < max_level)
+                        {
+                            capacity_upgrade_cost_text.text = capacity_upgrade_cost.ToString();
+                        }
+                        else
+                        {
+                            capacity_upgrade_cost_text.text = "MAX";
+                        }
 
                         GetComponent<AudioSource>().Play();
                     }
@@ -117,7 +135,7 @@ public class Upgrade : MonoBehaviour
             {
                 if (!digging_upgrade_flag)
                 {
-                    if (dirt_dump.money >= digging_upgrade_cost)
+                    if (dirt_dump.money >= digging_upgrade_cost && digging_level < max_level)
                     {
                         digging_upgrade_flag = true;
                         digging_level++;
@@ -129,7 +147,15 @@ public class Upgrade : MonoBehaviour
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
 
                         digging_upgrade_cost += 100;
-                        digging_upgrade_cost_text.text = digging_upgrade_cost.ToString();
+
+                        if (digging_level < max_level)
+                        {
+                            digging_upgrade_cost_text.text = digging_upgrade_cost.ToString();
+                        }
+                        else
+                        {
+                            digging_upgrade_cost_text.text = "MAX";
+                        }
 
                         GetComponent<AudioSource>().Play();
                     }
