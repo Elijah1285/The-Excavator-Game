@@ -19,8 +19,10 @@ public class EnterTheExcavator : MonoBehaviour
     public ParticleSystem pipe_1_particles;
     public ParticleSystem pipe_2_particles;
     public ParticleSystem pipe_3_particles;
+    public Canvas upgrade_UI;
     public TMP_Text full_text;
     public DirtScooper dirt_scooper;
+    public Upgrade upgrade;
 
     void Awake()
     {
@@ -81,6 +83,11 @@ public class EnterTheExcavator : MonoBehaviour
                     full_text.enabled = true;
                 }
 
+                if (upgrade.in_upgrade_station)
+                {
+                    upgrade_UI.enabled = true;
+                }
+
                 Input.ResetInputAxes();
             }
             else if (player_in_excavator)
@@ -112,6 +119,11 @@ public class EnterTheExcavator : MonoBehaviour
                 if (full_text.enabled)
                 {
                     full_text.enabled = false;
+                }
+
+                if (upgrade_UI.enabled)
+                {
+                    upgrade_UI.enabled = false;
                 }
 
                 if (excavator.GetComponent<ExcavatorMovement>().bucket_wheel_audio_source.isPlaying)

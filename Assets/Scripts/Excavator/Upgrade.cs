@@ -8,6 +8,7 @@ public class Upgrade : MonoBehaviour
     public bool speed_upgrade_flag = false;
     public bool capacity_upgrade_flag = false;
     public bool digging_upgrade_flag = false;
+    public bool in_upgrade_station = false;
 
     public int speed_level = 1;
     public int capacity_level = 1;
@@ -36,6 +37,7 @@ public class Upgrade : MonoBehaviour
         if (other.gameObject.tag == "UpgradeStation")
         {
             upgrade_UI.enabled = true;
+            in_upgrade_station = true;
         }
     }
 
@@ -44,12 +46,13 @@ public class Upgrade : MonoBehaviour
         if (other.gameObject.tag == "UpgradeStation")
         {
             upgrade_UI.enabled = false;
+            in_upgrade_station = false;
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "UpgradeStation")
+        if (other.gameObject.tag == "UpgradeStation" && excavator_movement.is_playing)
         {
             float speed_upgrade = Input.GetAxis("SpeedUpgrade");
             float capacity_upgrade = Input.GetAxis("CapacityUpgrade");
