@@ -7,21 +7,21 @@ public class Upgrade : MonoBehaviour
 {
     public bool speed_upgrade_flag = false;
     public bool capacity_upgrade_flag = false;
-    public bool dirt_collection_upgrade_flag = false;
+    public bool digging_upgrade_flag = false;
 
     public int speed_level = 1;
     public int capacity_level = 1;
-    public int dirt_collection_level = 1;
+    public int digging_level = 1;
     public int speed_upgrade_cost = 100;
     public int capacity_upgrade_cost = 100;
-    public int dirt_collection_upgrade_cost = 100;
+    public int digging_upgrade_cost = 100;
 
     public TMP_Text speed_level_text;
     public TMP_Text capacity_level_text;
-    public TMP_Text dirt_collection_level_text;
+    public TMP_Text digging_level_text;
     public TMP_Text speed_upgrade_cost_text;
     public TMP_Text capacity_upgrade_cost_text;
-    public TMP_Text dirt_collection_upgrade_cost_text;
+    public TMP_Text digging_upgrade_cost_text;
 
     public Canvas upgrade_UI;
 
@@ -51,7 +51,7 @@ public class Upgrade : MonoBehaviour
         {
             float speed_upgrade = Input.GetAxis("SpeedUpgrade");
             float capacity_upgrade = Input.GetAxis("CapacityUpgrade");
-            float dirt_collection_upgrade = Input.GetAxis("DirtCollectionUpgrade");
+            float digging_upgrade = Input.GetAxis("DiggingUpgrade");
 
             if (speed_upgrade > 0)
             {
@@ -113,21 +113,23 @@ public class Upgrade : MonoBehaviour
                 }
             }
 
-            if (dirt_collection_upgrade > 0)
+            if (digging_upgrade > 0)
             {
-                if (!dirt_collection_upgrade_flag)
+                if (!digging_upgrade_flag)
                 {
-                    if (dirt_dump.money > dirt_collection_upgrade_cost)
+                    if (dirt_dump.money >= digging_upgrade_cost)
                     {
-                        dirt_collection_upgrade_flag = true;
-                        dirt_collection_level++;
-                        dirt_collection_level_text.text = dirt_collection_level.ToString();
+                        digging_upgrade_flag = true;
+                        digging_level++;
+                        digging_level_text.text = digging_level.ToString();
 
-                        dirt_dump.money -= dirt_collection_upgrade_cost;
+                        dirt_scooper.digging_speed += 0.5f;
+
+                        dirt_dump.money -= digging_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
 
-                        dirt_collection_upgrade_cost += 100;
-                        dirt_collection_upgrade_cost_text.text = dirt_collection_upgrade_cost.ToString();
+                        digging_upgrade_cost += 100;
+                        digging_upgrade_cost_text.text = digging_upgrade_cost.ToString();
 
                         GetComponent<AudioSource>().Play();
                     }
@@ -135,9 +137,9 @@ public class Upgrade : MonoBehaviour
             }
             else
             {
-                if (dirt_collection_upgrade_flag)
+                if (digging_upgrade_flag)
                 {
-                    dirt_collection_upgrade_flag = false;
+                    digging_upgrade_flag = false;
                 }
             }
         }

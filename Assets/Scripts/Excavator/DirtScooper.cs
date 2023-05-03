@@ -12,6 +12,7 @@ public class DirtScooper : MonoBehaviour
     public int dirt_counter = 0;
     public int dirt_intersected = 0;
     public int dirt_capacity = 1000;
+    public float digging_speed = 1.0f;
     public TMP_Text dirt_counter_text;
     public TMP_Text full_text;
     public ParticleSystem dirt_particles;
@@ -52,8 +53,14 @@ public class DirtScooper : MonoBehaviour
             {
                 if (dirt_counter < dirt_capacity)
                 {
-                    other.gameObject.transform.localScale -= shrink;
-                    dirt_counter++;
+                    other.gameObject.transform.localScale -= shrink * digging_speed;
+                    dirt_counter += (int) digging_speed;
+
+                    if (dirt_counter > dirt_capacity)
+                    {
+                        dirt_counter = dirt_capacity;
+                    }
+
                     dirt_counter_text.text = dirt_counter.ToString();
 
                     if (other.gameObject.GetComponent<Rigidbody>() != null)
