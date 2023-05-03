@@ -26,6 +26,8 @@ public class Upgrade : MonoBehaviour
     public Canvas upgrade_UI;
 
     public DirtDump dirt_dump;
+    public DirtScooper dirt_scooper;
+    public ExcavatorMovement excavator_movement;
 
     void OnTriggerEnter(Collider other)
     {
@@ -61,6 +63,8 @@ public class Upgrade : MonoBehaviour
                         speed_level++;
                         speed_level_text.text = speed_level.ToString();
 
+                        excavator_movement.speed += 0.5f;
+
                         dirt_dump.money -= speed_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
 
@@ -88,6 +92,8 @@ public class Upgrade : MonoBehaviour
                         capacity_upgrade_flag = true;
                         capacity_level++;
                         capacity_level_text.text = capacity_level.ToString();
+
+                        dirt_scooper.dirt_capacity += 500;
 
                         dirt_dump.money -= capacity_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();

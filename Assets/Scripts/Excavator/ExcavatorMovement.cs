@@ -6,6 +6,7 @@ public class ExcavatorMovement : MonoBehaviour
 {
     enum Movement {FORWARD, BACKWARD, LEFT, RIGHT, FORWARDLEFT, FORWARDRIGHT, BACKWARDLEFT, BACKWARDRIGHT, STOP};
 
+    public float speed = 1.0f;
     public float speedDampTime = 399f;
     public float sensitivityX = 0.5f;
     public float animationSpeed = 1.5f;
@@ -86,7 +87,7 @@ public class ExcavatorMovement : MonoBehaviour
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
             float movement = Mathf.Lerp(0f, -0.030f, percentageComplete);
-            Vector3 moveForward = new Vector3(movement, 0f, 0f);
+            Vector3 moveForward = new Vector3(movement * speed, 0f, 0f);
             moveForward = ourBody.transform.TransformDirection(moveForward);
             ourBody.transform.position += moveForward;
 
@@ -115,7 +116,7 @@ public class ExcavatorMovement : MonoBehaviour
             // do movement
             float percentageComplete = elapsedTime / desiredDuration;
             float movement = Mathf.Lerp(0f, 0.030f, percentageComplete);
-            Vector3 moveBack = new Vector3(movement, 0f, 0f);
+            Vector3 moveBack = new Vector3(movement * speed, 0f, 0f);
             moveBack = ourBody.transform.TransformDirection(moveBack);
             ourBody.transform.position += moveBack;
 
@@ -152,7 +153,7 @@ public class ExcavatorMovement : MonoBehaviour
         {
             // use mouse input to create a Euler ange which provides rotation in the Y axis
             // this value is then turned into a Quarternion
-            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX, 0f);
+            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX * speed, 0f);
             // this value is applied to turn the body via the rididbody
             ourBody.MoveRotation(ourBody.rotation * deltaRotation);
 
