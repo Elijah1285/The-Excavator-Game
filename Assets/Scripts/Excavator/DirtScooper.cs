@@ -103,7 +103,7 @@ public class DirtScooper : MonoBehaviour
                     }
                 }
             }
-            else if (other.gameObject.tag == "DirtBall2")
+            else if (other.gameObject.tag == "DirtBall2" && digging_speed >= 2.0f)
             {
                 if (dirt_counter < dirt_capacity)
                 {
@@ -157,7 +157,7 @@ public class DirtScooper : MonoBehaviour
                     }
                 }
             }
-            else if (other.gameObject.tag == "DirtBall3")
+            else if (other.gameObject.tag == "DirtBall3" && digging_speed >= 3.0f)
             {
                 if (dirt_counter < dirt_capacity)
                 {
