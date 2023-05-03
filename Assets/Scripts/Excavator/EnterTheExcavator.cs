@@ -57,7 +57,9 @@ public class EnterTheExcavator : MonoBehaviour
                 view_switch.current_cam.enabled = true;
                 view_switch.current_cam.GetComponent<AudioListener>().enabled = true;
                 player.GetComponent<PlayerMovement>().is_playing = false;
-                player.transform.position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 5, excavator.transform.position.z);
+                Vector3 new_player_position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 5, excavator.transform.position.z);
+                new_player_position = excavator.transform.TransformDirection(new_player_position);
+                player.transform.position = new_player_position;
                 player.transform.parent = excavator.transform;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
