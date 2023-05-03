@@ -12,10 +12,16 @@ public class Upgrade : MonoBehaviour
     public int speed_level = 1;
     public int capacity_level = 1;
     public int dirt_collection_level = 1;
+    public int speed_upgrade_cost = 100;
+    public int capacity_upgrade_cost = 100;
+    public int dirt_collection_upgrade_cost = 100;
 
     public TMP_Text speed_level_text;
     public TMP_Text capacity_level_text;
     public TMP_Text dirt_collection_level_text;
+    public TMP_Text speed_upgrade_cost_text;
+    public TMP_Text capacity_upgrade_cost_text;
+    public TMP_Text dirt_collection_upgrade_cost_text;
 
     public Canvas upgrade_UI;
 
@@ -49,14 +55,17 @@ public class Upgrade : MonoBehaviour
             {
                 if (!speed_upgrade_flag)
                 {
-                    if (dirt_dump.money > 100)
+                    if (dirt_dump.money >= speed_upgrade_cost)
                     {
                         speed_upgrade_flag = true;
                         speed_level++;
                         speed_level_text.text = speed_level.ToString();
 
-                        dirt_dump.money -= 100;
+                        dirt_dump.money -= speed_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+                        speed_upgrade_cost += 100;
+                        speed_upgrade_cost_text.text = speed_upgrade_cost.ToString();
 
                         GetComponent<AudioSource>().Play();
                     }
@@ -74,14 +83,17 @@ public class Upgrade : MonoBehaviour
             {
                 if (!capacity_upgrade_flag)
                 {
-                    if (dirt_dump.money > 100)
+                    if (dirt_dump.money >= capacity_upgrade_cost)
                     {
                         capacity_upgrade_flag = true;
                         capacity_level++;
                         capacity_level_text.text = capacity_level.ToString();
-                        
-                        dirt_dump.money -= 100;
+
+                        dirt_dump.money -= capacity_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+                        capacity_upgrade_cost += 100;
+                        capacity_upgrade_cost_text.text = capacity_upgrade_cost.ToString();
 
                         GetComponent<AudioSource>().Play();
                     }
@@ -99,14 +111,17 @@ public class Upgrade : MonoBehaviour
             {
                 if (!dirt_collection_upgrade_flag)
                 {
-                    if (dirt_dump.money > 100)
+                    if (dirt_dump.money > dirt_collection_upgrade_cost)
                     {
                         dirt_collection_upgrade_flag = true;
                         dirt_collection_level++;
                         dirt_collection_level_text.text = dirt_collection_level.ToString();
 
-                        dirt_dump.money -= 100;
+                        dirt_dump.money -= dirt_collection_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+                        dirt_collection_upgrade_cost += 100;
+                        dirt_collection_upgrade_cost_text.text = dirt_collection_upgrade_cost.ToString();
 
                         GetComponent<AudioSource>().Play();
                     }
