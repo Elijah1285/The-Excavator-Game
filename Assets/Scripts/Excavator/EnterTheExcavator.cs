@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnterTheExcavator : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class EnterTheExcavator : MonoBehaviour
     public ParticleSystem pipe_1_particles;
     public ParticleSystem pipe_2_particles;
     public ParticleSystem pipe_3_particles;
+    public TMP_Text full_text;
+    public DirtScooper dirt_scooper;
 
     void Awake()
     {
@@ -72,6 +75,12 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_start = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Play();
+
+                if (dirt_scooper.dirt_counter >= dirt_scooper.dirt_capacity)
+                {
+                    full_text.enabled = true;
+                }
+
                 Input.ResetInputAxes();
             }
             else if (player_in_excavator)
@@ -99,6 +108,11 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<Animator>().SetFloat(hash.bucketWheelSpeedFloat, 0);
                 excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Stop();
                 excavator.GetComponent<ExcavatorMovement>().bucket_wheel_speed = 0;
+
+                if (full_text.enabled)
+                {
+                    full_text.enabled = false;
+                }
 
                 if (excavator.GetComponent<ExcavatorMovement>().bucket_wheel_audio_source.isPlaying)
                 {

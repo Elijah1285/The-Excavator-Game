@@ -52,8 +52,6 @@ public class GroundDetector : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(ground_intersected);
-
         if (off_ground_timer_running)
         {
             off_ground_timer -= Time.deltaTime;
