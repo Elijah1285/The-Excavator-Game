@@ -8,7 +8,9 @@ public class EnterTheExcavator : MonoBehaviour
     public bool player_in_bound = false;
     public bool player_in_excavator = false;
     public bool excavator_open = true;
-    public bool switched = false;
+
+    public float switch_timer = 0;
+
     public Camera player_cam;
     public Camera excavator_cam;
     public GameObject player;
@@ -54,15 +56,18 @@ public class EnterTheExcavator : MonoBehaviour
 
     void Update()
     {
-        float enter = Input.GetAxis("Enter");
-        Debug.Log(enter);
-        Debug.Log(switched);
+        if (switch_timer > 0)
+        {
+            switch_timer -= Time.deltaTime;
+        }
 
-        if (enter > 0 && excavator_open && !switched)
+        float enter = Input.GetAxis("Enter");
+
+        if (enter > 0 && excavator_open && switch_timer <= 0)
         {
             if (!player_in_excavator && player_in_bound)
             {
-                switched = true;
+                switch_timer = 3.0f;
                 player_in_excavator = true;
                 player_cam.enabled = false;
                 player_audio_listener.enabled = false;
@@ -98,7 +103,7 @@ public class EnterTheExcavator : MonoBehaviour
             }
             else if (player_in_excavator)
             {
-                switched = true;
+                switch_timer = 3.0f;
                 player_in_excavator = false;
                 player_cam.enabled = true;
                 player_audio_listener.enabled = true;
@@ -169,12 +174,5 @@ public class EnterTheExcavator : MonoBehaviour
                 Input.ResetInputAxes();
             }
         }     
-        else if (enter <= 0)
-        {
-            if (switched)
-            {
-                switched = false;
-            }
-        }
     }
 }
