@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 61
+  controlID: 106
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 62
+  controlID: 107
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 63
+  controlID: 108
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -374,22 +374,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Heli1
+    - Assets/Scripts/Excavator
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Heli1
+  - Assets/Scripts/Excavator
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\The-Excavator-Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: ac0e0100
-    m_LastClickedID: 69292
-    m_ExpandedIDs: 000000009c0e0100ac0e0100c60e010000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 210.33331}
+    m_SelectedIDs: a0e40000
+    m_LastClickedID: 58528
+    m_ExpandedIDs: 00000000d6e1000002e3000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -417,7 +417,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000d6e10000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -546,10 +546,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 309.3333}
-      m_SelectedIDs: ba360100
-      m_LastClickedID: 79546
-      m_ExpandedIDs: 2a59ffff0c75ffffea76ffff24320100083a0100
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: b6860000
+      m_LastClickedID: 34486
+      m_ExpandedIDs: f0faffffb8890000868f00008ca60000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -854,9 +854,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -475.19177, y: 65.75745, z: 1042.7589}
+    m_Target: {x: -579.696, y: 1.3693036, z: 801.2759}
     speed: 2
-    m_Value: {x: -475.19177, y: 65.75745, z: 1042.7589}
+    m_Value: {x: -579.696, y: 1.3693036, z: 801.2759}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -902,9 +902,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.0031282587, y: 0.9898579, z: -0.14081341, w: -0.021451386}
+    m_Target: {x: 0.1175019, y: 0.6733312, z: -0.109515555, w: 0.7217964}
     speed: 2
-    m_Value: {x: -0.0039728456, y: 0.98965347, z: -0.14078386, w: -0.02738851}
+    m_Value: {x: 0.11749219, y: 0.6732756, z: -0.10950651, w: 0.7217368}
   m_Size:
     m_Target: 3.3048542
     speed: 2
