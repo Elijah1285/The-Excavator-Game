@@ -11,6 +11,7 @@ public class SetUpCameras : MonoBehaviour
     public Camera FollowCamera2;
     public Camera CabCamera;
     public Camera WheelCamera;
+    public Camera HeliCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class SetUpCameras : MonoBehaviour
         FollowCamera2.enabled = false;
         CabCamera.enabled = false;
         WheelCamera.enabled = false;
+        HeliCamera.enabled = false;
 
         PlayerCharacter.GetComponent<AudioListener>().enabled = true;
         StaticCamera.GetComponent<AudioListener>().enabled = false;
@@ -32,5 +34,6 @@ public class SetUpCameras : MonoBehaviour
         FollowCamera2.GetComponent<AudioListener>().enabled = false;
         CabCamera.GetComponent<AudioListener>().enabled = false;
         WheelCamera.GetComponent<AudioListener>().enabled = false;
+        HeliCamera.GetComponent<AudioListener>().enabled = false;
     }
 }

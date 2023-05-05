@@ -9,6 +9,9 @@ public class GetInTheChopper : MonoBehaviour
     public GameObject player;
     public GameObject chopper;
     public Animation fly;
+    public Camera heli_cam;
+    public Camera live_cam;
+    public AudioListener player_audio;
     public Vector3 vertical_velocity = new Vector3(0.0f, 0.5f, 0.0f);
     public Vector3 vertical_acceleration = new Vector3(0.0f, 0.5f, 0.0f);
     public Vector3 maximum_vertical_velocity = new Vector3(0.0f, 10.0f, 0.0f);
@@ -16,6 +19,7 @@ public class GetInTheChopper : MonoBehaviour
     void Awake()
     {
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
+        live_cam = Camera.allCameras[0];
     }
 
         private void OnTriggerStay(Collider other)
@@ -44,6 +48,12 @@ public class GetInTheChopper : MonoBehaviour
         Quaternion player_rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         player.transform.rotation = player_rotation;
         flying = true;
+
+        live_cam.enabled = false;
+        player_audio.enabled = false;
+        heli_cam.enabled = true;
+        heli_cam.GetComponent<AudioListener>().enabled = true;
+        live_cam = Camera.allCameras[0];
     }
 
     private void Update()
