@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GetInTheChopper : MonoBehaviour
 {
-    bool flying = false;
+    public float win_timer = 5.0f;
+    public bool flying = false;
 
     public GameObject player;
     public GameObject chopper;
@@ -72,6 +74,13 @@ public class GetInTheChopper : MonoBehaviour
             else if (vertical_velocity.y > maximum_vertical_velocity.y)
             {
                 vertical_velocity = maximum_vertical_velocity;
+            }
+
+            win_timer -= Time.deltaTime;
+
+            if (win_timer <= 0)
+            {
+                SceneManager.LoadScene("Win");
             }
         }
     }
