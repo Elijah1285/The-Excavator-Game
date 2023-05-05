@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GetInTheChopper : MonoBehaviour
 {
-    public float win_timer = 5.0f;
+    public float win_timer = 15.0f;
     public bool flying = false;
 
     public GameObject player;
