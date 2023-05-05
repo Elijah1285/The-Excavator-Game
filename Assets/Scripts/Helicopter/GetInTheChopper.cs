@@ -12,6 +12,7 @@ public class GetInTheChopper : MonoBehaviour
     public Camera heli_cam;
     public Camera live_cam;
     public AudioListener player_audio;
+    public AudioSource heli_audio;
     public Vector3 vertical_velocity = new Vector3(0.0f, 0.5f, 0.0f);
     public Vector3 vertical_acceleration = new Vector3(0.0f, 0.5f, 0.0f);
     public Vector3 maximum_vertical_velocity = new Vector3(0.0f, 10.0f, 0.0f);
@@ -48,6 +49,8 @@ public class GetInTheChopper : MonoBehaviour
         Quaternion player_rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         player.transform.rotation = player_rotation;
         flying = true;
+
+        heli_audio.Play();
 
         live_cam.enabled = false;
         player_audio.enabled = false;
