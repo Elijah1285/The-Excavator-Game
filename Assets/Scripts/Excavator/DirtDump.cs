@@ -6,17 +6,25 @@ using TMPro;
 public class DirtDump : MonoBehaviour
 {
     public int money = 0;
+    public bool shown_dump_instruction = false;
 
     public GameObject current_dump;
     public DirtScooper dirt_scooper;
     public TMP_Text full_text;
     public TMP_Text money_counter;
 
+    public Canvas dump_instruction;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "DirtContainer")
         {
             current_dump = other.gameObject;
+
+            if (!shown_dump_instruction)
+            {
+                dump_instruction.enabled = true;
+            }
         }
     }
 
@@ -26,6 +34,11 @@ public class DirtDump : MonoBehaviour
         {
             current_dump.GetComponent<DirtContainer>().dumping = false;
             current_dump = null;
+
+            if (dump_instruction.enabled)
+            {
+                dump_instruction.enabled = false;
+            }
         }
     }
 
@@ -71,6 +84,16 @@ public class DirtDump : MonoBehaviour
                     if (full_text.enabled)
                     {
                         full_text.enabled = false;
+                    }
+
+                    if (!shown_dump_instruction)
+                    {
+                        shown_dump_instruction = true;
+                    }
+
+                    if (dump_instruction.enabled)
+                    {
+                        dump_instruction.enabled = false;
                     }
                 }
             }
