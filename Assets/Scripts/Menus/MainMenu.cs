@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public int menu = 0;
+
     private void Update()
     {
         float enter = Input.GetAxis("Enter");
@@ -12,13 +14,27 @@ public class MainMenu : MonoBehaviour
 
         if (enter > 0)
         {
-            SceneManager.LoadScene("Instructions");
+            if (menu == 1)
+            {
+                SceneManager.LoadScene("Instructions");
+            }
+            else if (menu == 2)
+            {
+                SceneManager.LoadScene("Gameplay");
+            }
         }
 
         if (exit > 0)
         {
-            Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
+            if (menu == 1)
+            {
+                Application.Quit();
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+            else if (menu == 2)
+            {
+                SceneManager.LoadScene("Main_Menu");
+            }
         }
     }
 }
