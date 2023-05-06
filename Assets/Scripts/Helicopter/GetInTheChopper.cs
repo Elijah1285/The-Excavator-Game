@@ -19,6 +19,9 @@ public class GetInTheChopper : MonoBehaviour
     public Vector3 vertical_acceleration = new Vector3(0.0f, 0.5f, 0.0f);
     public Vector3 maximum_vertical_velocity = new Vector3(0.0f, 10.0f, 0.0f);
     private HashIDs hash;
+
+    public EnterTheExcavator enter_the_excavator;
+
     void Awake()
     {
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
@@ -29,7 +32,7 @@ public class GetInTheChopper : MonoBehaviour
     {
         float enter = Input.GetAxis("Enter");
 
-        if (enter > 0)
+        if (enter > 0 && !enter_the_excavator.player_in_excavator && !flying)
         {
             getIn();
         }

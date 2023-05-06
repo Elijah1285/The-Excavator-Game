@@ -27,6 +27,8 @@ public class EnterTheExcavator : MonoBehaviour
     public DirtScooper dirt_scooper;
     public Upgrade upgrade;
 
+    public GetInTheChopper get_in_the_chopper;
+
     void Awake()
     {
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
@@ -63,7 +65,7 @@ public class EnterTheExcavator : MonoBehaviour
 
         float enter = Input.GetAxis("Enter");
 
-        if (enter > 0 && excavator_open && switch_timer <= 0)
+        if (enter > 0 && excavator_open && switch_timer <= 0 && !get_in_the_chopper.flying)
         {
             if (!player_in_excavator && player_in_bound)
             {
