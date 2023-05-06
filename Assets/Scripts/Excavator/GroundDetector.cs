@@ -16,6 +16,7 @@ public class GroundDetector : MonoBehaviour
 
     public Flash flash;
     public EnterTheExcavator enter_the_excavator;
+    public ExcavatorMovement excavator_movement;
 
     void OnTriggerEnter(Collider other)
     {
@@ -32,6 +33,12 @@ public class GroundDetector : MonoBehaviour
             if (!enter_the_excavator.excavator_open)
             {
                 enter_the_excavator.excavator_open = true;
+                
+            }
+
+            if (!excavator_movement.can_move)
+            {
+                excavator_movement.can_move = true;
             }
         }
     }
@@ -46,6 +53,7 @@ public class GroundDetector : MonoBehaviour
             {
                 off_ground_timer_running = true;
                 enter_the_excavator.excavator_open = false;
+                excavator_movement.can_move = false;
             }
         }
     }

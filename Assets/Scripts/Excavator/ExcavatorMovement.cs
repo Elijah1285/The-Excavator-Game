@@ -16,6 +16,7 @@ public class ExcavatorMovement : MonoBehaviour
     private float desiredDuration = 0.5f;
     private float armFrame = 0.0f;
     public bool is_playing = false;
+    public bool can_move = true;
     public bool engine_start = false;
     public bool revved = false;
     public float bucket_wheel_speed = 0.0f;
@@ -55,7 +56,7 @@ public class ExcavatorMovement : MonoBehaviour
 
     private void Update()
     {
-        if (is_playing)
+        if (is_playing && can_move)
         {
             float drive = Input.GetAxis("Drive");
             float steer = Input.GetAxis("Steer");
