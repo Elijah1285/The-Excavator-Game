@@ -12,10 +12,14 @@ public class DirtScooper : MonoBehaviour
     public int dirt_counter = 0;
     public int dirt_intersected = 0;
     public int dirt_capacity = 1000;
+    public int dirt_particle_type = 1;
     public float digging_speed = 1.0f;
     public TMP_Text dirt_counter_text;
     public TMP_Text full_text;
     public ParticleSystem dirt_particles;
+    public Material dirt_1;
+    public Material dirt_2;
+    public Material dirt_3;
 
     private void Update()
     {
@@ -55,6 +59,12 @@ public class DirtScooper : MonoBehaviour
                 {
                     other.gameObject.transform.localScale -= shrink * digging_speed;
                     dirt_counter += (int) digging_speed;
+
+                    if (dirt_particle_type != 1)
+                    {
+                        dirt_particles.GetComponent<Renderer>().material = dirt_1;
+                        dirt_particle_type = 1;
+                    }
 
                     if (dirt_counter > dirt_capacity)
                     {
@@ -110,6 +120,12 @@ public class DirtScooper : MonoBehaviour
                     other.gameObject.transform.localScale -= shrink * digging_speed * 0.5f;
                     dirt_counter += (int)digging_speed;
 
+                    if (dirt_particle_type != 2)
+                    {
+                        dirt_particles.GetComponent<Renderer>().material = dirt_2;
+                        dirt_particle_type = 2;
+                    }
+
                     if (dirt_counter > dirt_capacity)
                     {
                         dirt_counter = dirt_capacity;
@@ -163,6 +179,12 @@ public class DirtScooper : MonoBehaviour
                 {
                     other.gameObject.transform.localScale -= shrink * digging_speed * 0.25f;
                     dirt_counter += (int)digging_speed;
+
+                    if (dirt_particle_type != 3)
+                    {
+                        dirt_particles.GetComponent<Renderer>().material = dirt_3;
+                        dirt_particle_type = 3;
+                    }
 
                     if (dirt_counter > dirt_capacity)
                     {
