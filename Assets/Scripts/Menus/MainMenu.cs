@@ -12,14 +12,13 @@ public class MainMenu : MonoBehaviour
 
         if (enter > 0)
         {
-            SceneManager.LoadScene("Gameplay");
+            SceneManager.LoadScene("Instructions");
         }
 
         if (exit > 0)
         {
             Application.Quit();
             UnityEditor.EditorApplication.isPlaying = false;
-            //
         }
     }
 }

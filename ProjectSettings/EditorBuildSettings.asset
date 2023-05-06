@@ -14,12 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 64c19893cfe5c7043ad5ff058753c41b
-  - enabled: 1
-    path: Assets/Scenes/Win.unity
-    guid: bfdcfe7f2f74c5a43a34ac3898fa385f
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: 23adaebf247367e44bcc48fa92c1c407
+  - enabled: 1
+    path: Assets/Scenes/Instructions.unity
+    guid: 572d7dd291d2c444fb13c1617afeb741
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 802aa2f5f53922a43abfbf135ccc183f,
       type: 2}
