@@ -279,8 +279,8 @@ public class ExcavatorMovement : MonoBehaviour
 
         if (drive > 0 && steer == 0 && can_move && movement != Movement.FORWARD)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat,1.0f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -298,8 +298,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive < 0 && steer == 0 && can_move && movement != Movement.BACKWARD)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -317,8 +317,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive == 0 && steer > 0 && can_move && movement != Movement.RIGHT)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -336,8 +336,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive == 0 && steer < 0 && can_move && movement != Movement.LEFT)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -355,8 +355,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive > 0 && steer > 0 && can_move && movement != Movement.FORWARDRIGHT)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -374,8 +374,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive > 0 && steer < 0 && can_move && movement != Movement.FORWARDLEFT)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -393,8 +393,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive < 0 && steer > 0 && can_move && movement != Movement.BACKWARDLEFT)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
@@ -412,8 +412,8 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (drive < 0 && steer < 0 && can_move && movement != Movement.BACKWARDRIGHT)
         {
-            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
-            anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f);
+            anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f * (speed * 0.8f));
+            anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f * (speed * 0.8f));
 
             if (!pipe_1_particles.isEmitting)
             {
