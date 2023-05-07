@@ -65,7 +65,7 @@ public class EnterTheExcavator : MonoBehaviour
             switch_timer -= Time.deltaTime;
         }
 
-        float enter = Input.GetAxis("Enter");
+        float enter = Input.GetAxis("GetIn");
 
         if (enter > 0 && excavator_open && switch_timer <= 0 && !get_in_the_chopper.flying)
         {

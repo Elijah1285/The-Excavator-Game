@@ -30,7 +30,7 @@ public class GetInTheChopper : MonoBehaviour
 
         private void OnTriggerStay(Collider other)
     {
-        float enter = Input.GetAxis("Enter");
+        float enter = Input.GetAxis("GetIn");
 
         if (enter > 0 && !enter_the_excavator.player_in_excavator && !flying)
         {
