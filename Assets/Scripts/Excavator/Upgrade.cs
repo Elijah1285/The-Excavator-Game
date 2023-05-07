@@ -28,6 +28,8 @@ public class Upgrade : MonoBehaviour
 
     public Canvas upgrade_UI;
 
+    public TMP_Text upgrade_station_nav_instruction;
+
     public DirtDump dirt_dump;
     public DirtScooper dirt_scooper;
     public ExcavatorMovement excavator_movement;
@@ -38,6 +40,11 @@ public class Upgrade : MonoBehaviour
         {
             upgrade_UI.enabled = true;
             in_upgrade_station = true;
+
+            if (upgrade_station_nav_instruction.enabled)
+            {
+                upgrade_station_nav_instruction.enabled = false;
+            }
         }
     }
 

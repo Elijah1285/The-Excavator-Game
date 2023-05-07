@@ -7,6 +7,7 @@ public class DirtDump : MonoBehaviour
 {
     public int money = 0;
     public bool shown_dump_instruction = false;
+    public bool shown_upgrade_station_nav_instruction = false;
 
     public GameObject current_dump;
     public DirtScooper dirt_scooper;
@@ -14,6 +15,7 @@ public class DirtDump : MonoBehaviour
     public TMP_Text money_counter;
     public TMP_Text dump_instruction;
     public TMP_Text dirt_container_nav_instruction;
+    public TMP_Text upgrade_station_nav_instruction;
 
     void OnTriggerEnter(Collider other)
     {
@@ -116,6 +118,12 @@ public class DirtDump : MonoBehaviour
                 {
                     GetComponent<AudioSource>().Stop();
                 }
+            }
+
+            if (money > 0 && !shown_upgrade_station_nav_instruction)
+            {
+                upgrade_station_nav_instruction.enabled = true;
+                shown_upgrade_station_nav_instruction = true;
             }
         }
     }
