@@ -14,6 +14,8 @@ public class DirtScooper : MonoBehaviour
     public int dirt_intersected = 0;
     public int dirt_capacity = 1000;
     public int dirt_particle_type = 1;
+    public int dirt_level = 1;
+    public int diggable_dirt = 1;
     public float digging_speed = 1.0f;
     public TMP_Text dirt_counter_text;
     public TMP_Text full_text;
@@ -25,7 +27,7 @@ public class DirtScooper : MonoBehaviour
 
     private void Update()
     {
-        if (dirt_intersected > 0 && bucket_wheel_turning && dirt_counter < dirt_capacity)
+        if (dirt_intersected > 0 && bucket_wheel_turning && dirt_counter < dirt_capacity && (int)digging_speed >= dirt_level)
         {
             if (GetComponent<AudioSource>().volume < 1.0f)
             {
@@ -246,8 +248,19 @@ public class DirtScooper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "DirtBall" || other.gameObject.tag == "DirtBall2" || other.gameObject.tag == "DirtBall3")
+        if (other.gameObject.tag == "DirtBall")
         {
+            dirt_level = 1;
+            dirt_intersected++;
+        }
+        else if (other.gameObject.tag == "DirtBall2")
+        {
+            dirt_level = 2;
+            dirt_intersected++;
+        }
+        else if (other.gameObject.tag == "DirtBall3")
+        {
+            dirt_level = 3;
             dirt_intersected++;
         }
     }
