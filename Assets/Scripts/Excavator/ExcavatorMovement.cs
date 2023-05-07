@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExcavatorMovement : MonoBehaviour
 {
-    enum Movement {FORWARD, BACKWARD, LEFT, RIGHT, FORWARDLEFT, FORWARDRIGHT, BACKWARDLEFT, BACKWARDRIGHT, STOP};
+    enum Movement {FORWARD, BACKWARD, LEFT, RIGHT, FORWARDLEFT, FORWARDRIGHT, BACKWARDLEFT, BACKWARDRIGHT, STOP, AIR};
 
     public float speed = 1.0f;
     public float speedDampTime = 399f;
@@ -277,146 +277,173 @@ public class ExcavatorMovement : MonoBehaviour
         var pipe_2_particles_main = pipe_2_particles.main;
         var pipe_3_particles_main = pipe_3_particles.main;
 
-        if (drive > 0 && steer == 0 && movement != Movement.FORWARD)
+        if (drive > 0 && steer == 0 && can_move && movement != Movement.FORWARD)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat,1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.FORWARD;
         }
-        else if (drive < 0 && steer == 0 && movement != Movement.BACKWARD)
+        else if (drive < 0 && steer == 0 && can_move && movement != Movement.BACKWARD)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.BACKWARD;
         }
-        else if (drive == 0 && steer > 0 && movement != Movement.RIGHT)
+        else if (drive == 0 && steer > 0 && can_move && movement != Movement.RIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.RIGHT;
         }
-        else if (drive == 0 && steer < 0 && movement != Movement.LEFT)
+        else if (drive == 0 && steer < 0 && can_move && movement != Movement.LEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.LEFT;
         }
-        else if (drive > 0 && steer > 0 && movement != Movement.FORWARDRIGHT)
+        else if (drive > 0 && steer > 0 && can_move && movement != Movement.FORWARDRIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.6f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 100;
             movement = Movement.FORWARDRIGHT;
         }
-        else if (drive > 0 && steer < 0 && movement != Movement.FORWARDLEFT)
+        else if (drive > 0 && steer < 0 && can_move && movement != Movement.FORWARDLEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 1.0f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 100;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.FORWARDLEFT;
         }
-        else if (drive < 0 && steer > 0 && movement != Movement.BACKWARDLEFT)
+        else if (drive < 0 && steer > 0 && can_move && movement != Movement.BACKWARDLEFT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -0.6f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -1.0f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 100;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.BACKWARDLEFT;
         }
-        else if (drive < 0 && steer < 0 && movement != Movement.BACKWARDRIGHT)
+        else if (drive < 0 && steer < 0 && can_move && movement != Movement.BACKWARDRIGHT)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, -1.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, -0.6f);
+
             if (!pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Play();
             }
+
             if (!pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Play();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 100;
             movement = Movement.BACKWARDRIGHT;
         }
-        else if (drive == 0 && steer == 0 && movement != Movement.STOP)
+        else if (drive == 0 && steer == 0 && can_move && movement != Movement.STOP)
         {
             anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
             anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
+
             if (pipe_1_particles.isEmitting)
             {
                 pipe_1_particles.Stop();
             }
+
             if (pipe_3_particles.isEmitting)
             {
                 pipe_3_particles.Stop();
             }
+
             pipe_1_particles_main.startSize = 300;
             pipe_3_particles_main.startSize = 300;
             movement = Movement.STOP;
@@ -434,5 +461,10 @@ public class ExcavatorMovement : MonoBehaviour
         {
             turn_audio_source.Stop();
         }
+    }
+
+    public void setMovementToAir()
+    {
+        movement = Movement.AIR;
     }
 }

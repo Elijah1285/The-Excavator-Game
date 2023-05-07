@@ -58,9 +58,10 @@ public class GroundDetector : MonoBehaviour
                 off_ground_timer_running = true;
                 enter_the_excavator.excavator_open = false;
                 excavator_movement.can_move = false;
-                anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
+                anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);               
                 anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
                 excavator_movement.stopMovementAudio();
+                excavator_movement.setMovementToAir();
             }
         }
     }
