@@ -17,6 +17,7 @@ public class ViewSwitch : MonoBehaviour
     public TMP_Text view_instruction;
 
     public ExcavatorMovement excavator_movement;
+    public EnterTheExcavator enter_the_excavator;
 
     private void Update()
     {
@@ -43,6 +44,7 @@ public class ViewSwitch : MonoBehaviour
                     {
                         if (view_instruction.enabled)
                         {
+                            enter_the_excavator.shown_view_instruction = true;
                             view_instruction.enabled = false;
                         }
                     }
@@ -64,6 +66,7 @@ public class ViewSwitch : MonoBehaviour
                     {
                         if (view_instruction.enabled)
                         {
+                            enter_the_excavator.shown_view_instruction = true;
                             view_instruction.enabled = false;
                         }
                     }
@@ -85,6 +88,7 @@ public class ViewSwitch : MonoBehaviour
                     {
                         if (view_instruction.enabled)
                         {
+                            enter_the_excavator.shown_view_instruction = true;
                             view_instruction.enabled = false;
                         }
                     }

@@ -96,7 +96,6 @@ public class EnterTheExcavator : MonoBehaviour
                 if (!shown_view_instruction)
                 {
                     view_instruction.enabled = true;
-                    shown_view_instruction = true;
                 }
 
                 if (dirt_scooper.dirt_counter >= dirt_scooper.dirt_capacity)
