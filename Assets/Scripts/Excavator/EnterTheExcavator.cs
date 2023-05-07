@@ -8,6 +8,7 @@ public class EnterTheExcavator : MonoBehaviour
     public bool player_in_bound = false;
     public bool player_in_excavator = false;
     public bool excavator_open = true;
+    public bool shown_view_instruction = false;
 
     public float switch_timer = 0;
 
@@ -24,6 +25,7 @@ public class EnterTheExcavator : MonoBehaviour
     public ParticleSystem pipe_3_particles;
     public Canvas upgrade_UI;
     public TMP_Text full_text;
+    public TMP_Text view_instruction;
     public DirtScooper dirt_scooper;
     public Upgrade upgrade;
 
@@ -91,6 +93,12 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<ExcavatorMovement>().engine_start = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Play();
 
+                if (!shown_view_instruction)
+                {
+                    view_instruction.enabled = true;
+                    shown_view_instruction = true;
+                }
+
                 if (dirt_scooper.dirt_counter >= dirt_scooper.dirt_capacity)
                 {
                     full_text.enabled = true;
@@ -129,6 +137,11 @@ public class EnterTheExcavator : MonoBehaviour
                 excavator.GetComponent<Animator>().SetFloat(hash.bucketWheelSpeedFloat, 0);
                 excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Stop();
                 excavator.GetComponent<ExcavatorMovement>().bucket_wheel_speed = 0;
+
+                if (view_instruction.enabled)
+                {
+                    view_instruction.enabled = false;
+                }
 
                 if (full_text.enabled)
                 {
