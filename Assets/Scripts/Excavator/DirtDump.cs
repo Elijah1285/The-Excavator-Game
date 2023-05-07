@@ -12,8 +12,8 @@ public class DirtDump : MonoBehaviour
     public DirtScooper dirt_scooper;
     public TMP_Text full_text;
     public TMP_Text money_counter;
-
-    public Canvas dump_instruction;
+    public TMP_Text dump_instruction;
+    public TMP_Text dirt_container_nav_instruction;
 
     void OnTriggerEnter(Collider other)
     {
@@ -24,6 +24,11 @@ public class DirtDump : MonoBehaviour
             if (!shown_dump_instruction)
             {
                 dump_instruction.enabled = true;
+            }
+
+            if (dirt_container_nav_instruction.enabled)
+            {
+                dirt_container_nav_instruction.enabled = false;
             }
         }
     }

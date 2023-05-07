@@ -6,6 +6,7 @@ using TMPro;
 public class DirtScooper : MonoBehaviour
 {
     public bool bucket_wheel_turning;
+    public bool shown_dirt_container_nav_instruction = false;
     public Vector3 shrink = new Vector3(0.03f, 0.03f, 0.03f);
     public Vector3 minimum_size = new Vector3(0.5f, 0.5f, 0.5f);
     public Vector3 size_for_rigidbody = new Vector3(5.0f, 5.0f, 5.0f);
@@ -16,6 +17,7 @@ public class DirtScooper : MonoBehaviour
     public float digging_speed = 1.0f;
     public TMP_Text dirt_counter_text;
     public TMP_Text full_text;
+    public TMP_Text dirt_container_nav_instruction;
     public ParticleSystem dirt_particles;
     public Material dirt_1;
     public Material dirt_2;
@@ -110,6 +112,12 @@ public class DirtScooper : MonoBehaviour
                     if (dirt_counter >= dirt_capacity)
                     {
                         full_text.enabled = true;
+
+                        if (!shown_dirt_container_nav_instruction)
+                        {
+                            dirt_container_nav_instruction.enabled = true;
+                            shown_dirt_container_nav_instruction = true;
+                        }
                     }
                 }
             }
