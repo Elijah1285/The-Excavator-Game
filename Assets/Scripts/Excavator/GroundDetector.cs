@@ -13,10 +13,14 @@ public class GroundDetector : MonoBehaviour
     public int ground_intersected = 0;
 
     public GameObject excavator;
+    public Animator anim;
+    public AudioSource drive_audio;
+    public AudioSource turn_audio;
 
     public Flash flash;
     public EnterTheExcavator enter_the_excavator;
     public ExcavatorMovement excavator_movement;
+    public HashIDs hash;
 
     void OnTriggerEnter(Collider other)
     {
@@ -54,6 +58,9 @@ public class GroundDetector : MonoBehaviour
                 off_ground_timer_running = true;
                 enter_the_excavator.excavator_open = false;
                 excavator_movement.can_move = false;
+                anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
+                anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
+                excavator_movement.stopMovementAudio();
             }
         }
     }

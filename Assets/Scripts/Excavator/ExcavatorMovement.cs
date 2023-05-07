@@ -422,4 +422,17 @@ public class ExcavatorMovement : MonoBehaviour
             movement = Movement.STOP;
         }
     }
+
+    public void stopMovementAudio()
+    {
+        if (drive_audio_source.isPlaying)
+        {
+            drive_audio_source.Stop();
+        }
+
+        if (turn_audio_source.isPlaying)
+        {
+            turn_audio_source.Stop();
+        }
+    }
 }
