@@ -9,6 +9,7 @@ public class SetUpCameras : MonoBehaviour
     public Camera CabCamera;
     public Camera WheelCamera;
     public Camera HeliCamera;
+    public Camera pip_cam;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class SetUpCameras : MonoBehaviour
         CabCamera.enabled = false;
         WheelCamera.enabled = false;
         HeliCamera.enabled = false;
+        pip_cam.enabled = false;
 
         PlayerCharacter.GetComponent<AudioListener>().enabled = true;
         ExcavatorCamera.GetComponent<AudioListener>().enabled = false;
