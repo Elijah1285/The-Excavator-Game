@@ -102,6 +102,11 @@ public class DirtDump : MonoBehaviour
                     {
                         dump_instruction.enabled = false;
                     }
+
+                    if (!dirt_scooper.shown_dirt_container_nav_instruction)
+                    {
+                        dirt_scooper.shown_dirt_container_nav_instruction = true;
+                    }
                 }
             }
         }
