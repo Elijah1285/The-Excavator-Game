@@ -7,6 +7,7 @@ public class ExcavatorMovement : MonoBehaviour
     enum Movement {FORWARD, BACKWARD, LEFT, RIGHT, FORWARDLEFT, FORWARDRIGHT, BACKWARDLEFT, BACKWARDRIGHT, STOP, AIR};
 
     public float speed = 1.0f;
+    public float wheel_speed = 1.0f;
     public float speedDampTime = 399f;
     public float sensitivityX = 0.5f;
     public float animationSpeed = 1.5f;
@@ -193,7 +194,7 @@ public class ExcavatorMovement : MonoBehaviour
         }
         else if (wheel > 0)
         {
-            bucket_wheel_speed = wheel * 5.0f;
+            bucket_wheel_speed = wheel * wheel_speed * 5.0f;
             anim.SetFloat(hash.bucketWheelSpeedFloat, bucket_wheel_speed);
 
             if (!scooper.GetComponent<DirtScooper>().bucket_wheel_turning)
