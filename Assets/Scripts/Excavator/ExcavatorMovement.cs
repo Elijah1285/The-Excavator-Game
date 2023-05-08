@@ -48,11 +48,11 @@ public class ExcavatorMovement : MonoBehaviour
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
         ourBody = this.GetComponent<Rigidbody>();
         movement = Movement.STOP;
-        engine_audio_source.volume = 0.3f;
-        bucket_wheel_audio_source.volume = 0.3f;
-        arm_audio_source.volume = 0.3f;
-        turn_audio_source.volume = 0.1f;
-        drive_audio_source.volume = 0.3f;
+        engine_audio_source.volume = 0.2f;
+        bucket_wheel_audio_source.volume = 0.2f;
+        arm_audio_source.volume = 0.2f;
+        turn_audio_source.volume = 0.05f;
+        drive_audio_source.volume = 0.2f;
     }
 
     private void Update()
