@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class DollyZoom : MonoBehaviour
 {
+    public float zooming_speed = 15.0f;
+    public float cutscene_end_timer = 3.0f;
+
     public Transform target;
     public Camera zoomCamera;
 
     private float init_height_at_distance = 0;
     private bool dolly_zoom_enabled = false;
+    public bool slowing_down = false;
+    public bool cutscene_end_timer_running = false;
 
-    void Start()
-    {
-        startDollyZoomEffect();
-    }
+    public HelicopterZoomCutscene helicopter_zoom_cutscene;
 
     void Update()
     {
@@ -21,11 +23,31 @@ public class DollyZoom : MonoBehaviour
         {
             var currDistance = Vector3.Distance(transform.position, target.position);
             zoomCamera.fieldOfView = FOVForHeightAndDistance(init_height_at_distance, currDistance);
+            transform.Translate(Vector3.forward * Time.deltaTime * zooming_speed);
+
+            if (slowing_down)
+            {
+                zooming_speed -= 20 * Time.deltaTime;
+
+                if (zooming_speed <= 0)
+                {
+                    dolly_zoom_enabled = false;
+                    zooming_speed = 15.0f;
+                    cutscene_end_timer_running = true;
+                }
+            }
         }
 
-        if (Input.GetKey("[") || Input.GetKey("]"))
+        if (cutscene_end_timer_running)
         {
-            transform.Translate(Input.GetAxis("AltVertical") * Vector3.forward * Time.deltaTime);
+            cutscene_end_timer -= Time.deltaTime;
+
+            if (cutscene_end_timer <= 0)
+            {
+                helicopter_zoom_cutscene.endCutscene();
+                cutscene_end_timer_running = false;
+                cutscene_end_timer = 3.0f;
+            }
         }
     }
 
@@ -39,7 +61,7 @@ public class DollyZoom : MonoBehaviour
         return 2.0f * Mathf.Atan(init_height_at_distance * 0.5f / distance) * Mathf.Rad2Deg;
     }
 
-    void startDollyZoomEffect()
+    public void startDollyZoomEffect()
     {
         var distance = Vector3.Distance(transform.position, target.position);
         init_height_at_distance = frustumHeightAtDistance(distance);
@@ -47,8 +69,8 @@ public class DollyZoom : MonoBehaviour
         dolly_zoom_enabled = true;
     }
 
-    void stopDollyZoomEffect()
+    public void stopDollyZoomEffect()
     {
-        dolly_zoom_enabled = false;
+        slowing_down = true;
     }
 }

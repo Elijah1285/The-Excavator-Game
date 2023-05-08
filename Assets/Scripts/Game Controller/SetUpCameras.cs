@@ -13,6 +13,7 @@ public class SetUpCameras : MonoBehaviour
     public Camera WheelCamera;
     public Camera HeliCamera;
     public Camera minimap_cam;
+    public Camera helicopter_dolly_zoom_camera; 
 
     public TMP_Text minimap_toggle_instruction;
 
@@ -26,6 +27,7 @@ public class SetUpCameras : MonoBehaviour
         CabCamera.enabled = false;
         WheelCamera.enabled = false;
         HeliCamera.enabled = false;
+        helicopter_dolly_zoom_camera.enabled = false;
         minimap_cam.enabled = true;
 
         PlayerCharacter.GetComponent<AudioListener>().enabled = true;
