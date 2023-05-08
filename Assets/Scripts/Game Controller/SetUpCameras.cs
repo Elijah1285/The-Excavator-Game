@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SetUpCameras : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class SetUpCameras : MonoBehaviour
     public Camera WheelCamera;
     public Camera HeliCamera;
     public Camera minimap_cam;
+
+    public TMP_Text minimap_toggle_instruction;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,12 @@ public class SetUpCameras : MonoBehaviour
         if (map_toggle > 0 && !toggled_minimap)
         {
             minimap_cam.enabled = !minimap_cam.enabled;
+
+            if (minimap_toggle_instruction.enabled)
+            {
+                minimap_toggle_instruction.enabled = false;
+            }
+
             toggled_minimap = true;
         }
         else if (map_toggle <= 0)
