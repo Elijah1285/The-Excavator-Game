@@ -8,9 +8,11 @@ public class FollowCamera : MonoBehaviour
 
     public Target target_name = Target.PLAYER;
 
-    public float cam_max_distance = 0;
-    public float cam_min_distance = 0;
-    public int objects_inside = 0;
+    Vector3 cam_direction;
+    float cam_distance = 0;
+    float cam_min_distance = 0;
+    float cam_max_distance = 0;
+    //int objects_inside = 0;
 
     public GameObject target;
     public Vector3 offset;
@@ -19,27 +21,31 @@ public class FollowCamera : MonoBehaviour
     private float mouseY;
     private float mouseZ;
 
+    public Transform cam_transform;
+
     // Start is called before the first frame update
     void Start()
     {
         offset = transform.position - target.transform.position;
+        cam_direction = cam_transform.localPosition.normalized;
+        cam_distance = cam_max_distance;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if ((target_name == Target.PLAYER && other.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && other.gameObject.tag != "Excavator"))
-        {
-            objects_inside += 1;
-        }
-    }
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if ((target_name == Target.PLAYER && other.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && other.gameObject.tag != "Excavator"))
+    //    {
+    //        objects_inside += 1;
+    //    }
+    //}
 
-    void OnTriggerExit(Collider other)
-    {
-        if ((target_name == Target.PLAYER && other.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && other.gameObject.tag != "Excavator"))
-        {
-            objects_inside -= 1;
-        }
-    }
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if ((target_name == Target.PLAYER && other.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && other.gameObject.tag != "Excavator"))
+    //    {
+    //        objects_inside -= 1;
+    //    }
+    //}
 
     // Update is called once per frame
     void LateUpdate()
@@ -49,6 +55,8 @@ public class FollowCamera : MonoBehaviour
             float dist = Vector3.Distance(target.transform.position, transform.position);
 
             Transform camera_transform = this_camera.transform;
+
+
 
             RaycastHit hit;
             Ray ray_forward = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -94,7 +102,25 @@ public class FollowCamera : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
             transform.position = target.transform.position + (rotation * offset);
             transform.LookAt(target.transform);
+            //checkOcclusion(camera_transform);
         }
     }
+
+    //void checkOcclusion(Transform cam)
+    //{
+    //    Vector3 desired_cam_position = transform.TransformPoint(cam_direction * cam_max_distance);
+    //    RaycastHit hit;
+
+    //    if (Physics.Linecast(transform.position, desired_cam_position, out hit))
+    //    {
+    //        cam_distance = Mathf.Clamp(hit.distance, cam_min_distance, cam_max_distance);
+    //    }
+    //    else
+    //    {
+    //        cam_distance = cam_max_distance;
+    //    }
+
+    //    cam.localPosition = cam_direction * cam_distance;
+    //}
 }
 
