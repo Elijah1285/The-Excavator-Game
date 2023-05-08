@@ -44,19 +44,16 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Debug.Log(objects_inside);
-
         if (this_camera.enabled)
         {
             float dist = Vector3.Distance(target.transform.position, transform.position);
-            Debug.Log(dist);
 
             Transform camera_transform = this_camera.transform;
 
             RaycastHit hit;
             Ray ray_forward = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             Ray ray_backward = new Ray(camera_transform.position, -camera_transform.forward);
-            Debug.DrawRay(camera_transform.position, Vector3.Scale(-camera_transform.forward, new Vector3(5.0f, 5.0f, 5.0f)));
+            Debug.DrawRay(camera_transform.position, Vector3.Scale(-camera_transform.forward, new Vector3(100.0f, 100.0f, 100.0f)));
 
             if (Physics.Raycast(ray_forward, out hit))
             {
@@ -66,7 +63,7 @@ public class FollowCamera : MonoBehaviour
                 }
                 else
                 {
-                    if (!Physics.Raycast(ray_backward, 5.0f) && objects_inside == 0 && dist < cam_max_distance)
+                    if (!Physics.Raycast(ray_backward, 80.0f) && dist < cam_max_distance)
                     {
                         offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
                     }
