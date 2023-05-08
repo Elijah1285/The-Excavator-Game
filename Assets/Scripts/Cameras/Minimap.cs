@@ -26,6 +26,7 @@ public class Minimap : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<Camera>().depth = 0;
         adjustCamera();
     }
 

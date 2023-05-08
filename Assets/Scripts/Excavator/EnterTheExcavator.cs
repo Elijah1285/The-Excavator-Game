@@ -18,6 +18,7 @@ public class EnterTheExcavator : MonoBehaviour
     public GameObject excavator;
     public ViewSwitch view_switch;
     public AudioListener player_audio_listener;
+    public Camera minimap;
     private HashIDs hash;
 
     public ParticleSystem pipe_1_particles;
@@ -108,6 +109,8 @@ public class EnterTheExcavator : MonoBehaviour
                     upgrade_UI.enabled = true;
                 }
 
+                minimap.depth = 0;
+
                 Input.ResetInputAxes();
             }
             else if (player_in_excavator)
@@ -184,6 +187,8 @@ public class EnterTheExcavator : MonoBehaviour
                 {
                     pipe_3_particles.Stop();
                 }
+
+                minimap.depth = 0;
 
                 Input.ResetInputAxes();
             }
