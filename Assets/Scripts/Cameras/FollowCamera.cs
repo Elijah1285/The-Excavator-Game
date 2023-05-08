@@ -22,6 +22,22 @@ public class FollowCamera : MonoBehaviour
     {
         if (this_camera.enabled)
         {
+            RaycastHit hit;
+            Ray ray = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+
+                if (hit.collider.gameObject.tag != "Ground")
+                {
+                    if (hit.collider.gameObject.tag != "Player")
+                    {
+                        Debug.Log("occlusion");
+                    }
+                }
+            }
+
             mouseX = Input.GetAxis("Mouse X");
             mouseY = Input.GetAxis("Mouse Y");
             mouseZ = Input.GetAxis("Mouse ScrollWheel");
