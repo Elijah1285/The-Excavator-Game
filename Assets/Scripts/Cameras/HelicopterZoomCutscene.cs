@@ -5,7 +5,7 @@ using TMPro;
 
 public class HelicopterZoomCutscene : MonoBehaviour
 {
-    public float dolly_zoom_timer = 3.0f;
+    public float dolly_zoom_timer = 1.0f;
     public bool dolly_zoom_timer_running = false;
     public bool cutscene_played = false;
 
@@ -16,6 +16,7 @@ public class HelicopterZoomCutscene : MonoBehaviour
     public Camera prev_cam;
 
     public DollyZoom dolly_zoom;
+    public MusicPlayer music_player;
 
     void Awake()
     {
@@ -24,7 +25,7 @@ public class HelicopterZoomCutscene : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && !cutscene_played)
+        if ((other.gameObject.tag == "Player" || other.gameObject.tag == "Excavator") && !cutscene_played)
         {
             prev_cam = live_cam;
             live_cam.enabled = false;
@@ -38,6 +39,8 @@ public class HelicopterZoomCutscene : MonoBehaviour
             {
                 minimap_toggle_instruction.enabled = false;
             }
+
+            music_player.playZoomSound();
 
             cutscene_played = true;
         }
@@ -59,7 +62,7 @@ public class HelicopterZoomCutscene : MonoBehaviour
             {
                 dolly_zoom.stopDollyZoomEffect();
                 dolly_zoom_timer_running = false;
-                dolly_zoom_timer = 3.0f;
+                dolly_zoom_timer = 1.0f;
             }
         }
     }

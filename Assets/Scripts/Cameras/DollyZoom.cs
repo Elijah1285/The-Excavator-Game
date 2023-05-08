@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DollyZoom : MonoBehaviour
 {
-    public float zooming_speed = 15.0f;
+    public float zooming_speed = 45.0f;
     public float cutscene_end_timer = 1.0f;
 
     public Transform target;
@@ -27,7 +27,7 @@ public class DollyZoom : MonoBehaviour
 
             if (slowing_down)
             {
-                zooming_speed -= 20 * Time.deltaTime;
+                zooming_speed -= 150 * Time.deltaTime;
 
                 if (zooming_speed <= 0)
                 {
@@ -46,7 +46,7 @@ public class DollyZoom : MonoBehaviour
             {
                 helicopter_zoom_cutscene.endCutscene();
                 cutscene_end_timer_running = false;
-                cutscene_end_timer = 3.0f;
+                cutscene_end_timer = 1.0f;
             }
         }
     }

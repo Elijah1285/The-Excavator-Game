@@ -10,6 +10,7 @@ public class MusicPlayer : MonoBehaviour
     public AudioSource music_1;
     public AudioSource music_2;
     public AudioSource music_3;
+    public AudioSource zoom_sound;
 
     void Update()
     {
@@ -47,5 +48,10 @@ public class MusicPlayer : MonoBehaviour
         }
 
         music_timer = 30.0f;
+    }
+
+    public void playZoomSound()
+    {
+        zoom_sound.Play();
     }
 }
