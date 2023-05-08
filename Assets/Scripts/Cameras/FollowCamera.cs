@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
+    public enum Target {PLAYER, EXCAVATOR};
+
+    public Target target_name = Target.PLAYER;
+
+    public float cam_max_distance = 0;
+    public float cam_min_distance = 0;
+    public int objects_inside = 0;
+
     public GameObject target;
     public Vector3 offset;
     public Camera this_camera;
@@ -17,31 +25,56 @@ public class FollowCamera : MonoBehaviour
         offset = transform.position - target.transform.position;
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if ((target_name == Target.PLAYER && other.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && other.gameObject.tag != "Excavator"))
+        {
+            objects_inside += 1;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if ((target_name == Target.PLAYER && other.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && other.gameObject.tag != "Excavator"))
+        {
+            objects_inside -= 1;
+        }
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
+        Debug.Log(objects_inside);
+
         if (this_camera.enabled)
         {
+            float dist = Vector3.Distance(target.transform.position, transform.position);
+            Debug.Log(dist);
+
+            Transform camera_transform = this_camera.transform;
+
             RaycastHit hit;
-            Ray ray = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            Ray ray_forward = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            Ray ray_backward = new Ray(camera_transform.position, -camera_transform.forward);
+            Debug.DrawRay(camera_transform.position, Vector3.Scale(-camera_transform.forward, new Vector3(5.0f, 5.0f, 5.0f)));
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray_forward, out hit))
             {
-                Debug.DrawLine(ray.origin, hit.point);
-
-                if (hit.collider.gameObject.tag != "Ground")
+                if (((target_name == Target.PLAYER && hit.collider.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && hit.collider.gameObject.tag != "Excavator")) && dist > cam_min_distance)
                 {
-                    if (hit.collider.gameObject.tag != "Player")
+                    offset = Vector3.Scale(offset, new Vector3(0.95f, 0.95f, 0.95f));
+                }
+                else
+                {
+                    if (!Physics.Raycast(ray_backward, 5.0f) && objects_inside == 0 && dist < cam_max_distance)
                     {
-                        Debug.Log("occlusion");
+                        offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
                     }
                 }
             }
 
             mouseX = Input.GetAxis("Mouse X");
             mouseY = Input.GetAxis("Mouse Y");
-            mouseZ = Input.GetAxis("Mouse ScrollWheel");
-
 
             if (Input.GetMouseButton(1))
             {
@@ -59,19 +92,6 @@ public class FollowCamera : MonoBehaviour
                     Vector3 LocalRight = target.transform.worldToLocalMatrix.MultiplyVector(transform.right);
                     offset = Quaternion.AngleAxis(mouseY, LocalRight) * offset;
                 }
-            }
-
-            float dist = Vector3.Distance(target.transform.position, transform.position);
-
-            if (mouseZ < 0 && dist < 50)
-            {
-                offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
-            }
-
-
-            if (mouseZ > 0 && dist > 0.5)
-            {
-                offset = Vector3.Scale(offset, new Vector3(0.95f, 0.95f, 0.95f));
             }
 
             Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
