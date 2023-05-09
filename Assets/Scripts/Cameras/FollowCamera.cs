@@ -48,27 +48,11 @@ public class FollowCamera : MonoBehaviour
 
             checkOccllusion();
 
-            mouseX = 0;
-            mouseY = 0;
-
             angle_between = Vector3.Angle(Vector3.up, transform.forward);
 
             desired_angle = target.transform.eulerAngles.y;
 
-            if (((angle_between > 100) && (mouseY < 0)) || ((angle_between < 145) && (mouseY > 0)))
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    Vector3 LocalRight = target.transform.worldToLocalMatrix.MultiplyVector(transform.right);
-                    offset = Quaternion.AngleAxis(mouseY, LocalRight) * offset;
-                }
-            }
-
             smoothFollow();
-
-            //Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
-            //transform.position = target.transform.position + (rotation * offset);
-            //transform.LookAt(target.transform);
         }
     }
 
