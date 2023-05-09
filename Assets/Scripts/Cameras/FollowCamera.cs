@@ -8,6 +8,7 @@ public class FollowCamera : MonoBehaviour
 
     public Target target_name = Target.PLAYER;
 
+    public Vector3 desired_cam_position;
     public Vector3 cam_direction;
     public float cam_distance = 0;
     public float cam_min_distance = 0;
@@ -21,13 +22,12 @@ public class FollowCamera : MonoBehaviour
     private float mouseZ;
 
     public Transform cam_transform;
+    public Transform behind_cam_position_transform;
 
     // Start is called before the first frame update
     void Start()
     {
         offset = transform.position - target.transform.position;
-        cam_direction = cam_transform.localPosition.normalized;
-        cam_distance = cam_max_distance;
     }
 
     // Update is called once per frame
@@ -35,33 +35,12 @@ public class FollowCamera : MonoBehaviour
     {
         if (this_camera.enabled)
         {
-            cam_direction = cam_transform.localPosition.normalized;
             cam_direction = cam_transform.TransformDirection(Vector3.forward);
             cam_distance = Vector3.Distance(target.transform.position, transform.position);
 
             Transform camera_transform = this_camera.transform;
 
-            RaycastHit hit;
-            Ray ray_forward = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            Ray ray_backward = new Ray(camera_transform.position, -camera_transform.forward);
-            //Debug.DrawRay(camera_transform.position, Vector3.Scale(-camera_transform.forward, new Vector3(100.0f, 100.0f, 100.0f)));
-            Debug.DrawRay(camera_transform.position, Vector3.Scale(cam_direction, new Vector3(100.0f, 100.0f, 100.0f)));
-
-            if (Physics.Raycast(ray_forward, out hit))
-            {
-                if (((target_name == Target.PLAYER && hit.collider.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && hit.collider.gameObject.tag != "Excavator")) && cam_distance > cam_min_distance)
-                {
-                    offset = Vector3.Scale(offset, new Vector3(0.95f, 0.95f, 0.95f));
-                }
-                else
-                {
-                    if (!Physics.Raycast(ray_backward, 80.0f) && cam_distance < cam_max_distance)
-                    {
-                        Debug.Log("zooming out");
-                        offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
-                    }
-                }
-            }
+            checkOccllusion();
 
             mouseX = Input.GetAxis("Mouse X");
             mouseY = Input.GetAxis("Mouse Y");
@@ -88,6 +67,34 @@ public class FollowCamera : MonoBehaviour
             transform.position = target.transform.position + (rotation * offset);
             transform.LookAt(target.transform);
             //checkOcclusion(camera_transform);
+        }
+    }
+
+    void checkOccllusion()
+    {
+        RaycastHit cam_ray_hit;
+        RaycastHit behind_position_ray_hit;
+        Ray ray_from_cam = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray_from_behind_position = new Ray(behind_cam_position_transform.position, cam_direction);
+
+        if (Physics.Raycast(ray_from_cam, out cam_ray_hit))
+        {
+            if (((target_name == Target.PLAYER && cam_ray_hit.collider.gameObject.tag != "Player") || (target_name == Target.EXCAVATOR && cam_ray_hit.collider.gameObject.tag != "Excavator")) && cam_distance > cam_min_distance)
+            {
+                offset = Vector3.Scale(offset, new Vector3(0.95f, 0.95f, 0.95f));
+            }
+            else
+            {
+                if (cam_distance < cam_max_distance)
+                {
+                    Physics.Raycast(ray_from_behind_position, out behind_position_ray_hit);
+
+                    if (behind_position_ray_hit.collider.gameObject.tag == "Player")
+                    {
+                        offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
+                    }
+                }
+            }
         }
     }
 }
