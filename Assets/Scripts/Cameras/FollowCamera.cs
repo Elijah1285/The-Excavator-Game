@@ -10,9 +10,13 @@ public class FollowCamera : MonoBehaviour
 
     public Vector3 desired_cam_position;
     public Vector3 cam_direction;
+    public Vector3 smooth_follow;
     public float cam_distance = 0;
     public float cam_min_distance = 0;
     public float cam_max_distance = 0;
+    public float smooth_speed = 0.1f;
+    public float angle_between = 0;
+    public float desired_angle = 0;
 
     public GameObject target;
     public Vector3 offset;
@@ -23,6 +27,8 @@ public class FollowCamera : MonoBehaviour
 
     public Transform cam_transform;
     public Transform behind_cam_position_transform;
+
+    public Quaternion rotation;
 
     // Start is called before the first frame update
     void Start()
@@ -42,22 +48,14 @@ public class FollowCamera : MonoBehaviour
 
             checkOccllusion();
 
-            //mouseX = Input.GetAxis("Mouse X");
-            //mouseY = Input.GetAxis("Mouse Y");
-
             mouseX = 0;
             mouseY = 0;
 
-            if (Input.GetMouseButton(1))
-            {
-                offset = Quaternion.Euler(0, mouseX, 0) * offset;
-            }
+            angle_between = Vector3.Angle(Vector3.up, transform.forward);
 
-            float angleBetween = Vector3.Angle(Vector3.up, transform.forward);
+            desired_angle = target.transform.eulerAngles.y;
 
-            float desiredAngle = target.transform.eulerAngles.y;
-
-            if (((angleBetween > 100) && (mouseY < 0)) || ((angleBetween < 145) && (mouseY > 0)))
+            if (((angle_between > 100) && (mouseY < 0)) || ((angle_between < 145) && (mouseY > 0)))
             {
                 if (Input.GetMouseButton(0))
                 {
@@ -66,10 +64,11 @@ public class FollowCamera : MonoBehaviour
                 }
             }
 
-            Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
-            transform.position = target.transform.position + (rotation * offset);
-            transform.LookAt(target.transform);
-            //checkOcclusion(camera_transform);
+            smoothFollow();
+
+            //Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
+            //transform.position = target.transform.position + (rotation * offset);
+            //transform.LookAt(target.transform);
         }
     }
 
@@ -99,6 +98,15 @@ public class FollowCamera : MonoBehaviour
                 }
             }
         }
+    }
+
+    void smoothFollow()
+    {
+        rotation = Quaternion.Euler(0, desired_angle, 0);
+        smooth_follow = Vector3.Lerp(cam_transform.position, target.transform.position + (rotation * offset), smooth_speed);
+
+        cam_transform.position = smooth_follow;
+        transform.LookAt(target.transform);
     }
 }
 
