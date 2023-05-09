@@ -10,8 +10,8 @@ public class FollowCamera : MonoBehaviour
 
     Vector3 cam_direction;
     float cam_distance = 0;
-    float cam_min_distance = 0;
-    float cam_max_distance = 0;
+    public float cam_min_distance = 0;
+    public float cam_max_distance = 0;
     //int objects_inside = 0;
 
     public GameObject target;
@@ -56,8 +56,6 @@ public class FollowCamera : MonoBehaviour
 
             Transform camera_transform = this_camera.transform;
 
-
-
             RaycastHit hit;
             Ray ray_forward = this_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             Ray ray_backward = new Ray(camera_transform.position, -camera_transform.forward);
@@ -73,6 +71,7 @@ public class FollowCamera : MonoBehaviour
                 {
                     if (!Physics.Raycast(ray_backward, 80.0f) && dist < cam_max_distance)
                     {
+                        Debug.Log("zooming out");
                         offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
                     }
                 }
