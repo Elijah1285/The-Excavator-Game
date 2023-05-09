@@ -42,8 +42,11 @@ public class FollowCamera : MonoBehaviour
 
             checkOccllusion();
 
-            mouseX = Input.GetAxis("Mouse X");
-            mouseY = Input.GetAxis("Mouse Y");
+            //mouseX = Input.GetAxis("Mouse X");
+            //mouseY = Input.GetAxis("Mouse Y");
+
+            mouseX = 0;
+            mouseY = 0;
 
             if (Input.GetMouseButton(1))
             {
