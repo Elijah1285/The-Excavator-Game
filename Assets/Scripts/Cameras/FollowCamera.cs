@@ -89,7 +89,7 @@ public class FollowCamera : MonoBehaviour
                 {
                     Physics.Raycast(ray_from_behind_position, out behind_position_ray_hit);
 
-                    if (behind_position_ray_hit.collider.gameObject.tag == "Player")
+                    if ((target_name == Target.PLAYER && behind_position_ray_hit.collider.gameObject.tag == "Player") || (target_name == Target.EXCAVATOR && behind_position_ray_hit.collider.gameObject.tag == "Excavator"))
                     {
                         offset = Vector3.Scale(offset, new Vector3(1.05f, 1.05f, 1.05f));
                     }
