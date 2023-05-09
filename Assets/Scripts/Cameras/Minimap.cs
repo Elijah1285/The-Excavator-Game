@@ -12,6 +12,9 @@ public class Minimap : MonoBehaviour
     public vAlignment vertical_alignment = vAlignment.top;
     public UnitsIn units = UnitsIn.screen_percentage;
 
+    public Transform target;
+    public Vector3 new_position;
+
     public int pip_width = 50;
     public int pip_height = 50;
 
@@ -30,11 +33,14 @@ public class Minimap : MonoBehaviour
         adjustCamera();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (update)
         {
             adjustCamera();
+
+            new_position = new Vector3(target.position.x, transform.position.y, target.position.z);
+            transform.position = new_position; 
         }
     }
 

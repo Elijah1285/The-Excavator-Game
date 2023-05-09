@@ -44,8 +44,6 @@ public class FollowCamera : MonoBehaviour
             cam_direction = cam_transform.TransformDirection(Vector3.forward);
             cam_distance = Vector3.Distance(target.transform.position, transform.position);
 
-            Transform camera_transform = this_camera.transform;
-
             checkOccllusion();
 
             angle_between = Vector3.Angle(Vector3.up, transform.forward);
