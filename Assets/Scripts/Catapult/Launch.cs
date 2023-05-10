@@ -13,6 +13,9 @@ public class Launch : MonoBehaviour
 
     public TMP_Text catapult_instruction;
 
+    public Camera projectile_cam;
+    public Camera player_cam;
+
     void FixedUpdate()
     {
         bool fire = Input.GetButton("Fire");
@@ -26,6 +29,11 @@ public class Launch : MonoBehaviour
         }
         if (fire && (missile_is_live) && player_in_range)
         {
+            projectile_cam.transform.parent = missile.transform;
+
+            player_cam.enabled = false;
+            projectile_cam.enabled = true;
+
             missile.GetComponent<Rigidbody>().AddForce(missile.transform.right * projectileForce, ForceMode.Acceleration);
             missile.GetComponent<Rigidbody>().useGravity = true;
             missile_is_live = false;
