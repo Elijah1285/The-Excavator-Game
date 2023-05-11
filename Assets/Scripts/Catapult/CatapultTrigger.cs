@@ -7,6 +7,7 @@ public class CatapultTrigger : MonoBehaviour
 {
     public bool shown_catapult_instruction = false;
     public TMP_Text catapult_instruction;
+    public TMP_Text upgrade_station_nav_instruction;
 
     public Launch launch;
     public EnterTheExcavator enter_the_excavator;
@@ -20,7 +21,11 @@ public class CatapultTrigger : MonoBehaviour
             if (!shown_catapult_instruction)
             {
                 catapult_instruction.enabled = true;
-                shown_catapult_instruction= true;
+            }
+
+            if (upgrade_station_nav_instruction.enabled)
+            {
+                upgrade_station_nav_instruction.enabled = false;
             }
         }
     }
@@ -30,6 +35,11 @@ public class CatapultTrigger : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             launch.player_in_range = false;
+
+            if (catapult_instruction.enabled)
+            {
+                catapult_instruction.enabled = false;
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class Launch : MonoBehaviour
     public Transform projectile_cam_pos;
 
     public TMP_Text catapult_instruction;
+    public TMP_Text minimap_toggle_instruction;
 
     public Camera projectile_cam;
     public Camera player_cam;
@@ -22,6 +23,7 @@ public class Launch : MonoBehaviour
     public AudioSource launch_audio_source;
 
     public DirtDump dirt_dump;
+    public CatapultTrigger catapult_trigger;
 
     void FixedUpdate()
     {
@@ -57,6 +59,16 @@ public class Launch : MonoBehaviour
             if (catapult_instruction.enabled)
             {
                 catapult_instruction.enabled = false;
+            }
+
+            if (!catapult_trigger.shown_catapult_instruction)
+            {
+                catapult_trigger.shown_catapult_instruction = true;
+            }
+
+            if (minimap_toggle_instruction.enabled)
+            {
+                minimap_toggle_instruction.enabled = false;
             }
         }
     }
