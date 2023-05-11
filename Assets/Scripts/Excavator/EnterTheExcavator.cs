@@ -18,6 +18,7 @@ public class EnterTheExcavator : MonoBehaviour
     public GameObject player;
     public GameObject player_icon;
     public Transform player_pos_in_excavator;
+    public Transform cameras_parent;
     public GameObject excavator;
     public ViewSwitch view_switch;
     public AudioListener player_audio_listener;
@@ -80,6 +81,7 @@ public class EnterTheExcavator : MonoBehaviour
                 switch_timer = 3.0f;
                 player_in_excavator = true;
                 player_cam.enabled = false;
+                player_cam.transform.parent = player.transform;
                 player_audio_listener.enabled = false;
                 view_switch.current_cam.enabled = true;
                 view_switch.current_cam.GetComponent<AudioListener>().enabled = true;
@@ -124,6 +126,7 @@ public class EnterTheExcavator : MonoBehaviour
                 switch_timer = 3.0f;
                 player_in_excavator = false;
                 player_cam.enabled = true;
+                player_cam.transform.parent = cameras_parent;
                 player_audio_listener.enabled = true;
                 view_switch.current_cam.enabled = false;
                 view_switch.current_cam.GetComponent<AudioListener>().enabled = false;

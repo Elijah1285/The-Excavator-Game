@@ -16,6 +16,9 @@ public class Launch : MonoBehaviour
     public Camera projectile_cam;
     public Camera player_cam;
 
+    public AudioSource load_audio_source;
+    public AudioSource launch_audio_source;
+
     public DirtDump dirt_dump;
 
     void FixedUpdate()
@@ -31,6 +34,8 @@ public class Launch : MonoBehaviour
 
             dirt_dump.money -= 50;
             dirt_dump.money_counter.text = dirt_dump.money.ToString();
+
+            load_audio_source.Play();
         }
         if (fire && (missile_is_live) && player_in_range)
         {
@@ -42,6 +47,8 @@ public class Launch : MonoBehaviour
             missile.GetComponent<Rigidbody>().AddForce(missile.transform.right * projectileForce, ForceMode.Acceleration);
             missile.GetComponent<Rigidbody>().useGravity = true;
             missile_is_live = false;
+
+            launch_audio_source.Play();
 
             if (catapult_instruction.enabled)
             {
