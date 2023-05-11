@@ -9,6 +9,7 @@ public class EnterTheExcavator : MonoBehaviour
     public bool player_in_excavator = false;
     public bool excavator_open = true;
     public bool shown_view_instruction = false;
+    public bool in_helicopter_range = false;
 
     public float switch_timer = 0;
 
@@ -72,7 +73,7 @@ public class EnterTheExcavator : MonoBehaviour
 
         if (enter > 0 && excavator_open && switch_timer <= 0 && !get_in_the_chopper.flying)
         {
-            if (!player_in_excavator && player_in_bound)
+            if (!player_in_excavator && player_in_bound && !in_helicopter_range)
             {
                 switch_timer = 3.0f;
                 player_in_excavator = true;

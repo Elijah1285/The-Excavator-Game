@@ -28,13 +28,32 @@ public class GetInTheChopper : MonoBehaviour
         live_cam = Camera.allCameras[0];
     }
 
-        private void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        float enter = Input.GetAxis("GetIn");
-
-        if (enter > 0 && !enter_the_excavator.player_in_excavator && !flying)
+        if (other.gameObject.tag == "Player")
         {
-            getIn();
+            enter_the_excavator.in_helicopter_range = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            enter_the_excavator.in_helicopter_range = false;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            float enter = Input.GetAxis("GetIn");
+
+            if (enter > 0 && !enter_the_excavator.player_in_excavator && !flying)
+            {
+                getIn();
+            }
         }
     }
 
