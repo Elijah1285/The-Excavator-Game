@@ -15,6 +15,8 @@ public class EnterTheExcavator : MonoBehaviour
     public Camera player_cam;
     public Camera excavator_cam;
     public GameObject player;
+    public GameObject player_icon;
+    public Transform player_pos_in_excavator;
     public GameObject excavator;
     public ViewSwitch view_switch;
     public AudioListener player_audio_listener;
@@ -79,7 +81,7 @@ public class EnterTheExcavator : MonoBehaviour
                 view_switch.current_cam.enabled = true;
                 view_switch.current_cam.GetComponent<AudioListener>().enabled = true;
                 player.GetComponent<PlayerMovement>().is_playing = false;
-                Vector3 new_player_position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 5, excavator.transform.position.z);
+                Vector3 new_player_position = player_pos_in_excavator.position;
                 player.transform.position = new_player_position;
                 player.transform.parent = excavator.transform;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
@@ -88,8 +90,9 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<AudioSource>().Stop();
                 player.GetComponent<CapsuleCollider>().enabled = false;
                 Destroy(player.GetComponent<Rigidbody>());
-                Quaternion player_rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
-                player.transform.rotation = player_rotation;
+                Quaternion new_player_rotation = player_pos_in_excavator.rotation;
+                player.transform.rotation = new_player_rotation;
+                player_icon.SetActive(false);
                 excavator.GetComponent<ExcavatorMovement>().is_playing = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_start = true;
                 excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Play();
@@ -132,6 +135,7 @@ public class EnterTheExcavator : MonoBehaviour
                 player.GetComponent<Rigidbody>().freezeRotation = true;
                 Quaternion upright = Quaternion.Euler(0, 0, 0);
                 player.transform.rotation = upright;
+                player_icon.SetActive(true);
                 excavator.GetComponent<ExcavatorMovement>().is_playing = false;
                 excavator.GetComponent<Animator>().SetFloat(hash.leftTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.rightTrackSpeedFloat, 0);
