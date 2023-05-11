@@ -5,7 +5,7 @@ using UnityEngine;
 public class DollyZoom : MonoBehaviour
 {
     public float zooming_speed = 45.0f;
-    public float cutscene_end_timer = 1.0f;
+    public float cutscene_end_timer = 2.0f;
 
     public Transform target;
     public Camera zoomCamera;
