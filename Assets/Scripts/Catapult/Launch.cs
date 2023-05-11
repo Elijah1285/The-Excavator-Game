@@ -11,6 +11,8 @@ public class Launch : MonoBehaviour
     public bool missile_is_live = false;
     public bool player_in_range = false;
 
+    public Transform projectile_cam_pos;
+
     public TMP_Text catapult_instruction;
 
     public Camera projectile_cam;
@@ -39,6 +41,8 @@ public class Launch : MonoBehaviour
         }
         if (fire && (missile_is_live) && player_in_range)
         {
+            projectile_cam.transform.position = projectile_cam_pos.position;
+            projectile_cam.transform.rotation = projectile_cam_pos.rotation;
             projectile_cam.transform.parent = missile.transform;
 
             player_cam.enabled = false;
