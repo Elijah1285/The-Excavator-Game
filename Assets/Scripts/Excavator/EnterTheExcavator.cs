@@ -19,6 +19,7 @@ public class EnterTheExcavator : MonoBehaviour
     public GameObject player_icon;
     public Transform player_pos_in_excavator;
     public Transform cameras_parent;
+    public Transform player_exit_position;
     public GameObject excavator;
     public ViewSwitch view_switch;
     public AudioListener player_audio_listener;
@@ -131,7 +132,8 @@ public class EnterTheExcavator : MonoBehaviour
                 view_switch.current_cam.enabled = false;
                 view_switch.current_cam.GetComponent<AudioListener>().enabled = false;
                 player.GetComponent<PlayerMovement>().is_playing = true;
-                player.transform.position = new Vector3(excavator.transform.position.x + 4, excavator.transform.position.y + 1, excavator.transform.position.z - 6);
+                Vector3 new_player_position = player_exit_position.position;
+                player.transform.position = new_player_position;
                 player.transform.parent = null;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
@@ -140,8 +142,8 @@ public class EnterTheExcavator : MonoBehaviour
                 player.AddComponent(typeof(Rigidbody));
                 player.GetComponent<Rigidbody>().freezeRotation = true;
                 player_movement.our_body = player.GetComponent<Rigidbody>();
-                Quaternion upright = Quaternion.Euler(0, 0, 0);
-                player.transform.rotation = upright;
+                Quaternion new_player_rotation = player_exit_position.rotation;
+                player.transform.rotation = new_player_rotation;
                 player_icon.SetActive(true);
                 excavator_movement.is_playing = false;
                 excavator.GetComponent<Animator>().SetFloat(hash.leftTrackSpeedFloat, 0);
