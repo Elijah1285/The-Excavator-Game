@@ -351,32 +351,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'break through the dirt and escape the island
-
-
-    When the digger is
-    full of dirt, dump the dirt in the brown containers and earn money
-
-
-    use
-    your money to upgrade the excavator at the upgrade station
-
-
-    you must upgrade
-    the digging level before breaking through tougher dirt
-
-
-    there will be an
-    escape vehicle waiting for you on the other side, enter this vehicle to escape
-
-
-    Good
-    luck survivor
-
-
-    press enter to begin
-
-'
+  m_text: "break through the dirt and escape the island\n\nWhen the digger is full
+    of dirt, dump the dirt in the brown containers and earn money\n\nuse your money
+    to upgrade the excavator at the upgrade station\n\nyou must upgrade the digging
+    level before breaking through tougher dirt\n\nthere will be an escape vehicle
+    waiting for you on the other side, enter this vehicle to escape, use the c key
+    to show/hide controls \n\nGood luck survivor\n\npress enter to begin\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a910c0b8aadb11041858662021fc873d, type: 2}
   m_sharedMaterial: {fileID: 5620931570996255088, guid: a910c0b8aadb11041858662021fc873d,
