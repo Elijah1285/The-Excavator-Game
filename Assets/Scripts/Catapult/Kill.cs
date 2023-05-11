@@ -17,6 +17,11 @@ public class Kill : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "DirtBall" || collision.gameObject.tag == "DirtBall2" || collision.gameObject.tag == "DirtBall3")
+        {
+            Destroy(collision.gameObject);
+        }
+
         projectile_cam.enabled = false;
         player_cam.enabled = true;
 
