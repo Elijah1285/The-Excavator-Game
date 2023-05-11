@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float desiredDuration = 0.5f;
     public bool is_playing = true;
 
+    public Rigidbody our_body;
+
     private Animator anim;
     private HashIDs hash;
 
@@ -22,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetLayerWeight(1, 1f);
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
+
+        GetComponent<AudioSource>().pitch = 0.5f;
+        GetComponent<AudioSource>().volume = 1;
+
+        our_body = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -29,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         if (is_playing)
         {
             float v = Input.GetAxis("Vertical");
-          //  Debug.Log(v);
             bool sneak = Input.GetButton("Sneak");
             float turn = Input.GetAxis("Turn");
             Rotating(turn);
@@ -48,19 +54,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Rotating(float mouseXInput)
+    void Rotating(float turn)
     {
-        // access the avatar's rigidbody
-        Rigidbody ourBody = this.GetComponent<Rigidbody>();
-
-        // check whether we have rotation data to apply
-        if (mouseXInput != 0)
+        if (turn != 0)
         {
-            // use mouse input to create a Euler ange which provides rotation in the Y axis
-            // this value is then turned into a Quarternion
-            Quaternion deltaRotation = Quaternion.Euler(0f, mouseXInput * sensitivityX, 0f);
-            // this value is applied to turn the body via the rididbody
-            ourBody.MoveRotation(ourBody.rotation * deltaRotation);
+            Quaternion deltaRotation = Quaternion.Euler(0f, turn * sensitivityX, 0f);
+            our_body.MoveRotation(our_body.rotation * deltaRotation);
         }
     }
 
@@ -92,6 +91,11 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveBack = new Vector3(0f, 0f, movement);
             moveBack = ourBody.transform.TransformDirection(moveBack);
             ourBody.transform.position += moveBack;
+
+            if (GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Stop();
+            }
         }
 
         if (vertical == 0)
@@ -108,15 +112,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!GetComponent<AudioSource>().isPlaying)
             {
-                // not is playing rather than isNotPlaying
-                GetComponent<AudioSource>().pitch = 0.5f;
-                GetComponent<AudioSource>().volume = 1;
                 GetComponent<AudioSource>().Play();
             }
         }
         else
         {
-            GetComponent<AudioSource>().Stop();
+            if (GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Stop();
+            }
         }
 
         if (shout)
