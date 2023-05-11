@@ -34,6 +34,8 @@ public class EnterTheExcavator : MonoBehaviour
     public Upgrade upgrade;
 
     public GetInTheChopper get_in_the_chopper;
+    public PlayerMovement player_movement;
+    public ExcavatorMovement excavator_movement;
 
     void Awake()
     {
@@ -87,16 +89,16 @@ public class EnterTheExcavator : MonoBehaviour
                 player.transform.parent = excavator.transform;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
-                player.GetComponent<PlayerMovement>().noBackMov = true;
+                player_movement.noBackMov = true;
                 player.GetComponent<AudioSource>().Stop();
                 player.GetComponent<CapsuleCollider>().enabled = false;
                 Destroy(player.GetComponent<Rigidbody>());
                 Quaternion new_player_rotation = player_pos_in_excavator.rotation;
                 player.transform.rotation = new_player_rotation;
                 player_icon.SetActive(false);
-                excavator.GetComponent<ExcavatorMovement>().is_playing = true;
-                excavator.GetComponent<ExcavatorMovement>().engine_start = true;
-                excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Play();
+                excavator_movement.is_playing = true;
+                excavator_movement.engine_start = true;
+                excavator_movement.engine_audio_source.Play();
 
                 if (!shown_view_instruction)
                 {
@@ -130,20 +132,21 @@ public class EnterTheExcavator : MonoBehaviour
                 player.transform.parent = null;
                 player.GetComponent<Animator>().SetFloat(hash.speedFloat, 0);
                 player.GetComponent<Animator>().SetBool(hash.backwardsBool, false);
-                player.GetComponent<PlayerMovement>().noBackMov = true;
+                player_movement.noBackMov = true;
                 player.GetComponent<CapsuleCollider>().enabled = true;
                 player.AddComponent(typeof(Rigidbody));
                 player.GetComponent<Rigidbody>().freezeRotation = true;
+                player_movement.our_body = player.GetComponent<Rigidbody>();
                 Quaternion upright = Quaternion.Euler(0, 0, 0);
                 player.transform.rotation = upright;
                 player_icon.SetActive(true);
-                excavator.GetComponent<ExcavatorMovement>().is_playing = false;
+                excavator_movement.is_playing = false;
                 excavator.GetComponent<Animator>().SetFloat(hash.leftTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.rightTrackSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.armSpeedFloat, 0);
                 excavator.GetComponent<Animator>().SetFloat(hash.bucketWheelSpeedFloat, 0);
-                excavator.GetComponent<ExcavatorMovement>().engine_audio_source.Stop();
-                excavator.GetComponent<ExcavatorMovement>().bucket_wheel_speed = 0;
+                excavator_movement.engine_audio_source.Stop();
+                excavator_movement.bucket_wheel_speed = 0;
 
                 if (view_instruction.enabled)
                 {

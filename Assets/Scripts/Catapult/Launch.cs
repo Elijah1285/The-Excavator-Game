@@ -16,16 +16,21 @@ public class Launch : MonoBehaviour
     public Camera projectile_cam;
     public Camera player_cam;
 
+    public DirtDump dirt_dump;
+
     void FixedUpdate()
     {
         bool fire = Input.GetButton("Fire");
         bool instantiate = Input.GetButton("Instantiate");
 
-        if (instantiate && (!missile_is_live) && player_in_range)
+        if (instantiate && (!missile_is_live) && player_in_range && dirt_dump.money >= 50)
         {
             missile = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
             missile.GetComponent<Rigidbody>().useGravity = false;
             missile_is_live = true;
+
+            dirt_dump.money -= 50;
+            dirt_dump.money_counter.text = dirt_dump.money.ToString();
         }
         if (fire && (missile_is_live) && player_in_range)
         {

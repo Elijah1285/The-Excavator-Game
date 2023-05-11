@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponent<AudioSource>().pitch = 0.5f;
         GetComponent<AudioSource>().volume = 1;
-
-        our_body = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
