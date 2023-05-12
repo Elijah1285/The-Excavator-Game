@@ -12,6 +12,9 @@ public class DirtDestroyedTextTimer : MonoBehaviour
     public Color colour;
     public Color original_colour;
 
+    public TMP_Text dirt_destroyed_counter;
+    public TMP_Text dirt_destroyed_x;
+
     private void Start()
     {
         colour = GetComponent<TMP_Text>().color;
@@ -42,12 +45,20 @@ public class DirtDestroyedTextTimer : MonoBehaviour
     {
         colour.a -= Time.deltaTime;
         GetComponent<TMP_Text>().color = colour;
+        dirt_destroyed_counter.color = colour;
+        dirt_destroyed_x.color = colour;
 
         if (colour.a <= 0)
         {
             GetComponent<TMP_Text>().color = original_colour;
+            dirt_destroyed_counter.color = original_colour;
+            dirt_destroyed_x.color = original_colour;
             colour = original_colour;
+            dirt_destroyed_counter.GetComponent<DirtDestroyedCounter>().dirt_destroyed_num = 0;
+            dirt_destroyed_counter.text = "0";
             GetComponent<TMP_Text>().enabled = false;
+            dirt_destroyed_counter.enabled = false;
+            dirt_destroyed_x.enabled = false;
             fading_out = false;
         }
     }

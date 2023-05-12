@@ -11,6 +11,7 @@ public class MusicPlayer : MonoBehaviour
     public AudioSource music_2;
     public AudioSource music_3;
     public AudioSource zoom_sound;
+    public AudioSource dirt_destroyed_sound;
 
     void Update()
     {
@@ -53,5 +54,10 @@ public class MusicPlayer : MonoBehaviour
     public void playZoomSound()
     {
         zoom_sound.Play();
+    }
+
+    public void playDirtDestroyedSound()
+    {
+        dirt_destroyed_sound.Play();
     }
 }
