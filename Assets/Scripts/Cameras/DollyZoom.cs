@@ -15,7 +15,7 @@ public class DollyZoom : MonoBehaviour
     public bool slowing_down = false;
     public bool cutscene_end_timer_running = false;
 
-    public HelicopterZoomCutscene helicopter_zoom_cutscene;
+    public ZoomCutscene zoom_cutscene;
 
     void Update()
     {
@@ -44,7 +44,7 @@ public class DollyZoom : MonoBehaviour
 
             if (cutscene_end_timer <= 0)
             {
-                helicopter_zoom_cutscene.endCutscene();
+                zoom_cutscene.endCutscene();
                 cutscene_end_timer_running = false;
                 cutscene_end_timer = 1.0f;
             }

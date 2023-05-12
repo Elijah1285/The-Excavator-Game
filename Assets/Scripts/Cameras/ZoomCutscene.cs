@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HelicopterZoomCutscene : MonoBehaviour
+public class ZoomCutscene : MonoBehaviour
 {
     public float dolly_zoom_timer = 1.0f;
     public bool dolly_zoom_timer_running = false;
@@ -11,7 +11,7 @@ public class HelicopterZoomCutscene : MonoBehaviour
 
     public TMP_Text minimap_toggle_instruction;
 
-    public Camera helicopter_dolly_zoom_camera;
+    public Camera dolly_zoom_camera;
     public Camera live_cam;
     public Camera prev_cam;
 
@@ -29,7 +29,7 @@ public class HelicopterZoomCutscene : MonoBehaviour
         {
             prev_cam = live_cam;
             live_cam.enabled = false;
-            helicopter_dolly_zoom_camera.enabled = true;
+            dolly_zoom_camera.enabled = true;
             live_cam = Camera.allCameras[0];
 
             dolly_zoom.startDollyZoomEffect();
@@ -48,7 +48,7 @@ public class HelicopterZoomCutscene : MonoBehaviour
 
     public void endCutscene()
     {
-        helicopter_dolly_zoom_camera.enabled = false;
+        dolly_zoom_camera.enabled = false;
         prev_cam.enabled = true;
     }
 

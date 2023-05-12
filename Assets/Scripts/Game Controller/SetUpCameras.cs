@@ -14,6 +14,7 @@ public class SetUpCameras : MonoBehaviour
     public Camera HeliCamera;
     public Camera minimap_cam;
     public Camera helicopter_dolly_zoom_camera;
+    public Camera catapult_dolly_zoom_camera;
     public Camera projectile_cam;
 
     public TMP_Text minimap_toggle_instruction;
@@ -29,6 +30,7 @@ public class SetUpCameras : MonoBehaviour
         WheelCamera.enabled = false;
         HeliCamera.enabled = false;
         helicopter_dolly_zoom_camera.enabled = false;
+        catapult_dolly_zoom_camera.enabled = false;
         projectile_cam.enabled = false;
         minimap_cam.enabled = true;
 
