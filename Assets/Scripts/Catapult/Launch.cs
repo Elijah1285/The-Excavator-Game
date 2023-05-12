@@ -7,6 +7,7 @@ public class Launch : MonoBehaviour
 {
     public GameObject projectile;
     public float projectileForce = 800.0f;
+    public float catapult_cooldown = 0;
     GameObject missile;
     public bool missile_is_live = false;
     public bool player_in_range = false;
@@ -30,7 +31,7 @@ public class Launch : MonoBehaviour
         bool fire = Input.GetButton("Fire");
         bool instantiate = Input.GetButton("Instantiate");
 
-        if (instantiate && (!missile_is_live) && player_in_range && dirt_dump.money >= 50)
+        if (instantiate && (!missile_is_live) && player_in_range && dirt_dump.money >= 50 && catapult_cooldown <= 0)
         {
             missile = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
             missile.GetComponent<Rigidbody>().useGravity = false;
@@ -70,6 +71,13 @@ public class Launch : MonoBehaviour
             {
                 minimap_toggle_instruction.enabled = false;
             }
+
+            catapult_cooldown = 8.0f;
+        }
+
+        if (catapult_cooldown > 0)
+        {
+            catapult_cooldown -= Time.deltaTime;
         }
     }
 }
