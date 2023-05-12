@@ -23,8 +23,11 @@ public class Launch : MonoBehaviour
     public AudioSource load_audio_source;
     public AudioSource launch_audio_source;
 
+    public Animator anim;
+
     public DirtDump dirt_dump;
     public CatapultTrigger catapult_trigger;
+    public HashIDs hash;
 
     void FixedUpdate()
     {
@@ -56,6 +59,8 @@ public class Launch : MonoBehaviour
             missile_is_live = false;
 
             launch_audio_source.Play();
+
+            anim.SetBool(hash.launchingBool, true);
 
             if (catapult_instruction.enabled)
             {
