@@ -5,7 +5,7 @@ using TMPro;
 
 public class ZoomCutscene : MonoBehaviour
 {
-    public float dolly_zoom_timer = 1.0f;
+    public float dolly_zoom_timer = 0;
     public bool dolly_zoom_timer_running = false;
     public bool cutscene_played = false;
 
@@ -14,6 +14,7 @@ public class ZoomCutscene : MonoBehaviour
     public Camera dolly_zoom_camera;
     public Camera live_cam;
     public Camera prev_cam;
+    public Camera minimap;
 
     public DollyZoom dolly_zoom;
     public MusicPlayer music_player;
@@ -50,6 +51,8 @@ public class ZoomCutscene : MonoBehaviour
     {
         dolly_zoom_camera.enabled = false;
         prev_cam.enabled = true;
+
+        minimap.depth = 0;
     }
 
     void Update()
