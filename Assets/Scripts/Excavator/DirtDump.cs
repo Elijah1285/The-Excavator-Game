@@ -10,12 +10,14 @@ public class DirtDump : MonoBehaviour
     public bool shown_upgrade_station_nav_instruction = false;
 
     public GameObject current_dump;
-    public DirtScooper dirt_scooper;
     public TMP_Text full_text;
     public TMP_Text money_counter;
     public TMP_Text dump_instruction;
     public TMP_Text dirt_container_nav_instruction;
     public TMP_Text upgrade_station_nav_instruction;
+
+    public DirtScooper dirt_scooper;
+    public EnterTheExcavator enter_the_excavator;
 
     void OnTriggerEnter(Collider other)
     {
@@ -53,7 +55,7 @@ public class DirtDump : MonoBehaviour
     {
         float dump = Input.GetAxis("Dump");
 
-        if (dump > 0)
+        if (dump > 0 && enter_the_excavator.player_in_excavator)
         {
             if (current_dump != null)
             {
