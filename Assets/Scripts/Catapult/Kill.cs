@@ -33,7 +33,7 @@ public class Kill : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (projectile_state == ProjectileState.FIRING && collision.gameObject.tag != "Player")
+        if (projectile_state == ProjectileState.FIRING && collision.gameObject.tag != "Player" && collision.gameObject.tag != "Catapult")
         {
             if (collision.gameObject.tag == "DirtBall" || collision.gameObject.tag == "DirtBall2" || collision.gameObject.tag == "DirtBall3")
             {
