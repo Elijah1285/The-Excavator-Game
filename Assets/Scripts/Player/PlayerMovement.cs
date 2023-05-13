@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (true)
             {
-                thisAudio.GetComponent<AudioSource>().pitch = 2.0f;
+                thisAudio.GetComponent<AudioSource>().pitch = 0.95f;
             }
         }
     }
