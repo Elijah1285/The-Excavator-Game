@@ -59,6 +59,7 @@ public class Launch : MonoBehaviour
 
             projectile_camera_switch_delay_running = true;
 
+            missile.GetComponent<Kill>().switchStateToFiring();
             missile.GetComponent<Rigidbody>().AddForce(missile.transform.right * projectileForce, ForceMode.Acceleration);
             missile.GetComponent<Rigidbody>().useGravity = true;
             missile_is_live = false;

@@ -5,6 +5,9 @@ using TMPro;
 
 public class Kill : MonoBehaviour
 {
+    public enum ProjectileState {LOADED, FIRING};
+    public ProjectileState projectile_state = ProjectileState.LOADED;
+
     public bool destroying = false;
 
     public Transform cam_parent;
@@ -27,43 +30,51 @@ public class Kill : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "DirtBall" || collision.gameObject.tag == "DirtBall2" || collision.gameObject.tag == "DirtBall3")
+        if (projectile_state == ProjectileState.FIRING)
         {
-            Destroy(collision.gameObject);
-            music_player.playDirtDestroyedSound();
-
-            if (!dirt_destroyed.enabled)
+            if (collision.gameObject.tag == "DirtBall" || collision.gameObject.tag == "DirtBall2" || collision.gameObject.tag == "DirtBall3")
             {
-                dirt_destroyed.enabled = true;
-                dirt_destroyed.GetComponent<DirtDestroyedTextTimer>().timer_running = true;
+                Destroy(collision.gameObject);
+                music_player.playDirtDestroyedSound();
+
+                if (!dirt_destroyed.enabled)
+                {
+                    dirt_destroyed.enabled = true;
+                    dirt_destroyed.GetComponent<DirtDestroyedTextTimer>().timer_running = true;
+                }
+                else
+                {
+                    dirt_destroyed.GetComponent<DirtDestroyedTextTimer>().timer = 3.0f;
+                }
+
+                dirt_destroyed_counter.incrementDirtDestroyedNum();
             }
-            else
+
+            if (projectile_cam.enabled)
             {
-                dirt_destroyed.GetComponent<DirtDestroyedTextTimer>().timer = 3.0f;
+                projectile_cam.enabled = false;
             }
 
-            dirt_destroyed_counter.incrementDirtDestroyedNum();
-        }
+            if (!player_cam.enabled)
+            {
+                player_cam.enabled = true;
+            }
 
-        if (projectile_cam.enabled)
-        {
-            projectile_cam.enabled = false;
-        }
+            if (projectile_cam.transform.parent != cam_parent)
+            {
+                projectile_cam.transform.parent = cam_parent;
+            }
 
-        if (!player_cam.enabled)
-        {
-            player_cam.enabled = true;
+            if (!destroying)
+            {
+                Destroy(gameObject, 3);
+                destroying = true;
+            }
         }
+    }
 
-        if (projectile_cam.transform.parent != cam_parent)
-        {
-            projectile_cam.transform.parent = cam_parent;
-        }
-
-        if (!destroying)
-        {
-            Destroy(gameObject, 3);
-            destroying = true;
-        }
+    public void switchStateToFiring()
+    {
+        projectile_state = ProjectileState.FIRING;
     }
 }
