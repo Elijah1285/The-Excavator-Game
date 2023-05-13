@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject shout_object = null;
     public AudioClip shoutingClip;
     public float speedDampTime = 0.01f;
     public float sensitivityX = 1.0f;
@@ -122,16 +123,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (shout)
+        if (shout && shout_object == null)
         {
             AudioSource.PlayClipAtPoint(shoutingClip, transform.position);
 
-            GameObject thisAudio = GameObject.Find("One shot audio");
+            shout_object = GameObject.Find("One shot audio");
 
-            if (true)
-            {
-                thisAudio.GetComponent<AudioSource>().pitch = 0.95f;
-            }
+            shout_object.GetComponent<AudioSource>().pitch = 0.95f;
         }
     }
 
