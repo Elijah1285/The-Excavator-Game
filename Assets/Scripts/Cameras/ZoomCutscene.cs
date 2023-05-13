@@ -19,6 +19,9 @@ public class ZoomCutscene : MonoBehaviour
     public DollyZoom dolly_zoom;
     public MusicPlayer music_player;
     public SetUpCameras set_up_cameras;
+    public PlayerMovement player_movement;
+    public ExcavatorMovement excavator_movement;
+    public EnterTheExcavator enter_the_excavator;
 
     void Awake()
     {
@@ -45,6 +48,9 @@ public class ZoomCutscene : MonoBehaviour
             music_player.playZoomSound();
 
             set_up_cameras.cutscene_playing = true;
+            player_movement.can_move = false;
+            excavator_movement.can_move = false;
+            enter_the_excavator.excavator_open = false;
 
             cutscene_played = true;
         }
@@ -56,6 +62,9 @@ public class ZoomCutscene : MonoBehaviour
         prev_cam.enabled = true;
 
         set_up_cameras.cutscene_playing = false;
+        player_movement.can_move = true;
+        excavator_movement.can_move = true;
+        enter_the_excavator.excavator_open = true;
 
         minimap.depth = 0;
     }

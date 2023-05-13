@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public bool noBackMov = true;
     private float desiredDuration = 0.5f;
     public bool is_playing = true;
+    public bool can_move = true;
 
     public Rigidbody our_body;
 
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (is_playing)
+        if (is_playing && can_move)
         {
             float v = Input.GetAxis("Vertical");
             bool sneak = Input.GetButton("Sneak");
@@ -44,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (is_playing && noBackMov)
+        if (is_playing && can_move && noBackMov)
         {
             bool shout = Input.GetButtonDown("Attract");
             anim.SetBool(hash.shoutingBool, shout);
