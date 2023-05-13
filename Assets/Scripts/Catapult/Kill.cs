@@ -33,7 +33,7 @@ public class Kill : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (projectile_state == ProjectileState.FIRING)
+        if (projectile_state == ProjectileState.FIRING && collision.gameObject.tag != "Player")
         {
             if (collision.gameObject.tag == "DirtBall" || collision.gameObject.tag == "DirtBall2" || collision.gameObject.tag == "DirtBall3")
             {
@@ -80,5 +80,6 @@ public class Kill : MonoBehaviour
     {
         projectile_state = ProjectileState.FIRING;
         this_object.AddComponent(typeof(Rigidbody));
+        this_object.GetComponent<Rigidbody>().freezeRotation = true;
     }
 }
