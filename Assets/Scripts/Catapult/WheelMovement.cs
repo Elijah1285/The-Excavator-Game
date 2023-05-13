@@ -11,7 +11,6 @@ public class WheelMovement : MonoBehaviour
     public Vector3 velocity;
     public Vector3 local_velocity;
     public Animator anim;
-    public Rigidbody rigidbody;
 
     public HashIDs hash;
     public EnterTheExcavator enter_the_excavator;
@@ -36,7 +35,7 @@ public class WheelMovement : MonoBehaviour
     {
         if (in_push_range)
         {
-            velocity = rigidbody.velocity;
+            velocity = GetComponent<Rigidbody>().velocity;
             local_velocity = transform.InverseTransformDirection(velocity);
             speed = -local_velocity.z;
             anim.SetFloat(hash.wheelSpeedFloat, speed);
