@@ -11,11 +11,7 @@ public class DirtDestroyedCounter : MonoBehaviour
 
     public void incrementDirtDestroyedNum()
     {
-        Debug.Log("before");
-        Debug.Log(dirt_destroyed_num);
         dirt_destroyed_num++;
-        Debug.Log("after");
-        Debug.Log(dirt_destroyed_num);
         GetComponent<TMP_Text>().text = dirt_destroyed_num.ToString();
 
         if (!GetComponent<TMP_Text>().enabled && dirt_destroyed_num > 1)
