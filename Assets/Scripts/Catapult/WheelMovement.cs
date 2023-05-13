@@ -6,11 +6,12 @@ public class WheelMovement : MonoBehaviour
 {
     public bool in_push_range = false;
     public float x_movement = 0;
+    public float speed = 0;
 
-    public Vector3 pre_position;
-    public Vector3 post_position;
-    public Vector3 local_pre_position;
-    public Vector3 local_post_position;
+    //public Vector3 pre_position;
+    //public Vector3 post_position;
+    //public Vector3 local_pre_position;
+    //public Vector3 local_post_position;
     public Vector3 velocity;
     public Vector3 local_velocity;
     public Animator anim;
@@ -21,8 +22,8 @@ public class WheelMovement : MonoBehaviour
 
     void Start()
     {
-        pre_position = transform.position;
-        local_pre_position = transform.worldToLocalMatrix.MultiplyVector(pre_position);
+        //pre_position = transform.position;
+        //local_pre_position = transform.worldToLocalMatrix.MultiplyVector(pre_position);
     }
 
     void OnTriggerEnter(Collider other)
@@ -47,8 +48,8 @@ public class WheelMovement : MonoBehaviour
         {
             velocity = rigidbody.velocity;
             local_velocity = transform.InverseTransformDirection(velocity);
-            Debug.Log(local_velocity.z);
-
+            speed = -local_velocity.z;
+            anim.SetFloat(hash.wheelSpeedFloat, speed);
 
 
             //Vector3 local_forward = transform.worldToLocalMatrix.MultiplyVector(transform.forward);
