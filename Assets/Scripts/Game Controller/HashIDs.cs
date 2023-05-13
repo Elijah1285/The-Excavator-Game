@@ -19,6 +19,8 @@ public class HashIDs : MonoBehaviour
     public int reverseBool;
     public int launchingBool;
     public int reloadingBool;
+    public int leftWheelSpeedFloat;
+    public int rightWheelSpeedFloat;
 
     private void Awake()
     {
@@ -36,5 +38,7 @@ public class HashIDs : MonoBehaviour
         armSpeedFloat = Animator.StringToHash("arm speed");
         launchingBool = Animator.StringToHash("Launching");
         reloadingBool = Animator.StringToHash("Reloading");
+        leftWheelSpeedFloat = Animator.StringToHash("left_wheels_speed");
+        rightWheelSpeedFloat = Animator.StringToHash("right_wheels_speed");
     }
 }
