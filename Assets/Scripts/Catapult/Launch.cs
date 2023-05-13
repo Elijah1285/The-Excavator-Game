@@ -44,6 +44,7 @@ public class Launch : MonoBehaviour
         {
             missile = (GameObject)Instantiate(projectile, transform.position, transform.rotation);
             missile_is_live = true;
+            missile.transform.parent = gameObject.transform;
 
             dirt_dump.money -= 50;
             dirt_dump.money_counter.text = dirt_dump.money.ToString();

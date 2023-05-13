@@ -81,5 +81,6 @@ public class Kill : MonoBehaviour
         projectile_state = ProjectileState.FIRING;
         this_object.AddComponent(typeof(Rigidbody));
         this_object.GetComponent<Rigidbody>().freezeRotation = true;
+        this_object.transform.parent = null;
     }
 }
