@@ -10,11 +10,13 @@ public class Launch : MonoBehaviour
     public float catapult_cooldown = 0;
     public float reloading_timer = 7.0f;
     public float stop_reloading_timer = 2.0f;
+    public float projectile_camera_switch_delay = 0.8f;
     GameObject missile;
     public bool missile_is_live = false;
     public bool player_in_range = false;
     public bool reloading_timer_running;
     public bool stop_reloading_timer_running;
+    public bool projectile_camera_switch_delay_running;
 
     public Transform projectile_cam_pos;
 
@@ -55,8 +57,7 @@ public class Launch : MonoBehaviour
             projectile_cam.transform.rotation = projectile_cam_pos.rotation;
             projectile_cam.transform.parent = missile.transform;
 
-            player_cam.enabled = false;
-            projectile_cam.enabled = true;
+            projectile_camera_switch_delay_running = true;
 
             missile.GetComponent<Rigidbody>().AddForce(missile.transform.right * projectileForce, ForceMode.Acceleration);
             missile.GetComponent<Rigidbody>().useGravity = true;
@@ -113,6 +114,19 @@ public class Launch : MonoBehaviour
                 anim.SetBool(hash.reloadingBool, false);
                 stop_reloading_timer_running = false;
                 stop_reloading_timer = 2.0f;
+            }
+        }
+
+        if (projectile_camera_switch_delay_running)
+        {
+            projectile_camera_switch_delay -= Time.deltaTime;
+
+            if (projectile_camera_switch_delay <= 0)
+            {
+                player_cam.enabled = false;
+                projectile_cam.enabled = true;
+                projectile_camera_switch_delay_running = false;
+                projectile_camera_switch_delay = 0.8f;
             }
         }
     }
