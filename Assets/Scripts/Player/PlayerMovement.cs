@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetLayerWeight(1, 1f);
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
 
-        GetComponent<AudioSource>().pitch = 0.5f;
+        GetComponent<AudioSource>().pitch = 1.7f;
         GetComponent<AudioSource>().volume = 1;
     }
 
