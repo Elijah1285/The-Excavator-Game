@@ -34,7 +34,7 @@ public class ZoomCutscene : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.tag == "Player" || other.gameObject.tag == "Excavator") && !cutscene_played)
+        if ((other.gameObject.tag == "Player" || (other.gameObject.tag == "Excavator" && enter_the_excavator.player_in_excavator)) && !cutscene_played)
         {
             prev_cam = live_cam;
             live_cam.enabled = false;
