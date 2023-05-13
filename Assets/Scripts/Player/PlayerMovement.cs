@@ -134,6 +134,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    public void stopWalkAudio()
+    {
+        if (GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().Stop();
+        }
+    }
 }
 
 

@@ -18,6 +18,7 @@ public class ExcavatorMovement : MonoBehaviour
     private float armFrame = 0.0f;
     public bool is_playing = false;
     public bool can_move = true;
+    public bool cutscene_playing = false;
     public bool engine_start = false;
     public bool revved = false;
     public float bucket_wheel_speed = 0.0f;
@@ -57,7 +58,7 @@ public class ExcavatorMovement : MonoBehaviour
 
     private void Update()
     {
-        if (is_playing && can_move)
+        if (is_playing && can_move && !cutscene_playing)
         {
             float drive = Input.GetAxis("Drive");
             float steer = Input.GetAxis("Steer");
@@ -461,6 +462,14 @@ public class ExcavatorMovement : MonoBehaviour
         if (turn_audio_source.isPlaying)
         {
             turn_audio_source.Stop();
+        }
+    }
+
+    public void stopArmAudio()
+    {
+        if (arm_audio_source.isPlaying)
+        {
+            arm_audio_source.Stop();
         }
     }
 

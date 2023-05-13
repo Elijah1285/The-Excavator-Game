@@ -11,6 +11,9 @@ public class ZoomCutscene : MonoBehaviour
 
     public TMP_Text minimap_toggle_instruction;
 
+    public Animator player_anim;
+    public Animator excavator_anim;
+
     public Camera dolly_zoom_camera;
     public Camera live_cam;
     public Camera prev_cam;
@@ -22,6 +25,7 @@ public class ZoomCutscene : MonoBehaviour
     public PlayerMovement player_movement;
     public ExcavatorMovement excavator_movement;
     public EnterTheExcavator enter_the_excavator;
+    public HashIDs hash;
 
     void Awake()
     {
@@ -49,8 +53,19 @@ public class ZoomCutscene : MonoBehaviour
 
             set_up_cameras.cutscene_playing = true;
             player_movement.can_move = false;
-            excavator_movement.can_move = false;
-            enter_the_excavator.excavator_open = false;
+            excavator_movement.cutscene_playing = true;
+            enter_the_excavator.cutscene_playing = true;
+
+            player_anim.SetFloat(hash.speedFloat, 0.0f);
+            player_anim.SetBool(hash.sneakingBool, false);
+            player_anim.SetBool(hash.backwardsBool, false);
+
+            excavator_anim.SetFloat(hash.leftTrackSpeedFloat, 0.0f);
+            excavator_anim.SetFloat(hash.rightTrackSpeedFloat, 0.0f);
+            excavator_anim.SetFloat(hash.armSpeedFloat, 0.0f);
+            player_movement.stopWalkAudio();
+            excavator_movement.stopMovementAudio();
+            excavator_movement.stopArmAudio();
 
             cutscene_played = true;
         }
@@ -63,8 +78,8 @@ public class ZoomCutscene : MonoBehaviour
 
         set_up_cameras.cutscene_playing = false;
         player_movement.can_move = true;
-        excavator_movement.can_move = true;
-        enter_the_excavator.excavator_open = true;
+        excavator_movement.cutscene_playing = false;
+        enter_the_excavator.cutscene_playing = false;
 
         minimap.depth = 0;
     }

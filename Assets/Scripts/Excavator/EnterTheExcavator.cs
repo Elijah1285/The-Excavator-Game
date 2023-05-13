@@ -8,6 +8,7 @@ public class EnterTheExcavator : MonoBehaviour
     public bool player_in_bound = false;
     public bool player_in_excavator = false;
     public bool excavator_open = true;
+    public bool cutscene_playing = false;
     public bool shown_view_instruction = false;
     public bool in_helicopter_range = false;
 
@@ -75,7 +76,7 @@ public class EnterTheExcavator : MonoBehaviour
 
         float enter = Input.GetAxis("GetIn");
 
-        if (enter > 0 && excavator_open && switch_timer <= 0 && !get_in_the_chopper.flying)
+        if (enter > 0 && excavator_open && !cutscene_playing && switch_timer <= 0 && !get_in_the_chopper.flying)
         {
             if (!player_in_excavator && player_in_bound && !in_helicopter_range)
             {
