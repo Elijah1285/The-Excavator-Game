@@ -15,11 +15,14 @@ public class Kill : MonoBehaviour
     public Camera projectile_cam;
     public TMP_Text dirt_destroyed;
 
+    public GameObject this_object;
+
     public MusicPlayer music_player;
     public DirtDestroyedCounter dirt_destroyed_counter;
 
     void Awake()
     {
+        this_object = gameObject;
         cam_parent = GameObject.Find("Cameras").transform;
         player_cam = GameObject.Find("Player Camera").GetComponent<Camera>() as Camera;
         projectile_cam = GameObject.Find("projectile_cam").GetComponent<Camera>() as Camera;
@@ -73,8 +76,9 @@ public class Kill : MonoBehaviour
         }
     }
 
-    public void switchStateToFiring()
+    public void prepareForLaunch()
     {
         projectile_state = ProjectileState.FIRING;
+        this_object.AddComponent(typeof(Rigidbody));
     }
 }
