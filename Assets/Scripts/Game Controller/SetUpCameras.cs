@@ -6,6 +6,7 @@ using TMPro;
 public class SetUpCameras : MonoBehaviour
 {
     public bool toggled_minimap = false;
+    public bool cutscene_playing = false;
 
     public Camera PlayerCamera;
     public Camera ExcavatorCamera;
@@ -43,24 +44,27 @@ public class SetUpCameras : MonoBehaviour
 
     void Update()
     {
-        float map_toggle = Input.GetAxis("MapToggle");
-
-        if (map_toggle > 0 && !toggled_minimap)
+        if (!cutscene_playing)
         {
-            minimap_cam.enabled = !minimap_cam.enabled;
+            float map_toggle = Input.GetAxis("MapToggle");
 
-            if (minimap_toggle_instruction.enabled)
+            if (map_toggle > 0 && !toggled_minimap)
             {
-                minimap_toggle_instruction.enabled = false;
+                minimap_cam.enabled = !minimap_cam.enabled;
+
+                if (minimap_toggle_instruction.enabled)
+                {
+                    minimap_toggle_instruction.enabled = false;
+                }
+
+                toggled_minimap = true;
             }
-
-            toggled_minimap = true;
-        }
-        else if (map_toggle <= 0)
-        {
-            if (toggled_minimap)
+            else if (map_toggle <= 0)
             {
-                toggled_minimap = false;
+                if (toggled_minimap)
+                {
+                    toggled_minimap = false;
+                }
             }
         }
     }

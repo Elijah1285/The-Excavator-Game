@@ -18,6 +18,7 @@ public class ZoomCutscene : MonoBehaviour
 
     public DollyZoom dolly_zoom;
     public MusicPlayer music_player;
+    public SetUpCameras set_up_cameras;
 
     void Awake()
     {
@@ -43,6 +44,8 @@ public class ZoomCutscene : MonoBehaviour
 
             music_player.playZoomSound();
 
+            set_up_cameras.cutscene_playing = true;
+
             cutscene_played = true;
         }
     }
@@ -51,6 +54,8 @@ public class ZoomCutscene : MonoBehaviour
     {
         dolly_zoom_camera.enabled = false;
         prev_cam.enabled = true;
+
+        set_up_cameras.cutscene_playing = false;
 
         minimap.depth = 0;
     }
