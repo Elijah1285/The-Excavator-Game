@@ -39,15 +39,13 @@ public class ExcavatorMovement : MonoBehaviour
     public ParticleSystem pipe_2_particles;
     public ParticleSystem pipe_3_particles;
 
-    private Animator anim;
+    public Animator anim;
     private HashIDs hash;
-    private Rigidbody ourBody;
+    public Rigidbody ourBody;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
         hash = GameObject.FindGameObjectWithTag("GameController").GetComponent<HashIDs>();
-        ourBody = this.GetComponent<Rigidbody>();
         movement = Movement.STOP;
         engine_audio_source.volume = 0.2f;
         bucket_wheel_audio_source.volume = 0.2f;
@@ -92,7 +90,7 @@ public class ExcavatorMovement : MonoBehaviour
             float movement = Mathf.Lerp(0f, -0.030f, percentageComplete);
             Vector3 moveForward = new Vector3(movement * speed, 0f, 0f);
             moveForward = ourBody.transform.TransformDirection(moveForward);
-            ourBody.transform.position += moveForward;
+            transform.position += moveForward;
 
             if (!revved)
             {
@@ -121,7 +119,7 @@ public class ExcavatorMovement : MonoBehaviour
             float movement = Mathf.Lerp(0f, 0.030f, percentageComplete);
             Vector3 moveBack = new Vector3(movement * speed, 0f, 0f);
             moveBack = ourBody.transform.TransformDirection(moveBack);
-            ourBody.transform.position += moveBack;
+            transform.position += moveBack;
 
             if (!revved)
             {
@@ -148,17 +146,14 @@ public class ExcavatorMovement : MonoBehaviour
     }
     void Rotating(float steer)
     {
-        // access the avatar's rigidbody
-        Rigidbody ourBody = this.GetComponent<Rigidbody>();
-
         // check whether we have rotation data to apply
         if (steer != 0)
         {
             // use mouse input to create a Euler ange which provides rotation in the Y axis
             // this value is then turned into a Quarternion
-            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX * speed, 0f);
+            Vector3 deltaRotation = new Vector3(0f, steer * sensitivityX * speed, 0f);
             // this value is applied to turn the body via the rididbody
-            ourBody.MoveRotation(ourBody.rotation * deltaRotation);
+            transform.Rotate(transform.rotation * deltaRotation);
 
             if (!turn_audio_source.isPlaying)
             {
