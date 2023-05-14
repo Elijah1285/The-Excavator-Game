@@ -11,6 +11,7 @@ public class EnterTheExcavator : MonoBehaviour
     public bool cutscene_playing = false;
     public bool shown_view_instruction = false;
     public bool in_helicopter_range = false;
+    public bool in_dirt_dump_range = false;
 
     public float switch_timer = 0;
 
@@ -33,6 +34,7 @@ public class EnterTheExcavator : MonoBehaviour
     public Canvas upgrade_UI;
     public TMP_Text full_text;
     public TMP_Text view_instruction;
+    public TMP_Text dump_instruction;
     public DirtScooper dirt_scooper;
     public Upgrade upgrade;
 
@@ -119,6 +121,11 @@ public class EnterTheExcavator : MonoBehaviour
                     upgrade_UI.enabled = true;
                 }
 
+                if (in_dirt_dump_range)
+                {
+                    dump_instruction.enabled = true;
+                }
+
                 minimap.depth = 0;
 
                 Input.ResetInputAxes();
@@ -162,6 +169,11 @@ public class EnterTheExcavator : MonoBehaviour
                 if (full_text.enabled)
                 {
                     full_text.enabled = false;
+                }
+
+                if (dump_instruction.enabled)
+                {
+                    dump_instruction.enabled = false;
                 }
 
                 if (upgrade_UI.enabled)

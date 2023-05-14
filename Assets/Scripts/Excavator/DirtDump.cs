@@ -24,6 +24,7 @@ public class DirtDump : MonoBehaviour
         if (other.gameObject.tag == "DirtContainer")
         {
             current_dump = other.gameObject;
+            enter_the_excavator.in_dirt_dump_range = true;
 
             if (!shown_dump_instruction)
             {
@@ -43,6 +44,7 @@ public class DirtDump : MonoBehaviour
         {
             current_dump.GetComponent<DirtContainer>().dumping = false;
             current_dump = null;
+            enter_the_excavator.in_dirt_dump_range = false;
 
             if (dump_instruction.enabled)
             {
