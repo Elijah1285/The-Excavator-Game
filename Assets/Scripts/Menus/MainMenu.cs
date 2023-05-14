@@ -29,7 +29,6 @@ public class MainMenu : MonoBehaviour
             if (menu == 1)
             {
                 Application.Quit();
-                UnityEditor.EditorApplication.isPlaying = false;
             }
             else if (menu == 2)
             {
