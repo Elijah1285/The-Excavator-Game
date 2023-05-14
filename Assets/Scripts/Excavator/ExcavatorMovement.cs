@@ -90,7 +90,7 @@ public class ExcavatorMovement : MonoBehaviour
             float movement = Mathf.Lerp(0f, -0.030f, percentageComplete);
             Vector3 moveForward = new Vector3(movement * speed, 0f, 0f);
             moveForward = ourBody.transform.TransformDirection(moveForward);
-            transform.position += moveForward;
+            ourBody.transform.position += moveForward;
 
             if (!revved)
             {
@@ -119,7 +119,7 @@ public class ExcavatorMovement : MonoBehaviour
             float movement = Mathf.Lerp(0f, 0.030f, percentageComplete);
             Vector3 moveBack = new Vector3(movement * speed, 0f, 0f);
             moveBack = ourBody.transform.TransformDirection(moveBack);
-            transform.position += moveBack;
+            ourBody.transform.position += moveBack;
 
             if (!revved)
             {
@@ -146,14 +146,10 @@ public class ExcavatorMovement : MonoBehaviour
     }
     void Rotating(float steer)
     {
-        // check whether we have rotation data to apply
         if (steer != 0)
         {
-            // use mouse input to create a Euler ange which provides rotation in the Y axis
-            // this value is then turned into a Quarternion
-            Vector3 deltaRotation = new Vector3(0f, steer * sensitivityX * speed, 0f);
-            // this value is applied to turn the body via the rididbody
-            transform.Rotate(transform.rotation * deltaRotation);
+            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX * speed, 0f);
+            ourBody.MoveRotation(ourBody.rotation * deltaRotation);
 
             if (!turn_audio_source.isPlaying)
             {
