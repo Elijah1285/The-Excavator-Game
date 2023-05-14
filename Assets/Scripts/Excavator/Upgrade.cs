@@ -76,6 +76,7 @@ public class Upgrade : MonoBehaviour
                         speed_level_text.text = speed_level.ToString();
 
                         excavator_movement.speed += 0.5f;
+                        excavator_movement.rotate_speed += 0.1f;
 
                         dirt_dump.money -= speed_upgrade_cost;
                         dirt_dump.money_counter.text = dirt_dump.money.ToString();

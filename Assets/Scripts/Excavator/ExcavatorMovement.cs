@@ -7,6 +7,7 @@ public class ExcavatorMovement : MonoBehaviour
     enum Movement {FORWARD, BACKWARD, LEFT, RIGHT, FORWARDLEFT, FORWARDRIGHT, BACKWARDLEFT, BACKWARDRIGHT, STOP, AIR};
 
     public float speed = 1.0f;
+    public float rotate_speed = 1.0f;
     public float wheel_speed = 1.0f;
     public float speedDampTime = 399f;
     public float sensitivityX = 0.5f;
@@ -148,7 +149,7 @@ public class ExcavatorMovement : MonoBehaviour
     {
         if (steer != 0)
         {
-            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX * speed, 0f);
+            Quaternion deltaRotation = Quaternion.Euler(0f, steer * sensitivityX * rotate_speed, 0f);
             ourBody.MoveRotation(ourBody.rotation * deltaRotation);
 
             if (!turn_audio_source.isPlaying)
