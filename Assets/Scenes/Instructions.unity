@@ -328,7 +328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: 165.25}
+  m_AnchoredPosition: {x: 15, y: 231.25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091738919
@@ -351,12 +351,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "break through the dirt and escape the island\n\nWhen the digger is full
-    of dirt, dump the dirt in the brown containers and earn money\n\nuse your money
-    to upgrade the excavator at the upgrade station\n\nyou must upgrade the digging
-    level before breaking through tougher dirt\n\nthere will be an escape vehicle
-    waiting for you on the other side, enter this vehicle to escape, use the c key
-    to show/hide controls \n\nGood luck survivor\n\npress enter to begin\n"
+  m_text: "break through the dirt and escape the island\n\nDig dirt using the digger
+    or destroy it with the catapult\n\nWhen the digger is full of dirt, dump the
+    dirt in the brown containers and earn money\n\nuse your money to upgrade the
+    excavator at the upgrade station and load the catapult\n\nyou must upgrade the
+    digging level before breaking through tougher dirt\n\nthere will be an escape
+    vehicle waiting for you on the other side, enter this vehicle to escape, use
+    the c key to show/hide controls \n\nGood luck survivor\n\npress enter to begin\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a910c0b8aadb11041858662021fc873d, type: 2}
   m_sharedMaterial: {fileID: 5620931570996255088, guid: a910c0b8aadb11041858662021fc873d,
@@ -744,7 +745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115.5, y: 275}
+  m_AnchoredPosition: {x: 115.5, y: 302.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1870285764
