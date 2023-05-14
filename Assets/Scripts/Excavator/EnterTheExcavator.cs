@@ -169,24 +169,24 @@ public class EnterTheExcavator : MonoBehaviour
                     upgrade_UI.enabled = false;
                 }
 
-                if (excavator.GetComponent<ExcavatorMovement>().bucket_wheel_audio_source.isPlaying)
+                if (excavator_movement.bucket_wheel_audio_source.isPlaying)
                 {
-                    excavator.GetComponent<ExcavatorMovement>().bucket_wheel_audio_source.Stop();
+                    excavator_movement.bucket_wheel_audio_source.Stop();
                 }
 
-                if (excavator.GetComponent<ExcavatorMovement>().arm_audio_source.isPlaying)
+                if (excavator_movement.arm_audio_source.isPlaying)
                 {
-                    excavator.GetComponent<ExcavatorMovement>().arm_audio_source.Stop();
+                    excavator_movement.arm_audio_source.Stop();
                 }
 
-                if (excavator.GetComponent<ExcavatorMovement>().turn_audio_source.isPlaying)
+                if (excavator_movement.turn_audio_source.isPlaying)
                 {
-                    excavator.GetComponent<ExcavatorMovement>().turn_audio_source.Stop();
+                    excavator_movement.turn_audio_source.Stop();
                 }
 
-                if (excavator.GetComponent<ExcavatorMovement>().drive_audio_source.isPlaying)
+                if (excavator_movement.drive_audio_source.isPlaying)
                 {
-                    excavator.GetComponent<ExcavatorMovement>().drive_audio_source.Stop();
+                    excavator_movement.drive_audio_source.Stop();
                 }
 
                 if (pipe_1_particles.isEmitting)
